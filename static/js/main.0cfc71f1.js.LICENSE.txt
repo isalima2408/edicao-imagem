@@ -1,3 +1,5 @@
+/*! Fabric.js Copyright 2008-2015, Printio (Juriy Zaytsev, Maxim Chernyak) */
+
 /**
  * @license React
  * react-dom.production.min.js
