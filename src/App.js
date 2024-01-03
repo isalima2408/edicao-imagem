@@ -4,6 +4,7 @@ import { fabric } from 'fabric'
 
 import { Text } from "./components/Text";
 import { Image } from "./components/Image";
+import BackgroundImage from "./components/BackgroundImage"
 import MyFabric from "./components/MyFabric";
 import MyToolkit from "./components/MyToolkit";
 
@@ -46,6 +47,7 @@ const [texts, onTextChange] = useFabricData({
 
   return(
     <FabricContext.Provider value={createRef()}>
+      <BackgroundImage />
       <MyFabric />
       <MyToolkit />
       {Object.entries(texts).map(
