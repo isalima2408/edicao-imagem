@@ -4,7 +4,6 @@ import { fabric } from 'fabric'
 
 import { Text } from "./components/Text";
 import { Image } from "./components/Image";
-import { Canvas } from "./components/Canvas"
 import MyFabric from "./components/MyFabric";
 import MyToolkit from "./components/MyToolkit";
 
