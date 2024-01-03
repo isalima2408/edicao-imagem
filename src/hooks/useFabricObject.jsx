@@ -1,8 +1,12 @@
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback, useContext } from 'react'
 import { fabric } from 'fabric';
+import { FabricContext } from '../App';
 
-export function useFabricObject (objectFactory, canvas, id, options, onChange) {
+
+
+export function useFabricObject (objectFactory, id, options, onChange) {
     const [element, setElement] = useState();
+    const canvas = useContext(FabricContext)
   
     useEffect(() => {
       if (element) {
@@ -10,7 +14,7 @@ export function useFabricObject (objectFactory, canvas, id, options, onChange) {
       }
       const setupObject = async () => {
         const awaitedElement = await objectFactory(options);
-        canvas.add(awaitedElement);
+        canvas.current?.add(awaitedElement);
         setElement(awaitedElement);
       };
       setupObject();
@@ -37,9 +41,9 @@ export function useFabricObject (objectFactory, canvas, id, options, onChange) {
   };
   
 
-  export const Text = ({ canvas, id, options, onChange }) => {
+  export const Text = ({ id, options, onChange }) => {
     const factory = useCallback(() => textboxFactory(options), []);
-    const textbox = useFabricObject(factory, canvas, id, options, onChange);
+    const textbox = useFabricObject(factory, id, options, onChange);
   
     useEffect(() => {
       const update = () => {

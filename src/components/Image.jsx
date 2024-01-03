@@ -1,6 +1,7 @@
-import { useCallback } from "react";
+import { useCallback, useContext, useRef, createRef } from "react";
 import { fabric } from "fabric";
 import { useFabricObject } from "../hooks/useFabricObject";
+import { FabricContext } from "../App.js";
 
 const imageFactory = (options) => {
     return new Promise((resolve, reject) =>
@@ -19,8 +20,11 @@ const imageFactory = (options) => {
   };
   
   export const Image = (props) => {
+
+    const canvas = useContext(FabricContext);
+
     const factory = useCallback(() => imageFactory(props.options), []);
-    useFabricObject(factory, props.canvas, props.id, props.options, props.onChange);
+    useFabricObject(factory, props.id, props.options, props.onChange);
   
     return <></>;
   };
