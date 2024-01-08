@@ -7,16 +7,14 @@ export function Text({ onChange, id, options }) {
 
   const canvas = useContext(FabricContext);
 
-  //Será que é só o textbox que é adicionado como canva?
-  const [textbox] = useState(() => new fabric.Textbox(options.text ?? '', options));
+  // canvas.current acessa o canvas que criei via ref
+  const addText = () => {
+    canvas.current?.add(new fabric.Textbox("Texto", {
+      left: 30,
+      fill: 'blue'
+    }))}
 
-  // o set canvas altera o canvas, e até agora só foi "alterado na criação"
-  useEffect(() => {
-    canvas.current?.add(textbox);
-    
-  }, [canvas?.current, textbox]);
-
-
+/*
   useEffect(() => {
     textbox.setOptions(options);
   }, [options, textbox]);
@@ -29,7 +27,7 @@ export function Text({ onChange, id, options }) {
     textbox.on('scaled', update);
     textbox.on('rotated', update);
     textbox.on('changed', update);
-  }, [id, onChange, textbox]);
+  }, [id, onChange, textbox]);*/
 
-  return <></>;
+  return <button onClick={addText}>Texto</button>
 }
