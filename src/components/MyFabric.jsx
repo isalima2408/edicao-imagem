@@ -19,7 +19,7 @@ export const useFabric = () => {
 function MyFabric() {
     const fabricRef = useFabric();
 
-    return <canvas ref={fabricRef} width={540} height={320} />
+    return <canvas ref={fabricRef} />
 }
 
 export default MyFabric

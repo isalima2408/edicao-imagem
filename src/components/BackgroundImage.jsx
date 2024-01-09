@@ -33,18 +33,23 @@ const BackgroundImage = () => {
     useEffect(() => {
 
         new fabric.Image.fromURL(bgImgURL, function(img) {
-            img.objectCaching = false
-            img.noScaleCache = true
+            let scale
+
+            if (img.width > img.height) {
+                scale = width / img.width 
+            } else {
+                scale = height / img.height
+            }
+            
             img.set({
-                scaleX: 1,
-                scaleY: 1,
-                
-                
-                imageSmoothingEnabled: false,
+                scaleX: scale,
+                scaleY: scale,
+
+                /*imageSmoothingEnabled: false,
                 webkitImageSmoothingEnabled: false,
                 mozImageSmoothingEnabled: false,
                 msImageSmoothingEnabled: false,
-                oImageSmoothingEnabled: false
+                oImageSmoothingEnabled: false*/
             })
             
             canvas.current?.setBackgroundImage(img, canvas.current?.renderAll.bind(canvas.current))
