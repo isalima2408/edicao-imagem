@@ -1,9 +1,6 @@
 import { useContext, useState, useEffect, useRef } from "react"
 import { FabricContext } from "../App"
 import { fabric } from "fabric"
-import Pica from 'pica'
-
-const pic = require('pica')
 
 
 const BackgroundImage = () => {
@@ -36,29 +33,24 @@ const BackgroundImage = () => {
     
 
     useEffect(() => {
+            new fabric.Image.fromURL(bgImgURL, function(img) {
+            var scale
 
-        new fabric.Image.fromURL(bgImgURL, function(img) {
-            let scale = 1
-
-            
-
-            /*if (img.width > img.height && img.height < height) {
+            if (img.width > img.height && img.height < height) {
                 scale = width / img.width
             } else if(img.height > img.width && img.width < width){
                 scale = height / img.height
             } else if (img.width > img.height && img.height > height) {
-                scale = height / img.height
-                 
+                scale = height / img.height    
             } else if (img.height > img.width && img.width > width) {
                 scale = width / img.width
             } else if (img.width == img.height) {
                 scale = height / img.height
-            }*/
+            }
             
             img.set({
                 scaleX: scale,
                 scaleY: scale,
-
 
                 imageSmoothingEnabled: false,
                 webkitImageSmoothingEnabled: false,
@@ -70,9 +62,9 @@ const BackgroundImage = () => {
             img.noScaleCache = true
             
             canvas.current?.setBackgroundImage(img, canvas.current?.renderAll.bind(canvas.current))
-            
             canvas.current?.setWidth(img.getScaledWidth())
             canvas.current?.setHeight(img.getScaledHeight())
+
             img.set({
                 left: 0,
                 top: 0
@@ -92,9 +84,7 @@ const BackgroundImage = () => {
                 Imagem de Fundo
                 <input type="file" accept="image/*" onChange={handleImgChange} />
             </label>
-            
         </>
-        
     )
 }
 
