@@ -17,6 +17,13 @@ const BackgroundImage = () => {
         setBgImgURL(URL.createObjectURL(e.target.files[0]))   
     }
 
+    const handleSaveImage = (e) => {
+        canvas.current?.toDataURL({
+            format: 'jpeg',
+            quality: 1
+        })
+    }
+
     
     /*useEffect(() => {
 
@@ -78,12 +85,43 @@ const BackgroundImage = () => {
     }, [canvas?.current, bgImgURL])
 
 
+
+
+    // Função Download
+    const ref = useRef(null);
+
+    useEffect(() => {
+        const handleClick = event => {
+        console.log('Button clicked');
+
+        console.log('bobbyhadz.com');
+        };
+
+        var imageSaver = ref.current;
+
+        imageSaver = document.getElementById('download');
+        imageSaver.addEventListener('click', saveImage, false);
+
+        function saveImage(e) {
+        this.href = canvas.current.toDataURL({
+            format: 'png',
+            quality: 1,
+            multiplier: 1
+        });
+        this.download = 'canvas.png'
+
+        return () => {
+        saveImage.removeEventListener('click', handleClick);
+        }}
+  }, [])
+
     return(
         <>
             <label>
                 Imagem de Fundo
                 <input type="file" accept="image/*" onChange={handleImgChange} />
             </label>
+            <a ref={ref} id='download' href='#' >Baixar</a>
         </>
     )
 }
