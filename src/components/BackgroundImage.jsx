@@ -17,7 +17,7 @@ const BackgroundImage = () => {
     //const fileInput = useRef(null)
 
     const handleImgChange = (e) => {
-        setBgImgURL(URL.createObjectURL(e.target.files[0]))
+        setBgImgURL(URL.createObjectURL(e.target.files[0]))   
     }
 
     
@@ -38,11 +38,11 @@ const BackgroundImage = () => {
     useEffect(() => {
 
         new fabric.Image.fromURL(bgImgURL, function(img) {
-            let scale
+            let scale = 1
 
             
 
-            if (img.width > img.height && img.height < height) {
+            /*if (img.width > img.height && img.height < height) {
                 scale = width / img.width
             } else if(img.height > img.width && img.width < width){
                 scale = height / img.height
@@ -53,7 +53,7 @@ const BackgroundImage = () => {
                 scale = width / img.width
             } else if (img.width == img.height) {
                 scale = height / img.height
-            }
+            }*/
             
             img.set({
                 scaleX: scale,
@@ -78,37 +78,6 @@ const BackgroundImage = () => {
                 top: 0
             })
             img.setCoords()
-
-            function resizeImage(file, body) {
-                const pic = Pica();
-              
-                const outputCanvas = canvas?.current
-                // this will determine resulting size
-                // ignores proper aspect ratio, but could be set dynamically
-                // to handle that
-                outputCanvas.height = canvas.current?.getScaledHeight();
-                outputCanvas.width = canvas.current?.getScaledWidth();
-              
-                return new Promise(resolve => {
-                  const img = new Image();
-              
-                  // resize needs to happen after image is "loaded"
-                  img.onload = () => {
-                    resolve(
-                      pic
-                        .resize(img, outputCanvas, {
-                          unsharpAmount: 80,
-                          unsharpRadius: 0.6,
-                          unsharpThreshold: 2,
-                      })
-                      .then(result => pic.toBlob(result, 'image/jpeg', 0.7)),
-                    );
-                  };
-              
-                  img.src = `data:${file.type};base64,${body}`;
-                });
-              }
-            
 
             canvas.current?.requestRenderAll()          
         })
