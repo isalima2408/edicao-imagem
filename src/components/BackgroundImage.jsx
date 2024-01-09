@@ -16,14 +16,6 @@ const BackgroundImage = () => {
     const handleImgChange = (e) => {
         setBgImgURL(URL.createObjectURL(e.target.files[0]))   
     }
-
-    const handleSaveImage = (e) => {
-        canvas.current?.toDataURL({
-            format: 'jpeg',
-            quality: 1
-        })
-    }
-
     
     /*useEffect(() => {
 
@@ -40,51 +32,49 @@ const BackgroundImage = () => {
     
 
     useEffect(() => {
-            new fabric.Image.fromURL(bgImgURL, function(img) {
-            var scale
+        new fabric.Image.fromURL(bgImgURL, function(img) {
+        var scale
 
-            if (img.width > img.height && img.height < height) {
-                scale = width / img.width
-            } else if(img.height > img.width && img.width < width){
-                scale = height / img.height
-            } else if (img.width > img.height && img.height > height) {
-                scale = height / img.height    
-            } else if (img.height > img.width && img.width > width) {
-                scale = width / img.width
-            } else if (img.width == img.height) {
-                scale = height / img.height
-            }
-            
-            img.set({
-                scaleX: scale,
-                scaleY: scale,
-
-                imageSmoothingEnabled: false,
-                webkitImageSmoothingEnabled: false,
-                mozImageSmoothingEnabled: false,
-                msImageSmoothingEnabled: false,
-                oImageSmoothingEnabled: false
-            })
-            img.objectCaching = false
-            img.noScaleCache = true
-            
-            canvas.current?.setBackgroundImage(img, canvas.current?.renderAll.bind(canvas.current))
-            canvas.current?.setWidth(img.getScaledWidth())
-            canvas.current?.setHeight(img.getScaledHeight())
-
-            img.set({
-                left: 0,
-                top: 0
-            })
-            img.setCoords()
-
-            canvas.current?.requestRenderAll()          
-        })
+        if (img.width > img.height && img.height < height) {
+            scale = width / img.width
+        } else if(img.height > img.width && img.width < width){
+            scale = height / img.height
+        } else if (img.width > img.height && img.height > height) {
+            scale = height / img.height    
+        } else if (img.height > img.width && img.width > width) {
+            scale = width / img.width
+        } else if (img.width == img.height) {
+            scale = height / img.height
+        }
         
+        img.set({
+            scaleX: scale,
+            scaleY: scale,
+
+            imageSmoothingEnabled: false,
+            webkitImageSmoothingEnabled: false,
+            mozImageSmoothingEnabled: false,
+            msImageSmoothingEnabled: false,
+            oImageSmoothingEnabled: false
+        })
+        img.objectCaching = false
+        img.noScaleCache = true
+        
+        canvas.current?.setBackgroundImage(img, canvas.current?.renderAll.bind(canvas.current))
+        canvas.current?.setWidth(img.getScaledWidth())
+        canvas.current?.setHeight(img.getScaledHeight())
+
+        img.set({
+            left: 0,
+            top: 0
+        })
+        img.setCoords()
+
+        canvas.current?.requestRenderAll()          
+        })
+    
         console.log(canvas?.current)
     }, [canvas?.current, bgImgURL])
-
-
 
 
     // Função Download
@@ -93,8 +83,6 @@ const BackgroundImage = () => {
     useEffect(() => {
         const handleClick = event => {
         console.log('Button clicked');
-
-        console.log('bobbyhadz.com');
         };
 
         var imageSaver = ref.current;
@@ -104,11 +92,10 @@ const BackgroundImage = () => {
 
         function saveImage(e) {
         this.href = canvas.current.toDataURL({
-            format: 'png',
+            format: 'jpeg',
             quality: 1,
-            multiplier: 1
         });
-        this.download = 'canvas.png'
+        this.download = 'abare-img.jpeg'
 
         return () => {
         saveImage.removeEventListener('click', handleClick);
