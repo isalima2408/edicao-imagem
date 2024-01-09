@@ -1,6 +1,10 @@
 import { useContext, useState, useEffect, useRef } from "react"
 import { FabricContext } from "../App"
 import { fabric } from "fabric"
+import Pica from 'pica'
+
+const pic = require('pica')
+
 
 const BackgroundImage = () => {
     const canvas = useContext(FabricContext)
@@ -16,6 +20,7 @@ const BackgroundImage = () => {
         setBgImgURL(URL.createObjectURL(e.target.files[0]))
     }
 
+    
     /*useEffect(() => {
 
         new fabric.Image.fromURL(bgImgURL, function(img) {
@@ -35,9 +40,18 @@ const BackgroundImage = () => {
         new fabric.Image.fromURL(bgImgURL, function(img) {
             let scale
 
-            if (img.width > img.height) {
-                scale = width / img.width 
-            } else {
+            
+
+            if (img.width > img.height && img.height < height) {
+                scale = width / img.width
+            } else if(img.height > img.width && img.width < width){
+                scale = height / img.height
+            } else if (img.width > img.height && img.height > height) {
+                scale = height / img.height
+                 
+            } else if (img.height > img.width && img.width > width) {
+                scale = width / img.width
+            } else if (img.width == img.height) {
                 scale = height / img.height
             }
             
@@ -45,7 +59,7 @@ const BackgroundImage = () => {
                 scaleX: scale,
                 scaleY: scale,
 
-                
+
                 imageSmoothingEnabled: false,
                 webkitImageSmoothingEnabled: false,
                 mozImageSmoothingEnabled: false,
@@ -64,17 +78,54 @@ const BackgroundImage = () => {
                 top: 0
             })
             img.setCoords()
-            canvas.current?.requestRenderAll()            
+
+            function resizeImage(file, body) {
+                const pic = Pica();
+              
+                const outputCanvas = canvas?.current
+                // this will determine resulting size
+                // ignores proper aspect ratio, but could be set dynamically
+                // to handle that
+                outputCanvas.height = canvas.current?.getScaledHeight();
+                outputCanvas.width = canvas.current?.getScaledWidth();
+              
+                return new Promise(resolve => {
+                  const img = new Image();
+              
+                  // resize needs to happen after image is "loaded"
+                  img.onload = () => {
+                    resolve(
+                      pic
+                        .resize(img, outputCanvas, {
+                          unsharpAmount: 80,
+                          unsharpRadius: 0.6,
+                          unsharpThreshold: 2,
+                      })
+                      .then(result => pic.toBlob(result, 'image/jpeg', 0.7)),
+                    );
+                  };
+              
+                  img.src = `data:${file.type};base64,${body}`;
+                });
+              }
+            
+
+            canvas.current?.requestRenderAll()          
         })
+        
         console.log(canvas?.current)
     }, [canvas?.current, bgImgURL])
 
 
     return(
-        <label>
-            Imagem de Fundo
-            <input type="file" accept="image/*" onChange={handleImgChange} />
-        </label>
+        <>
+            <label>
+                Imagem de Fundo
+                <input type="file" accept="image/*" onChange={handleImgChange} />
+            </label>
+            
+        </>
+        
     )
 }
 
