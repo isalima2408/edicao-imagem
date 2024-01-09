@@ -7,7 +7,6 @@ export const useFabric = () => {
     
     const fabricRef = useCallback((element) => {
       if (!element) return canvas.current?.dispose();
-  
       canvas.current = new fabric.Canvas(element, {
         backgroundColor: '#eee',
         imageSmoothingEnabled: false,
