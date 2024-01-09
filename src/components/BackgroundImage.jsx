@@ -5,7 +5,7 @@ import { fabric } from "fabric"
 const BackgroundImage = () => {
     const canvas = useContext(FabricContext)
     const [bgImgURL, setBgImgURL] = useState('')
-    const { innerWidth: wwidth, innerHeight: wheight } = window
+    const { innerWidth: width, innerHeight: height } = window
 
     /* ref para forçar o input a ser componente não-controlado, 
     para pdoer limpar o value após adicionar imagem (não estava conseguindo 
