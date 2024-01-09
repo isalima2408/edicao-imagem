@@ -1,16 +1,3 @@
-/*
-      object-assign
-      (c) Sindre Sorhus
-      @license MIT
-      */
-
-/*!
-
-pica
-https://github.com/nodeca/pica
-
-*/
-
 /*! Fabric.js Copyright 2008-2015, Printio (Juriy Zaytsev, Maxim Chernyak) */
 
 /**
