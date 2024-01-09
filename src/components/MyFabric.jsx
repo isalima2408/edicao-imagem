@@ -10,6 +10,11 @@ export const useFabric = () => {
   
       canvas.current = new fabric.Canvas(element, {
         backgroundColor: '#eee',
+        imageSmoothingEnabled: false,
+        webkitImageSmoothingEnabled: false,
+        mozImageSmoothingEnabled: false,
+        msImageSmoothingEnabled: false,
+        oImageSmoothingEnabled: false
       });
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);

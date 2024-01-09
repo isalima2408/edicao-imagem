@@ -45,12 +45,15 @@ const BackgroundImage = () => {
                 scaleX: scale,
                 scaleY: scale,
 
-                /*imageSmoothingEnabled: false,
+                
+                imageSmoothingEnabled: false,
                 webkitImageSmoothingEnabled: false,
                 mozImageSmoothingEnabled: false,
                 msImageSmoothingEnabled: false,
-                oImageSmoothingEnabled: false*/
+                oImageSmoothingEnabled: false
             })
+            img.objectCaching = false
+            img.noScaleCache = true
             
             canvas.current?.setBackgroundImage(img, canvas.current?.renderAll.bind(canvas.current))
             
