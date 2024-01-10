@@ -33,7 +33,7 @@ const BackgroundImage = () => {
 
     useEffect(() => {
         new fabric.Image.fromURL(bgImgURL, function(img) {
-            var scale = 0,scaleW = 0, scaleH = 0;
+            var scale
             var scaleW = width / img.width
             var scaleH = height / img.height
 
@@ -42,30 +42,45 @@ const BackgroundImage = () => {
             } else {
                 scale = scaleW */
 
-            if (img.width > img.height && img.height < height) {
-                scale = scaleW
-            } else if (img.width > img.height && img.height > height){
-                scale = scaleH
-            } else if (img.height > img.width && img.width < width) {
-                scale = scaleH  
-            } else if (img.height > img.width && img.width > width) {
-                scale = scaleW
-            } else if (img.height == img.width) {
-                scale = scaleH
+            if(width > 540) {
+                if (img.width > img.height && img.height < height) {
+                    scale = scaleW
+                } else if (img.width > img.height && img.height > height){
+                    scale = scaleH
+                } else if (img.height > img.width && img.width < width) {
+                    scale = scaleH  
+                } else if (img.height > img.width && img.width > width) {
+                    scale = scaleW
+                } else if (img.height == img.width) {
+                    scale = scaleH
+                }
+            } else {                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
+                if (img.width > img.height && img.height < height) {
+                    scale = scaleW
+                } else if (img.width > img.height && img.height > height){
+                    scale = scaleW
+                } else if (img.height > img.width && img.width < width) {
+                    scale = scaleH  
+                } else if (img.height > img.width && img.width > width) {
+                    scale = scaleW
+                } else if (img.height == img.width) {
+                    scale = scaleW
+                }
             }
+            
             
             img.set({
                 scaleX: scale,
                 scaleY: scale,
 
-                imageSmoothingEnabled: false,
+                /*imageSmoothingEnabled: false,
                 webkitImageSmoothingEnabled: false,
                 mozImageSmoothingEnabled: false,
                 msImageSmoothingEnabled: false,
-                oImageSmoothingEnabled: false
+                oImageSmoothingEnabled: false*/
             })
-            img.objectCaching = false
-            img.noScaleCache = true
+            /*img.objectCaching = false
+            img.noScaleCache = true*/
             
             canvas.current?.setBackgroundImage(img, canvas.current?.renderAll.bind(canvas.current))
             canvas.current?.setWidth(img.getScaledWidth())
