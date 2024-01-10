@@ -42,15 +42,15 @@ const BackgroundImage = () => {
             } else {
                 scale = scaleW */
 
-            if (img.width > img.height || img.height < height) {
+            if (img.width > img.height && img.height < height) {
                 scale = scaleW
-            } else if (img.height > img.width || img.width < width){
+            } else if (img.width > img.height && img.height > height){
                 scale = scaleH
-            } else if (img.width > img.height || img.height > height) {
+            } else if (img.height > img.width && img.width < width) {
                 scale = scaleH  
-            } else if (img.height > img.width || img.width > width) {
+            } else if (img.height > img.width && img.width > width) {
                 scale = scaleW
-            } else {
+            } else if (img.height == img.width) {
                 scale = scaleH
             }
             
