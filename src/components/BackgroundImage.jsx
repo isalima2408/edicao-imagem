@@ -33,18 +33,25 @@ const BackgroundImage = () => {
 
     useEffect(() => {
         new fabric.Image.fromURL(bgImgURL, function(img) {
-            var scale
+            var scale = 0,scaleW = 0, scaleH = 0;
+            var scaleW = width / img.width
+            var scaleH = height / img.height
 
-            if (img.width > img.height && img.height < height) {
-                scale = width / img.width
-            } else if (img.height > img.width && img.width < width){
-                scale = height / img.height
-            } else if (img.width > img.height && img.height > height) {
-                scale = height / img.height    
-            } else if (img.height > img.width && img.width > width) {
-                scale = width / img.width
-            } else if (img.height == img.width){
-                scale = height / img.height
+            /*if(img.width > img.height && img.height > height) {
+                scale = scaleH
+            } else {
+                scale = scaleW */
+
+            if (img.width > img.height || img.height < height) {
+                scale = scaleW
+            } else if (img.height > img.width || img.width < width){
+                scale = scaleH
+            } else if (img.width > img.height || img.height > height) {
+                scale = scaleH  
+            } else if (img.height > img.width || img.width > width) {
+                scale = scaleW
+            } else {
+                scale = scaleH
             }
             
             img.set({
