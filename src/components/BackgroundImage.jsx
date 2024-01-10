@@ -63,7 +63,7 @@ const BackgroundImage = () => {
                     scale = scaleH  
                 } else if (img.height > img.width && img.width > width) {
                     //talvez dê bug aqui, testar depois
-                    scale = scaleH
+                    scale = scaleW
                 } else if (img.height == img.width) {
                     scale = scaleW
                 }
