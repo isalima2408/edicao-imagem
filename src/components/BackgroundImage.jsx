@@ -96,7 +96,7 @@ const BackgroundImage = () => {
             canvas.current?.requestRenderAll()          
             })
 
-            alert("gesture on")
+            alert("gesture on3")
             var pausePanning,
                 zoomStartScale,
                 currentX,
