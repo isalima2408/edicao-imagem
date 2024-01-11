@@ -117,15 +117,15 @@ const BackgroundImage = () => {
                             pausePanning = true;
                             var point = new fabric.Point(e.self.x, e.self.y);
                             if (e.self.state == "start") {
-                              
+                              /* eslint-disable-next-line no-restricted-globals */
                                 zoomStartScale = window.self.canvas.current?.getZoom();
                             }
                             var delta = zoomStartScale * e.self.scale;
-                            
+                            /* eslint-disable-next-line no-restricted-globals */
                             window.self.canvas.current?.zoomToPoint(point, delta);
                             pausePanning = false;
                         }
-                    }})/*,
+                    },
                     'object:selected': function() {
                         pausePanning = true;
                     },
@@ -148,7 +148,7 @@ const BackgroundImage = () => {
                             lastY = e.e.layerY;
                         }
                     }
-                });*/
+                });
                 console.log("zoom")
         
             console.log(canvas?.current)
