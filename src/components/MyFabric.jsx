@@ -26,7 +26,7 @@ function MyFabric() {
     const fabricRef = useFabric();
 
     return(
-      <div>
+      <div className="MyFabric">
         <canvas ref={fabricRef} />
       </div>
     )
