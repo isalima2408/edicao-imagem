@@ -72,9 +72,36 @@ const BackgroundImage = () => {
                 } else if (img.height == img.width) {
                     scale = scaleW
                 }
+            }
+            
+            
+            img.set({
+                scaleX: scale,
+                scaleY: scale,
 
+                /*imageSmoothingEnabled: false,
+                webkitImageSmoothingEnabled: false,
+                mozImageSmoothingEnabled: false,
+                msImageSmoothingEnabled: false,
+                oImageSmoothingEnabled: false*/
+            })
+            /*img.objectCaching = false
+            img.noScaleCache = true*/
+            
+            canvas.current?.setBackgroundImage(img, canvas.current?.renderAll.bind(canvas.current))
+            canvas.current?.setWidth(img.getScaledWidth())
+            canvas.current?.setHeight(img.getScaledHeight())
 
-                var pausePanning,
+            img.set({
+                left: 0,
+                top: 0
+            })
+            img.setCoords()
+
+            canvas.current?.requestRenderAll()          
+            })
+
+            var pausePanning,
                 zoomStartScale,
                 currentX,
                 currentY,
@@ -122,37 +149,7 @@ const BackgroundImage = () => {
                         }
                     }
                 });
-
-
-
-            }
-            
-            
-            img.set({
-                scaleX: scale,
-                scaleY: scale,
-
-                /*imageSmoothingEnabled: false,
-                webkitImageSmoothingEnabled: false,
-                mozImageSmoothingEnabled: false,
-                msImageSmoothingEnabled: false,
-                oImageSmoothingEnabled: false*/
-            })
-            /*img.objectCaching = false
-            img.noScaleCache = true*/
-            
-            canvas.current?.setBackgroundImage(img, canvas.current?.renderAll.bind(canvas.current))
-            canvas.current?.setWidth(img.getScaledWidth())
-            canvas.current?.setHeight(img.getScaledHeight())
-
-            img.set({
-                left: 0,
-                top: 0
-            })
-            img.setCoords()
-
-            canvas.current?.requestRenderAll()          
-            })
+                console.log("zoom")
         
             console.log(canvas?.current)
     }, [canvas?.current, bgImgURL])
