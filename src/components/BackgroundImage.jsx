@@ -55,10 +55,6 @@ const BackgroundImage = () => {
                     scale = scaleH
                 }
 
-
-
-
-
             } else {                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
                 if (img.width > img.height && img.height < height) {
                     scale = scaleW
@@ -73,8 +69,7 @@ const BackgroundImage = () => {
                     scale = scaleW
                 }
             }
-            
-            
+  
             img.set({
                 scaleX: scale,
                 scaleY: scale,
@@ -101,6 +96,7 @@ const BackgroundImage = () => {
             canvas.current?.requestRenderAll()          
             })
 
+            alert("gesture on")
             var pausePanning,
                 zoomStartScale,
                 currentX,
@@ -118,11 +114,11 @@ const BackgroundImage = () => {
                             var point = new fabric.Point(e.self.x, e.self.y);
                             if (e.self.state == "start") {
                               /* eslint-disable-next-line no-restricted-globals */
-                                zoomStartScale = window.self.canvas.current?.getZoom();
+                                zoomStartScale = self.canvas.current?.getZoom();
                             }
                             var delta = zoomStartScale * e.self.scale;
                             /* eslint-disable-next-line no-restricted-globals */
-                            window.self.canvas.current?.zoomToPoint(point, delta);
+                            self.canvas.current?.zoomToPoint(point, delta);
                             pausePanning = false;
                         }
                     },
