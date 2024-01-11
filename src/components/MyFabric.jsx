@@ -16,15 +16,7 @@ export const useFabric = () => {
         msImageSmoothingEnabled: false,
         oImageSmoothingEnabled: false
       });
-      canvas.current.selection = false
 
-      
-
-      
-        
-
-      
-      
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
     return fabricRef;

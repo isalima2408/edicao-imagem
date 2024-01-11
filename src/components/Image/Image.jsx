@@ -1,7 +1,7 @@
 import { useCallback, useContext, useRef, createRef } from "react";
 import { fabric } from "fabric";
-import { useFabricObject } from "../hooks/useFabricObject";
-import { FabricContext } from "../App.js";
+import { useFabricObject } from "../../hooks/useFabricObject.jsx";
+import { FabricContext } from "../../App.js";
 
 const imageFactory = (options) => {
     return new Promise((resolve, reject) =>

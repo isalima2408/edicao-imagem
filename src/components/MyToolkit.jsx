@@ -9,7 +9,11 @@ export function MyToolKit() {
         {top: 100, left: 100, width: 100, height: 100, fill: 'red'}
       ));
     };
-    return <button onClick={drawRect}>Draw</button>;
+    return(
+      <div>
+        <button onClick={drawRect}>Rect</button>
+      </div>
+    )
   }
 
   export default MyToolKit

@@ -1,16 +1,10 @@
 import { useContext, useState, useEffect, useRef } from "react"
-import { FabricContext } from "../App"
+import { FabricContext } from "../../App"
 import { fabric } from "fabric"
 
 const ExternImage = () => {
     const canvas = useContext(FabricContext)
-
-    /* ref para forçar o input a ser componente não-controlado, 
-    para pdoer limpar o value após adicionar imagem (não estava conseguindo 
-    adicionar imagens semelhantes consecutivamente) */
     const fileInput = useRef(null)
-
-    // variável para 
     const [imgURL, setImgURL] = useState('')
 
     const handleImgChange = (e) => {
@@ -32,7 +26,7 @@ const ExternImage = () => {
 
     return(
         <label>
-            Inserir imagem
+            Imagem
             <input type="file" onChange={handleImgChange} ref={fileInput} />
         </label>
     )
