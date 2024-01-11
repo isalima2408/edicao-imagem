@@ -27,8 +27,8 @@ export const useFabric = () => {
           lastX,
           lastY
 
-      if (width <= 540) {
-        canvas.current?.on({
+      
+        canvas.current.on({
           'touch:gesture': function(e) {
              
               if (e.e.touches && e.e.touches.length == 2) {
@@ -68,7 +68,7 @@ export const useFabric = () => {
           }
       });
 
-      }
+      
       
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
