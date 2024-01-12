@@ -1,5 +1,4 @@
-const TextTools = ({oi}) => {
-    console.log(oi)
+const TextTools = () => {
 
     return(
         <div>
