@@ -4,7 +4,6 @@ import { FabricContext } from "../App.js";
 
 export const useFabric = () => {
     const canvas = useContext(FabricContext);
-    const { innerWidth: width } = window
     
     const fabricRef = useCallback((element) => {
       if (!element) return canvas.current?.dispose();
