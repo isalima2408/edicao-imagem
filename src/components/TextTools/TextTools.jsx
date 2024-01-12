@@ -1,6 +1,5 @@
 import { useContext } from "react";
 import { FabricContext } from "../../App";
-import './fonts.css'
 
 var FontFaceObserver = require('fontfaceobserver')
 
