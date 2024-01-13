@@ -24,7 +24,10 @@ const ExternImage = ({setTextBtnSelected, setPaintBtnSelected}) => {
 
     useEffect(() => {
         new fabric.Image.fromURL(imgURL, function(img) {
-            img.set().scale(0.2)
+            img.set({
+                selectable: true
+            }).scale(0.2)
+            
             canvas.current?.add(img)
             canvas.current?.renderAll()
         })

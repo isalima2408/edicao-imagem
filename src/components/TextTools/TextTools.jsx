@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState, useEffect } from "react";
 import { FabricContext } from "../../App";
 
 var FontFaceObserver = require('fontfaceobserver')
@@ -10,15 +10,19 @@ const TextTools = () => {
     // Mudar alinhamento
     const changeTextAlign = (e) => {
         const align = e.target.value
-        canvas.current?.getActiveObject().set('textAlign', align)
-        canvas.current?.renderAll()
+        if (canvas.current?.getActiveObject()) {
+            canvas.current?.getActiveObject().set('textAlign', align)
+            canvas.current?.renderAll()
+        }  
     }
 
     // Mudar cor
     const changeTextColor = (e) => {
         const color = e.target.value
-        canvas.current?.getActiveObject().set('fill', color)
-        canvas.current?.renderAll()
+        if (canvas.current?.getActiveObject()) {
+            canvas.current?.getActiveObject().set('fill', color)
+            canvas.current?.renderAll()
+        }  
     }
 
     // Carregar família da fonte antes de usar (evitar erros)
@@ -35,29 +39,42 @@ const TextTools = () => {
           });
       }
     
+
+    /*const initialState = canvas.current?.getActiveObject().get('fontFamily')
+    const [selectedFont, setSelectedFont] = useState(initialState)
+    //setSelectedFont(() => canvas.current?.getActiveObject().get('fontFamily'))
+    console.log(selectedFont)
+
+    useEffect(() => {
+        setSelectedFont(()=>canvas.current?.getActiveObject().get('fontFamily'))
+    }, [canvas.current?.getActiveObject()])*/
+
     // Mudar fonte
     const changeFontFamily = (e) => {
-        const fontFamily = e.target.value
+        const fontFamily = e.target.value   
 
-        if (fontFamily !== 'Times New Roman') {
-            loadAndUse(fontFamily)
-        } else {
-            canvas.current?.getActiveObject().set('fontFamily', fontFamily)
-            canvas.current?.requestRenderAll();
+        if (canvas.current?.getActiveObject()) {
+            if (fontFamily !== 'Arial') {
+                loadAndUse(fontFamily)
+            } else {
+                canvas.current?.getActiveObject().set('fontFamily', fontFamily)
+                canvas.current?.renderAll();
+            }
         }
     }
-
+    
     
     return(
         <div>
-            <select name="font_family" id="font_family" onChange={changeFontFamily}>
+            <select name="font_family" id="font_family" onChange={changeFontFamily}>  
                 <option value="Roboto">Roboto</option>
+                <option value="Arial">Arial</option>
                 <option value="Montserrat">Montserrat</option>
                 <option value="Lemon">Lemon</option>
             </select>
             <select name="text_color" id="text_color" onChange={changeTextColor}>
-                <option value="red">Vermelho</option>
                 <option value="black">Preto</option>
+                <option value="red">Vermelho</option>
                 <option value="blue">Azul</option>
             </select>
             <select name="text_align" id="text_align" onChange={changeTextAlign} >

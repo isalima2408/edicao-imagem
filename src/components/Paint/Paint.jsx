@@ -8,7 +8,11 @@ const Paint = ({setPaintBtnSelected, setTextBtnSelected}) => {
         setPaintBtnSelected(true)
         setTextBtnSelected(false)
         
+        canvas.current?.discardActiveObject()
+        canvas.current?.renderAll()
         canvas.current?.set('isDrawingMode', true)
+        canvas.current.freeDrawingBrush.width = 5;
+        canvas.current.freeDrawingBrush.color = 'purple'
     }
 
     return(

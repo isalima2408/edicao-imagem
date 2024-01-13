@@ -10,15 +10,18 @@ const Text = ({ setPaintBtnSelected, setTextBtnSelected }) => {
   const addText = () => {
     setTextBtnSelected(true)
     setPaintBtnSelected(false)
+
     canvas.current?.set('isDrawingMode', false)
 
     const textbox = new fabric.Textbox("Texto", {
       left: 30,
-      fill: 'blue',
-      textAlign: 'left'
+      fill: 'back',
+      textAlign: 'left',
+      fontFamily: 'Arial',
+      selectable: true
     })
-    
-    canvas.current?.add(textbox)
+    canvas.current?.setActiveObject(textbox)
+    canvas.current?.add(textbox).renderAll()
   }
 
 

@@ -4,11 +4,18 @@ import { FabricContext } from "../../App"
 import styles from './BgImage.module.css'
 
 
-const BgImage = () => {
+const BgImage = ({setTextBtnSelected, setPaintBtnSelected, disablePaintMode}) => {
     const canvas = useContext(FabricContext)
     const [bgImgURL, setBgImgURL] = useState('')
     const { innerWidth: width, innerHeight: height } = window
     //const fileInput = useRef(null)
+
+    // Limpar elementos inseridos no canvas antigo ao inserir nova imagem de fundo
+    const resetCanvas = () => {
+        setTextBtnSelected(false)
+        disablePaintMode()
+        canvas.current?.clear()
+    }
 
     const handleImgChange = (e) => {
         setBgImgURL(URL.createObjectURL(e.target.files[0]))   
@@ -51,14 +58,14 @@ const BgImage = () => {
                 scaleX: scale,
                 scaleY: scale,
 
-                /*imageSmoothingEnabled: false,
+                imageSmoothingEnabled: false,
                 webkitImageSmoothingEnabled: false,
                 mozImageSmoothingEnabled: false,
                 msImageSmoothingEnabled: false,
-                oImageSmoothingEnabled: false*/
+                oImageSmoothingEnabled: false
             })
-            /*img.objectCaching = false
-            img.noScaleCache = true*/
+            img.objectCaching = false
+            img.noScaleCache = true
             
             canvas.current?.setBackgroundImage(img, canvas.current?.renderAll.bind(canvas.current))
             canvas.current?.setWidth(img.getScaledWidth())
@@ -81,7 +88,7 @@ const BgImage = () => {
         <div className={ styles.my_img}>
             <label>
                 Inserir Imagem
-                <input type="file" accept="image/*" onChange={handleImgChange} />
+                <input type="file" accept="image/*" onClick={resetCanvas} onChange={handleImgChange} />
             </label> 
         </div>      
     )

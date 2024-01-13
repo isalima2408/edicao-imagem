@@ -39,14 +39,15 @@ const PaintTools = ({setPaintBtnSelected}) => {
                 <option value="pencil">Pincél</option>
             </select>
             <select name="brush_color" id="brush_color" onChange={changeBrushColor}>
+                <option value="purple">Roxo</option>
                 <option value="red">Vermelho</option>
                 <option value="black">Preto</option>
                 <option value="blue">Azul</option>
             </select>
             <select name="brush_width" id="brush_width" onChange={changeBrushWidth} >
-                <option value="3">1</option>
-                <option value="7">2</option>
-                <option value="15">3</option>
+                <option value="5">1</option>
+                <option value="15">2</option>
+                <option value="30">3</option>
             </select>
             <button onClick={clearCanvas}>Limpar</button>
             <button onClick={disablePaintMode}>Sair</button>

@@ -15,6 +15,7 @@ const Toolbar = () => {
     const [textBtnSelected, setTextBtnSelected] = useState(false)
     const [paintBtnSelected, setPaintBtnSelected] = useState(false)
 
+    // COLOCAR DESABILITAR DE TODOS OS ELEMENTOS AQUI (TODOS OS FALSES)
     const disablePaintMode = () => {
         setPaintBtnSelected(false)
         canvas.current?.set('isDrawingMode', false)

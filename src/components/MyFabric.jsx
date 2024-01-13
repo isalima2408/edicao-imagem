@@ -16,6 +16,9 @@ export const useFabric = () => {
         oImageSmoothingEnabled: false
       });
 
+      // desabilitando seleção de tudo (p/ desabilitar a seleção do paint mode. Para tornar outros elementos selecionaveis basta especificar na criação dos mesmos)
+      fabric.Object.prototype.selectable = false;
+
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
     return fabricRef;
