@@ -1,6 +1,19 @@
-const Paint = () => {
+import { useContext } from "react"
+import { FabricContext } from "../../App"
 
-    return <button >Desenhar</button>
+const Paint = ({setPaintBtnSelected, setTextBtnSelected}) => {
+    const canvas = useContext(FabricContext)
+
+    function activePaintMode () {
+        setPaintBtnSelected(true)
+        setTextBtnSelected(false)
+        
+        canvas.current?.set('isDrawingMode', true)
+    }
+
+    return(
+        <button onClick={activePaintMode}>Desenhar</button>
+    )
 }
 
 export default Paint
