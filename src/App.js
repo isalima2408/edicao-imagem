@@ -12,12 +12,14 @@ export const FabricContext = createContext();
 function App () {
 
   return(
-    <FabricContext.Provider value={createRef()}>
-      <Toolbar />
-      <MyFabric />
-      <Toolkit />
-      <Download />
-    </FabricContext.Provider>
+    <div className="containerA">
+      <FabricContext.Provider value={createRef()}>
+        <Toolbar />
+        <MyFabric />
+        <Toolkit />
+      </FabricContext.Provider>
+    </div>
+    
   )
 }
 

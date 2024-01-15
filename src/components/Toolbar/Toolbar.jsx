@@ -5,13 +5,15 @@ import BgImage from "../BgImage/BgImage"
 import Text from "../Text/Text"
 import TextTools from '../TextTools/TextTools'
 import Emoji from "../Emoji/Emoji"
-import EmojiPicker, { EmojiStyle, EmojiClickData }  from  'emoji-picker-react' ; 
+import EmojiPicker from  'emoji-picker-react' ; 
 
 import Sticker from "../Sticker/Sticker"
 import Paint from "../Paint/Paint"
 import PaintTools from "../PaintTools/PaintTools"
 import ExternImage from '../Image/ExternImage'
+import Download from "../Download/Download"
 import { FabricContext } from "../../App"
+import styles from "./Toolbar.module.css"
 
 const Toolbar = () => {
     const canvas = useContext(FabricContext)
@@ -20,7 +22,6 @@ const Toolbar = () => {
     const [textBtnSelected, setTextBtnSelected] = useState(false)
     const [paintBtnSelected, setPaintBtnSelected] = useState(false)
     const [emojiBtnSelected, setEmojiBtnSelected] = useState(false)
-    //const [selectedEmoji, setSelectedEmoji] = useState()
 
     // COLOCAR DESABILITAR DE TODOS OS ELEMENTOS AQUI (TODOS OS FALSES)
     const disablePaintMode = () => {
@@ -29,7 +30,7 @@ const Toolbar = () => {
     }
 
     function onEmojiClick (emojiObject, e) {
-     
+        setEmojiBtnSelected(false)
         
         var emojiURL = emojiObject.imageUrl
         console.log(emojiObject)
@@ -47,16 +48,27 @@ const Toolbar = () => {
     }
 
     return(
-        <div id="Toolbar">
-            <BgImage setBgImageInserted={setBgImageInserted} setTextBtnSelected={setTextBtnSelected} setPaintBtnSelected={setPaintBtnSelected} disablePaintMode={disablePaintMode} />
-            <Text bgImageInserted={bgImageInserted} setTextBtnSelected={setTextBtnSelected} setPaintBtnSelected={setPaintBtnSelected} disablePaintMode={disablePaintMode} />
-            <ExternImage bgImageInserted={bgImageInserted} setTextBtnSelected={setTextBtnSelected} setPaintBtnSelected={setPaintBtnSelected} disablePaintMode={disablePaintMode}  />
-            <Emoji bgImageInserted={bgImageInserted} setEmojiBtnSelected={setEmojiBtnSelected} disablePaintMode={disablePaintMode} />
-            <Sticker bgImageInserted={bgImageInserted} disablePaintMode={disablePaintMode} />
-            <Paint bgImageInserted={bgImageInserted} setPaintBtnSelected={setPaintBtnSelected} setTextBtnSelected={setTextBtnSelected} disablePaintMode={disablePaintMode} />
-            {textBtnSelected && <TextTools />}
-            {paintBtnSelected && <PaintTools setPaintBtnSelected={setPaintBtnSelected} />}
-            {emojiBtnSelected && <EmojiPicker onEmojiClick={onEmojiClick} emojiStyle="native"/>}
+        <div id="toolbar" className={styles.toolbar}>
+            <div className={ styles.main_tools }>
+                <BgImage setBgImageInserted={setBgImageInserted} setTextBtnSelected={setTextBtnSelected} setPaintBtnSelected={setPaintBtnSelected} disablePaintMode={disablePaintMode} />
+                <Text bgImageInserted={bgImageInserted} setTextBtnSelected={setTextBtnSelected} setPaintBtnSelected={setPaintBtnSelected} disablePaintMode={disablePaintMode} />
+                <ExternImage bgImageInserted={bgImageInserted} setTextBtnSelected={setTextBtnSelected} setPaintBtnSelected={setPaintBtnSelected} disablePaintMode={disablePaintMode}  />
+                
+                <span className={ styles.btn_emoji }>
+                    <Emoji bgImageInserted={bgImageInserted} setEmojiBtnSelected={setEmojiBtnSelected} disablePaintMode={disablePaintMode} />
+                    <div className={ styles.emoji_box }>
+                    {emojiBtnSelected && <EmojiPicker onEmojiClick={onEmojiClick} emojiStyle="native"/>}
+                    </div>
+                </span>
+
+                <Sticker bgImageInserted={bgImageInserted} disablePaintMode={disablePaintMode} />
+                <Paint bgImageInserted={bgImageInserted} setPaintBtnSelected={setPaintBtnSelected} setTextBtnSelected={setTextBtnSelected} disablePaintMode={disablePaintMode} />
+                <Download />
+            </div>
+            <div className={ styles.custom_tools } >
+                {textBtnSelected && <TextTools />}
+                {paintBtnSelected && <PaintTools setPaintBtnSelected={setPaintBtnSelected} />}
+            </div>
         </div>
     )
 }

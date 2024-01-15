@@ -8,6 +8,7 @@ const BgImage = ({setBgImageInserted, setTextBtnSelected, setPaintBtnSelected, d
     const canvas = useContext(FabricContext)
     const [bgImgURL, setBgImgURL] = useState('')
     const { innerWidth: width, innerHeight: height } = window
+    const windowHeight = height - 40
     //const fileInput = useRef(null)
 
     // Limpar elementos inseridos no canvas antigo ao inserir nova imagem de fundo
@@ -27,7 +28,7 @@ const BgImage = ({setBgImageInserted, setTextBtnSelected, setPaintBtnSelected, d
         new fabric.Image.fromURL(bgImgURL, function(img) {
             var scale
             var scaleW = width / img.width
-            var scaleH = height / img.height
+            var scaleH = windowHeight / img.height
 
             if(width > 540) {
                 if (img.width > img.height && img.height < height) {
@@ -87,12 +88,10 @@ const BgImage = ({setBgImageInserted, setTextBtnSelected, setPaintBtnSelected, d
 
 
     return(
-        <div className={ styles.my_img}>
             <label>
                 Inserir Imagem
                 <input type="file" accept="image/*" onClick={resetCanvas} onChange={handleImgChange} />
-            </label> 
-        </div>      
+            </label>     
     )
 }
 

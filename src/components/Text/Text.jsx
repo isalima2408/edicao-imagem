@@ -27,11 +27,7 @@ const Text = ({ bgImageInserted, setPaintBtnSelected, setTextBtnSelected }) => {
       }
   }
 
-  return (
-    <div>
-      <button onClick={addText} >Texto</button>
-    </div>
-  )
+  return <button onClick={addText} >Texto</button>
 }
 
 export default Text
