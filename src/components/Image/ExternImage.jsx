@@ -2,7 +2,7 @@ import { useContext, useState, useEffect, useRef } from "react"
 import { FabricContext } from "../../App"
 import { fabric } from "fabric"
 
-const ExternImage = ({setTextBtnSelected, setPaintBtnSelected}) => {
+const ExternImage = ({bgImageInserted, setTextBtnSelected, setPaintBtnSelected}) => {
     const canvas = useContext(FabricContext)
     const fileInput = useRef(null)
     const [imgURL, setImgURL] = useState('')
@@ -11,7 +11,7 @@ const ExternImage = ({setTextBtnSelected, setPaintBtnSelected}) => {
     function setElementsFalse () {
         setTextBtnSelected(false)
         setPaintBtnSelected(false)
-        canvas.current?.set('isDrawingMode', false)
+        canvas.current?.set('isDrawingMode', false)       
     }
 
     const handleImgChange = (e) => {
@@ -25,7 +25,8 @@ const ExternImage = ({setTextBtnSelected, setPaintBtnSelected}) => {
     useEffect(() => {
         new fabric.Image.fromURL(imgURL, function(img) {
             img.set({
-                selectable: true
+                selectable: true,
+                hoverCursor: 'pointer',
             }).scale(0.2)
             
             canvas.current?.add(img)
@@ -38,7 +39,7 @@ const ExternImage = ({setTextBtnSelected, setPaintBtnSelected}) => {
     return(
         <label>
             Imagem
-            <input type="file" onChange={handleImgChange} onClick={setElementsFalse} ref={fileInput} />
+            <input type="file" onChange={handleImgChange} onClick={setElementsFalse} ref={fileInput} disabled={bgImageInserted ? false : true} />
         </label>
     )
 }

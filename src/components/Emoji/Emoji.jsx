@@ -1,6 +1,6 @@
-const Emoji = () => {
+const Emoji = ({setEmojiBtnSelected}) => {
 
-    return <button >Emoji</button>
+    return <button onClick={() => setEmojiBtnSelected(true)}>Emoji</button>
 }
 
 export default Emoji

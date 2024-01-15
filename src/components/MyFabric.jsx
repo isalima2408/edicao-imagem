@@ -9,6 +9,7 @@ export const useFabric = () => {
       if (!element) return canvas.current?.dispose();
       canvas.current = new fabric.Canvas(element, {
         backgroundColor: '#eee',
+        hoverCursor: 'default',
         imageSmoothingEnabled: false,
         webkitImageSmoothingEnabled: false,
         mozImageSmoothingEnabled: false,
@@ -16,7 +17,7 @@ export const useFabric = () => {
         oImageSmoothingEnabled: false
       });
 
-      // desabilitando seleção de tudo (p/ desabilitar a seleção do paint mode. Para tornar outros elementos selecionaveis basta especificar na criação dos mesmos)
+      // desabilitando seleção de tudo (p/ desabilitar a seleção do paint mode. Para tornar outros elementos selecionaveis basta especificar na criação dos mesmos como selectable: true)
       fabric.Object.prototype.selectable = false;
 
       // eslint-disable-next-line react-hooks/exhaustive-deps

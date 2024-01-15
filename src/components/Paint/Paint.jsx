@@ -1,18 +1,20 @@
 import { useContext } from "react"
 import { FabricContext } from "../../App"
 
-const Paint = ({setPaintBtnSelected, setTextBtnSelected}) => {
+const Paint = ({bgImageInserted, setPaintBtnSelected, setTextBtnSelected}) => {
     const canvas = useContext(FabricContext)
 
     function activePaintMode () {
-        setPaintBtnSelected(true)
-        setTextBtnSelected(false)
-        
-        canvas.current?.discardActiveObject()
-        canvas.current?.renderAll()
-        canvas.current?.set('isDrawingMode', true)
-        canvas.current.freeDrawingBrush.width = 5;
-        canvas.current.freeDrawingBrush.color = 'purple'
+        if (bgImageInserted) {
+            setPaintBtnSelected(true)
+            setTextBtnSelected(false)
+            
+            canvas.current?.discardActiveObject()
+            canvas.current?.renderAll()
+            canvas.current?.set('isDrawingMode', true)
+            canvas.current.freeDrawingBrush.width = 5;
+            canvas.current.freeDrawingBrush.color = 'purple'
+        }
     }
 
     return(

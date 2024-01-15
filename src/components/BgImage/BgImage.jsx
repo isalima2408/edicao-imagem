@@ -4,14 +4,16 @@ import { FabricContext } from "../../App"
 import styles from './BgImage.module.css'
 
 
-const BgImage = ({setTextBtnSelected, setPaintBtnSelected, disablePaintMode}) => {
+const BgImage = ({setBgImageInserted, setTextBtnSelected, setPaintBtnSelected, disablePaintMode}) => {
     const canvas = useContext(FabricContext)
     const [bgImgURL, setBgImgURL] = useState('')
     const { innerWidth: width, innerHeight: height } = window
     //const fileInput = useRef(null)
 
     // Limpar elementos inseridos no canvas antigo ao inserir nova imagem de fundo
+    // Ver se consigo tornar isso válido somente na 2° inserção de imagem, porque na primeira ja vai estar limpo
     const resetCanvas = () => {
+        setBgImageInserted(true)
         setTextBtnSelected(false)
         disablePaintMode()
         canvas.current?.clear()
