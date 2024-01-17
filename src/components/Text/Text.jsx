@@ -1,6 +1,7 @@
 import { useContext } from 'react';
 import { fabric } from 'fabric';
 import { FabricContext } from "../../App.js";
+import styles from './Text.module.css'
 
 
 const Text = ({ bgImageInserted, setPaintBtnSelected, setTextBtnSelected }) => {
@@ -27,7 +28,7 @@ const Text = ({ bgImageInserted, setPaintBtnSelected, setTextBtnSelected }) => {
       }
   }
 
-  return <button onClick={addText} >Texto</button>
+  return <button className={ styles.text_button } onClick={addText} ><ion-icon name="text-outline"></ion-icon></button>
 }
 
 export default Text

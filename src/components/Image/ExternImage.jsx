@@ -1,12 +1,13 @@
 import { useContext, useState, useEffect, useRef } from "react"
 import { FabricContext } from "../../App"
 import { fabric } from "fabric"
+import styles from './ExternImage.module.css'
 
 const ExternImage = ({bgImageInserted, setTextBtnSelected, setPaintBtnSelected}) => {
     const canvas = useContext(FabricContext)
     const fileInput = useRef(null)
     const [imgURL, setImgURL] = useState('')
-
+    
 
     function setElementsFalse () {
         setTextBtnSelected(false)
@@ -37,8 +38,8 @@ const ExternImage = ({bgImageInserted, setTextBtnSelected, setPaintBtnSelected})
 
 
     return(
-        <label>
-            Imagem
+        <label className={ styles.image_icon }>
+            <ion-icon name="images-outline"></ion-icon>
             <input type="file" onChange={handleImgChange} onClick={setElementsFalse} ref={fileInput} disabled={bgImageInserted ? false : true} />
         </label>
     )

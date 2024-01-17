@@ -2,24 +2,31 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 10px;
+    gap: 5px;
 
     height: 40px;
+    background-color: rgb(231, 231, 231);
+    /*border: 1px solid red;*/
 }
+
 
 .main_tools{
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 10px;
+    gap: 50px;
 
     height: 40px;
+    /*border: 1px solid red;*/
 }
 
 .custom_tools {
     display: flex;
-    align-items: right;
-    justify-content: right;
+    align-items: center;
+    justify-content: center;
+    height: 20px;
+    background-color: gray;
+    /*border: 1px solid red;*/
 }
 
 .btn_emoji {
@@ -31,4 +38,12 @@
     z-index: 1;
 }
 
+.btn_sticker {
+    position: relative;
+}
+
+.sticker_box {
+    position: absolute;
+    z-index: 1;
+}
 

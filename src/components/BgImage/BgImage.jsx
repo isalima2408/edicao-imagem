@@ -8,7 +8,7 @@ const BgImage = ({setBgImageInserted, setTextBtnSelected, setPaintBtnSelected, d
     const canvas = useContext(FabricContext)
     const [bgImgURL, setBgImgURL] = useState('')
     const { innerWidth: width, innerHeight: height } = window
-    const windowHeight = height - 40
+    const windowHeight = height - 60
     //const fileInput = useRef(null)
 
     // Limpar elementos inseridos no canvas antigo ao inserir nova imagem de fundo
@@ -88,8 +88,8 @@ const BgImage = ({setBgImageInserted, setTextBtnSelected, setPaintBtnSelected, d
 
 
     return(
-            <label>
-                Inserir Imagem
+            <label className={ styles.camera_icon }>
+                <ion-icon name="camera-outline"></ion-icon>
                 <input type="file" accept="image/*" onClick={resetCanvas} onChange={handleImgChange} />
             </label>     
     )

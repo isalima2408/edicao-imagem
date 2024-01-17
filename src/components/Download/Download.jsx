@@ -27,7 +27,11 @@ const Download = () => {
         }}
   }, [])
 
-    return <a ref={ref} id='download' href='#' className={styles.lnk_download} >Baixar</a>
+    return (
+        <a ref={ref} id='download' href='#' className={styles.lnk_download} >
+            <ion-icon name="download-outline"></ion-icon>
+        </a>
+    )
 }
 
 export default Download

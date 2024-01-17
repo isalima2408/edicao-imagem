@@ -8,13 +8,13 @@ export const useFabric = () => {
     const { innerWidth: width, innerHeight: height } = window
 
     // 40 é o tamanho da barra de ferramentas
-    const canvasHeight = height - 40
+    const canvasHeight = height - 60
     console.log(width)
     
     const fabricRef = useCallback((element) => {
       if (!element) return canvas.current?.dispose();
       canvas.current = new fabric.Canvas(element, {
-        backgroundColor: '#eee',
+        backgroundColor: 'gray',
         hoverCursor: 'default',
         height: canvasHeight,
         imageSmoothingEnabled: false,

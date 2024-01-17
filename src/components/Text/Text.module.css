@@ -1,9 +1,6 @@
-input[type='file'] {
-    display: none;
-    
-}
-
-.camera_icon {
+.text_button {
+    background-color: rgba(255, 255, 255, 0);
+    border: none; 
     display: flex;
     align-items: center;
     justify-content: center;
@@ -13,12 +10,6 @@ input[type='file'] {
     /*border: 1px solid red;*/
     transition: background-color 0.2s;
 }
-
-.camera_icon:hover {
+.text_button:hover {
     background-color: rgb(243, 243, 243);
-}
-
-.my_img {
-    /*margin-top: 10px;
-    margin-bottom: 10px;*/
 }

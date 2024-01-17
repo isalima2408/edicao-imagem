@@ -1,5 +1,6 @@
 import { useContext } from "react"
 import { FabricContext } from "../../App"
+import styles from './Paint.module.css'
 
 const Paint = ({bgImageInserted, setPaintBtnSelected, setTextBtnSelected}) => {
     const canvas = useContext(FabricContext)
@@ -18,7 +19,7 @@ const Paint = ({bgImageInserted, setPaintBtnSelected, setTextBtnSelected}) => {
     }
 
     return(
-        <button onClick={activePaintMode}>Desenhar</button>
+        <button className={ styles.paint_icon } onClick={activePaintMode}><ion-icon name="pencil-outline"></ion-icon></button>
     )
 }
 
