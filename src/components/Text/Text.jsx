@@ -22,7 +22,25 @@ const Text = ({ bgImageInserted, setPaintBtnSelected, setTextBtnSelected }) => {
         fontFamily: 'Arial',
         selectable: true,
         hoverCursor: 'pointer',
+        centeredScaling: true,
+        centeredRotation: true,
+        transparentCorners: false,
+        cornerStyle: 'circle',
+        cornerColor: 'purple',
       })
+
+      textbox.setControlsVisibility({
+        tl:false, 
+        tr:false,
+        ml:false, 
+        mr:false, 
+        bl:false, 
+        mb:false, 
+        mt: true,
+        mtr: true,
+        br: true,
+      })
+
       canvas.current?.setActiveObject(textbox)
       canvas.current?.add(textbox).renderAll()
       }

@@ -28,7 +28,21 @@ const ExternImage = ({bgImageInserted, setTextBtnSelected, setPaintBtnSelected})
             img.set({
                 selectable: true,
                 hoverCursor: 'pointer',
+                cornerStyle: 'circle',
+                cornerColor: 'purple',
             }).scale(0.2)
+
+            img.setControlsVisibility({
+                tl:false, 
+                tr:false,
+                ml:false, 
+                mr:false, 
+                bl:false, 
+                mb:false, 
+                mt: true,
+                mtr: true,
+                br: true,
+              })
             
             canvas.current?.add(img)
             canvas.current?.renderAll()

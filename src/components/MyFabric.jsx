@@ -14,6 +14,7 @@ export const useFabric = () => {
     const fabricRef = useCallback((element) => {
       if (!element) return canvas.current?.dispose();
       canvas.current = new fabric.Canvas(element, {
+        selection: false,
         backgroundColor: 'gray',
         hoverCursor: 'default',
         height: canvasHeight,
