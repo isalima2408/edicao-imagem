@@ -27,22 +27,3 @@
     background-color: gray;
     /*border: 1px solid red;*/
 }
-
-.btn_emoji {
-    position: relative;
-}
-
-.emoji_box {
-    position: absolute;
-    z-index: 1;
-}
-
-.btn_sticker {
-    position: relative;
-}
-
-.sticker_box {
-    position: absolute;
-    z-index: 1;
-}
-

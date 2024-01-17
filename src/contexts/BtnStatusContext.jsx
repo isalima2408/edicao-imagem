@@ -1,7 +1,7 @@
 import { createContext, useContext, useState } from "react";
 import { FabricContext } from "../App";
 
-const BtnStatusContext = createContext()
+export const BtnStatusContext = createContext()
 
 export function BtnStatusProvider({ children }) {
     const canvas = useContext(FabricContext)
@@ -12,13 +12,13 @@ export function BtnStatusProvider({ children }) {
     const [emojiBtnSelected, setEmojiBtnSelected] = useState(false)
     const [stickerBtnSelected, setStickerBtnSelected] = useState(false)
 
-    function disablePaintMode () {
+    const disablePaintMode = () => {
         setPaintBtnSelected(false)
         canvas.current?.set('isDrawingMode', false)
     }
 
     return(
-    <BtnStatusProvider.Provider value={{
+    <BtnStatusContext.Provider value={{
         bgImageInserted,
         setBgImageInserted,
         textBtnSelected,
@@ -32,7 +32,7 @@ export function BtnStatusProvider({ children }) {
         disablePaintMode
     }}>
         {children}
-    </BtnStatusProvider.Provider>
+    </BtnStatusContext.Provider>
     )  
 }
 

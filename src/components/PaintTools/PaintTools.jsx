@@ -5,7 +5,11 @@ import { useBtnStatus } from "../../contexts/BtnStatusContext"
 
 const PaintTools = () => {
     const canvas = useContext(FabricContext)
-    const { setPaintBtnSelected } = useBtnStatus
+    const { setPaintBtnSelected, disablePaintMode } = useBtnStatus
+
+    function exitPaintMode () {
+        disablePaintMode()
+    }
 
     const changeBrushType = (e) => {
         const brushType = e.target.value
@@ -24,11 +28,6 @@ const PaintTools = () => {
     const changeBrushWidth = (e) => {
         const brushWidth = e.target.value
         canvas.current.freeDrawingBrush.width = parseInt(brushWidth, 10);
-    }
-
-    const disablePaintMode = () => {
-        setPaintBtnSelected(false)
-        canvas.current?.set('isDrawingMode', false)
     }
     
     const clearCanvas = () => {
@@ -52,7 +51,7 @@ const PaintTools = () => {
                 <option value="30">3</option>
             </select>
             <button onClick={clearCanvas}>Limpar</button>
-            <button onClick={disablePaintMode}>Sair</button>
+            <button onClick={exitPaintMode}>Sair</button>
         </div>
     )
 }

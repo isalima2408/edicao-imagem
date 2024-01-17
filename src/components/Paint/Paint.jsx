@@ -1,9 +1,11 @@
+import styles from './Paint.module.css'
 import { useContext } from "react"
 import { FabricContext } from "../../App"
-import styles from './Paint.module.css'
+import { useBtnStatus } from "../../contexts/BtnStatusContext"
 
-const Paint = ({bgImageInserted, setPaintBtnSelected, setTextBtnSelected}) => {
+const Paint = ({}) => {
     const canvas = useContext(FabricContext)
+    const { bgImageInserted, setPaintBtnSelected, setTextBtnSelected } = useBtnStatus()
 
     function activePaintMode () {
         if (bgImageInserted) {
@@ -19,7 +21,9 @@ const Paint = ({bgImageInserted, setPaintBtnSelected, setTextBtnSelected}) => {
     }
 
     return(
-        <button className={ styles.paint_icon } onClick={activePaintMode}><ion-icon name="pencil-outline"></ion-icon></button>
+        <button className={ styles.paint_icon } onClick={activePaintMode}>
+            <ion-icon name="pencil-outline"></ion-icon>
+        </button>
     )
 }
 

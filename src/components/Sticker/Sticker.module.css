@@ -13,3 +13,12 @@
 .sticker_icon:hover {
     background-color: rgb(243, 243, 243);
 }
+
+.btn_sticker {
+    position: relative;
+}
+
+.sticker_box {
+    position: absolute;
+    z-index: 1;
+}

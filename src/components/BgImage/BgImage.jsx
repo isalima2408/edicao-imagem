@@ -1,11 +1,14 @@
 import { useContext, useState, useEffect, useRef } from "react"
 import { fabric } from "fabric"
 import { FabricContext } from "../../App"
+import { useBtnStatus } from "../../contexts/BtnStatusContext"
 import styles from './BgImage.module.css'
 
 
-const BgImage = ({setBgImageInserted, setTextBtnSelected, setPaintBtnSelected, disablePaintMode}) => {
+const BgImage = ({}) => {
     const canvas = useContext(FabricContext)
+    const { setBgImageInserted, setTextBtnSelected, setPaintBtnSelected, disablePaintMode } = useBtnStatus()
+
     const [bgImgURL, setBgImgURL] = useState('')
     const { innerWidth: width, innerHeight: height } = window
     const windowHeight = height - 60
