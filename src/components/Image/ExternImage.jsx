@@ -1,10 +1,12 @@
 import { useContext, useState, useEffect, useRef } from "react"
-import { FabricContext } from "../../App"
 import { fabric } from "fabric"
+import { FabricContext } from "../../App"
+import { useBtnStatus } from '../../contexts/BtnStatusContext'
 import styles from './ExternImage.module.css'
 
-const ExternImage = ({bgImageInserted, setTextBtnSelected, setPaintBtnSelected}) => {
+const ExternImage = () => {
     const canvas = useContext(FabricContext)
+    const { bgImageInserted, setTextBtnSelected, setPaintBtnSelected } = useBtnStatus()
     const fileInput = useRef(null)
     const [imgURL, setImgURL] = useState('')
     
@@ -27,23 +29,9 @@ const ExternImage = ({bgImageInserted, setTextBtnSelected, setPaintBtnSelected})
         new fabric.Image.fromURL(imgURL, function(img) {
             img.set({
                 selectable: true,
-                hoverCursor: 'pointer',
-                cornerStyle: 'circle',
-                cornerColor: 'purple',
             }).scale(0.2)
-
-            img.setControlsVisibility({
-                tl:false, 
-                tr:false,
-                ml:false, 
-                mr:false, 
-                bl:false, 
-                mb:false, 
-                mt: true,
-                mtr: true,
-                br: true,
-              })
             
+            canvas.current?.setActiveObject(img)
             canvas.current?.add(img)
             canvas.current?.renderAll()
         })

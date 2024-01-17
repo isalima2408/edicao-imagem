@@ -13,3 +13,12 @@
 .emoji_icon:hover {
     background-color: rgb(243, 243, 243);
 }
+
+.btn_emoji {
+    position: relative;
+}
+
+.emoji_box {
+    position: absolute;
+    z-index: 1;
+}

@@ -1,12 +1,13 @@
 import { useContext } from 'react';
 import { fabric } from 'fabric';
 import { FabricContext } from "../../App.js";
+import { useBtnStatus } from '../../contexts/BtnStatusContext';
 import styles from './Text.module.css'
 
 
-const Text = ({ bgImageInserted, setPaintBtnSelected, setTextBtnSelected }) => {
+const Text = () => {
   const canvas = useContext(FabricContext);
-  //console.log(textBtnSelected)
+  const {bgImageInserted, setPaintBtnSelected, setTextBtnSelected} = useBtnStatus()
 
   const addText = () => {
     if (bgImageInserted) {
@@ -24,21 +25,6 @@ const Text = ({ bgImageInserted, setPaintBtnSelected, setTextBtnSelected }) => {
         hoverCursor: 'pointer',
         centeredScaling: true,
         centeredRotation: true,
-        transparentCorners: false,
-        cornerStyle: 'circle',
-        cornerColor: 'purple',
-      })
-
-      textbox.setControlsVisibility({
-        tl:false, 
-        tr:false,
-        ml:false, 
-        mr:false, 
-        bl:false, 
-        mb:false, 
-        mt: true,
-        mtr: true,
-        br: true,
       })
 
       canvas.current?.setActiveObject(textbox)

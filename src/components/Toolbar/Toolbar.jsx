@@ -11,19 +11,20 @@ import PaintTools from "../PaintTools/PaintTools"
 import ExternImage from '../Image/ExternImage'
 import Download from "../Download/Download"
 import { FabricContext } from "../../App"
+import { BtnStatusProvider } from "../../contexts/BtnStatusContext"
+import { useBtnStatus } from "../../contexts/BtnStatusContext.jsx"
 import styles from "./Toolbar.module.css"
 
-import EmojiPicker from  'emoji-picker-react' ;
-
 const Toolbar = () => {
-    const canvas = useContext(FabricContext)
+    // const canvas = useContext(FabricContext)
+    const { textBtnSelected, paintBtnSelected } = useBtnStatus()
 
-    const [bgImageInserted, setBgImageInserted] = useState(false)
+    /*const [bgImageInserted, setBgImageInserted] = useState(false)
     const [textBtnSelected, setTextBtnSelected] = useState(false)
     const [paintBtnSelected, setPaintBtnSelected] = useState(false)
     const [emojiBtnSelected, setEmojiBtnSelected] = useState(false)
     const [stickerBtnSelected, setStickerBtnSelected] = useState(false)
-    const standardStickers = [
+    const defaultStickers = [
         {
             names: ['SUBZERO', 'Subzero perfil'],
             imgUrl: 'https://avatarfiles.alphacoders.com/342/342681.png',
@@ -41,7 +42,7 @@ const Toolbar = () => {
         }
     ]
 
-    // COLOCAR DESABILITAR DE TODOS OS ELEMENTOS AQUI (TODOS OS FALSES)
+    /* COLOCAR DESABILITAR DE TODOS OS ELEMENTOS AQUI (TODOS OS FALSES)
     const disablePaintMode = () => {
         setPaintBtnSelected(false)
         canvas.current?.set('isDrawingMode', false)
@@ -51,15 +52,13 @@ const Toolbar = () => {
         setEmojiBtnSelected(false)
         
         var emojiURL = emojiObject.imageUrl
-        console.log(emojiObject)
-        console.log(emojiObject.imageUrl)
-        console.log("teste: https://www.youtube.com/watch?v=WXUK_xK1RTk")
 
         new fabric.Image.fromURL(emojiURL, function(img) {
             img.set({
                 selectable: true,
                 hoverCursor: 'default'
             })
+            canvas.current?.setActiveObject(img)
             canvas.current?.add(img)
             canvas.current?.renderAll()
         })
@@ -77,47 +76,30 @@ const Toolbar = () => {
                 selectable: true,
                 hoverCursor: 'default'
             }).scale(0.1)
+            canvas.current?.setActiveObject(img)
             canvas.current?.add(img)
             canvas.current?.renderAll()
         })
-    }
+    }*/
 
     return(
-        <>
-        <div id="toolbar" className={styles.toolbar}>
-            <div className={ styles.main_tools }>
-                <BgImage setBgImageInserted={setBgImageInserted} setTextBtnSelected={setTextBtnSelected} setPaintBtnSelected={setPaintBtnSelected} disablePaintMode={disablePaintMode} />
-                <Text bgImageInserted={bgImageInserted} setTextBtnSelected={setTextBtnSelected} setPaintBtnSelected={setPaintBtnSelected} disablePaintMode={disablePaintMode} />
-                <ExternImage bgImageInserted={bgImageInserted} setTextBtnSelected={setTextBtnSelected} setPaintBtnSelected={setPaintBtnSelected} disablePaintMode={disablePaintMode}  />
-                
-                <span className={ styles.btn_emoji }>
-                    <Emoji bgImageInserted={bgImageInserted} setEmojiBtnSelected={setEmojiBtnSelected} disablePaintMode={disablePaintMode} />
-                    <div className={ styles.emoji_box }>
-                    {emojiBtnSelected && <EmojiPicker onEmojiClick={onEmojiClick} emojiStyle="apple"/>}
-                    </div>
-                </span>
-
-                <span className={ styles.btn_sticker }>
-                    <Sticker bgImageInserted={bgImageInserted} setStickerBtnSelected={setStickerBtnSelected} disablePaintMode={disablePaintMode} />
-                    <div className={ styles.sticker_box }>
-                    {stickerBtnSelected && <EmojiPicker onEmojiClick={onStickerClick} categories={[{category: 'custom', name: 'Figurinhas'}]} 
-                    customEmojis={ standardStickers }
-                    previewConfig={{defaultEmoji: 'scorpion'/*id*/, defaultCaption: 'Selecione sua figurinha...', showPreview: true }}
-                    emojiStyle="apple"/>}
-                    </div>
-                </span>
-                
-
-                <Paint bgImageInserted={bgImageInserted} setPaintBtnSelected={setPaintBtnSelected} setTextBtnSelected={setTextBtnSelected} disablePaintMode={disablePaintMode} />
-                <Download />
-                
+        <BtnStatusProvider>
+            <div id="toolbar" className={styles.toolbar}>
+                <div className={ styles.main_tools }>
+                    <BgImage />
+                    <Text />
+                    <ExternImage />
+                    <Emoji />
+                    <Sticker />
+                    <Paint />
+                    <Download />   
+                </div>
             </div>
-        </div>
-        <div className={ styles.custom_tools } >
-            {textBtnSelected && <TextTools />}
-            {paintBtnSelected && <PaintTools setPaintBtnSelected={setPaintBtnSelected} />}
-        </div>
-        </>
+            <div className={ styles.custom_tools } >
+                {textBtnSelected && <TextTools />}
+                {paintBtnSelected && <PaintTools />}
+            </div>
+        </BtnStatusProvider>
     )
 }
 

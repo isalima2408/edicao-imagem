@@ -1,9 +1,11 @@
 import { useContext } from "react"
 import { FabricContext } from "../../App"
 import { fabric } from "fabric"
+import { useBtnStatus } from "../../contexts/BtnStatusContext"
 
-const PaintTools = ({setPaintBtnSelected}) => {
+const PaintTools = () => {
     const canvas = useContext(FabricContext)
+    const { setPaintBtnSelected } = useBtnStatus
 
     const changeBrushType = (e) => {
         const brushType = e.target.value
