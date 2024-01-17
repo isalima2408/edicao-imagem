@@ -7,7 +7,7 @@ const PaintTools = () => {
     const canvas = useContext(FabricContext)
     const { setPaintBtnSelected, disablePaintMode } = useBtnStatus
 
-    function exitPaintMode () {
+    const exitPaintMode = () => {
         disablePaintMode()
     }
 

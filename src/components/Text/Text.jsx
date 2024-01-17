@@ -7,14 +7,13 @@ import styles from './Text.module.css'
 
 const Text = () => {
   const canvas = useContext(FabricContext);
-  const {bgImageInserted, setPaintBtnSelected, setTextBtnSelected} = useBtnStatus()
+  const {disablePaintMode, bgImageInserted, setPaintBtnSelected, setTextBtnSelected} = useBtnStatus()
 
   const addText = () => {
     if (bgImageInserted) {
       setTextBtnSelected(true)
-      setPaintBtnSelected(false)
 
-      canvas.current?.set('isDrawingMode', false)
+      disablePaintMode()
 
       const textbox = new fabric.Textbox("Texto", {
         left: 30,
