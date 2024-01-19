@@ -10,11 +10,19 @@ const ExternImage = () => {
     const fileInput = useRef(null)
     const [imgURL, setImgURL] = useState('')
     
+    function disableExternImageBtn () {
+        if (bgImageInserted) {
+            return false
+        } else {
+            return true
+        }
+    }
 
-    function setElementsFalse () {
+    function disableElements () {
+        canvas.current?.discardActiveObject().renderAll()
+        canvas.current?.set('isDrawingMode', false) 
         setTextBtnSelected(false)
-        setPaintBtnSelected(false)
-        canvas.current?.set('isDrawingMode', false)       
+        setPaintBtnSelected(false)      
     }
 
     const handleImgChange = (e) => {
@@ -29,20 +37,24 @@ const ExternImage = () => {
         new fabric.Image.fromURL(imgURL, function(img) {
             img.set({
                 selectable: true,
+                hoverCursor: 'pointer',
+                centeredScaling: true,
+                centeredRotation: true,
             }).scale(0.2)
             
-            canvas.current?.setActiveObject(img)
             canvas.current?.add(img)
-            canvas.current?.renderAll()
+            canvas.current?.centerObject(img)
+            img.setCoords()
+            canvas.current?.setActiveObject(img).renderAll()
+            
         })
-        
     }, [canvas?.current, imgURL])
 
 
     return(
         <label className={ styles.image_icon }>
             <ion-icon name="images-outline"></ion-icon>
-            <input type="file" onChange={handleImgChange} onClick={setElementsFalse} ref={fileInput} disabled={bgImageInserted ? false : true} />
+            <input type="file" onChange={handleImgChange} onClick={disableElements} ref={fileInput} disabled={ disableExternImageBtn() } />
         </label>
     )
 }

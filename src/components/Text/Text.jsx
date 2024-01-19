@@ -9,8 +9,10 @@ const Text = () => {
   const canvas = useContext(FabricContext);
   const {bgImageInserted, setPaintBtnSelected, setTextBtnSelected} = useBtnStatus()
 
+  // O setActiveObject já desativa objetos selecionados
   const addText = () => {
     if (bgImageInserted) {
+
       setTextBtnSelected(true)
       setPaintBtnSelected(false)
 
@@ -27,12 +29,18 @@ const Text = () => {
         centeredRotation: true,
       })
 
-      canvas.current?.setActiveObject(textbox)
-      canvas.current?.add(textbox).renderAll()
+      canvas.current?.add(textbox)
+      canvas.current?.centerObject(textbox)
+      textbox.setCoords()
+      canvas.current?.setActiveObject(textbox).renderAll()
       }
   }
 
-  return <button className={ styles.text_button } onClick={addText} ><ion-icon name="text-outline"></ion-icon></button>
+  return (
+    <button className={ styles.text_button } onClick={addText} >
+      <ion-icon name="text-outline"></ion-icon>
+    </button>
+  )
 }
 
 export default Text

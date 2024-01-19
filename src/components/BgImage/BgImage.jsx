@@ -17,14 +17,14 @@ const BgImage = ({}) => {
     // Limpar elementos inseridos no canvas antigo ao inserir nova imagem de fundo
     // Ver se consigo tornar isso válido somente na 2° inserção de imagem, porque na primeira ja vai estar limpo
     const resetCanvas = () => {
-        setBgImageInserted(true)
         setTextBtnSelected(false)
         disablePaintMode()
         canvas.current?.clear()
     }
 
     const handleImgChange = (e) => {
-        setBgImgURL(URL.createObjectURL(e.target.files[0]))   
+        setBgImgURL(URL.createObjectURL(e.target.files[0])) 
+        setBgImageInserted(true)  
     }
 
     useEffect(() => {
@@ -85,8 +85,6 @@ const BgImage = ({}) => {
 
             canvas.current?.requestRenderAll()          
             })
-
-            console.log(canvas?.current)
     }, [canvas?.current, bgImgURL])
 
 

@@ -3,13 +3,12 @@ import { useContext } from 'react'
 import { fabric } from 'fabric';
 import { FabricContext } from '../../App';
 import { useBtnStatus } from '../../contexts/BtnStatusContext';
-
 import EmojiPicker from  'emoji-picker-react' ;
 
 
 const Sticker = () => {
     const canvas = useContext(FabricContext)
-    const { stickerBtnSelected, setStickerBtnSelected } = useBtnStatus()
+    const { bgImageInserted, stickerBtnSelected, setStickerBtnSelected, setEmojiBtnSelected, setPaintBtnSelected, setTextBtnSelected} = useBtnStatus()
 
     const defaultStickers = [
         {
@@ -29,6 +28,17 @@ const Sticker = () => {
         }
     ]
 
+    function disableElements() {
+        if(bgImageInserted) {
+            setStickerBtnSelected(val => !val)
+            canvas.current?.set('isDrawingMode', false)
+            canvas.current?.discardActiveObject().renderAll()
+            setTextBtnSelected(false)
+            setPaintBtnSelected(false)
+            setEmojiBtnSelected(false)
+        }
+    }
+
     function onStickerClick (emojiObject, e) {
         setStickerBtnSelected(false)
         
@@ -39,17 +49,20 @@ const Sticker = () => {
         new fabric.Image.fromURL(stickerURL, function(img) {
             img.set({
                 selectable: true,
-                hoverCursor: 'default'
-            }).scale(0.1)
-            canvas.current?.setActiveObject(img)
+                hoverCursor: 'pointer',
+                centeredScaling: true,
+                centeredRotation: true,
+            }).scale(.15)
             canvas.current?.add(img)
-            canvas.current?.renderAll()
+            canvas.current?.centerObject(img)
+            img.setCoords()
+            canvas.current?.setActiveObject(img).renderAll()
         })
     }
 
     return (
         <span className={ styles.btn_sticker }>
-            <button className={ styles.sticker_icon } onClick={() => setStickerBtnSelected(val => !val)}>
+            <button className={ styles.sticker_icon } onClick={ disableElements }>
                 <ion-icon name="planet-outline"></ion-icon>
             </button>
             <div className={ styles.sticker_box }>
