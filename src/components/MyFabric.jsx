@@ -52,6 +52,7 @@ export const useFabric = () => {
       fabric.Object.prototype.transparentCorners = false
       fabric.Object.prototype.cornerStyle = 'circle'
       fabric.Object.prototype.cornerColor = 'purple'
+      fabric.Object.prototype.cornerSize = 18
 
       // criando controle de exclusão no elemento (somente imagens e formas)
       fabric.Object.prototype.controls.deleteControl = new fabric.Control({
@@ -61,7 +62,7 @@ export const useFabric = () => {
         cursorStyle: 'pointer',
         mouseUpHandler: deleteObject,
         render: renderIcon,
-        cornerSize: 24
+        cornerSize: 20
       });
 
       // controle de exclusão para texto
@@ -72,7 +73,7 @@ export const useFabric = () => {
         cursorStyle: 'pointer',
         mouseUpHandler: deleteObject,
         render: renderIcon,
-        cornerSize: 24
+        cornerSize: 20
       });
      
       function deleteObject(eventData, transform) {

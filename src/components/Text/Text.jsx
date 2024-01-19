@@ -27,6 +27,7 @@ const Text = () => {
         hoverCursor: 'pointer',
         centeredScaling: true,
         centeredRotation: true,
+        
       })
 
       textbox.on('selected', function () {
