@@ -7,12 +7,13 @@ import styles from './Text.module.css'
 
 const Text = () => {
   const canvas = useContext(FabricContext);
-  const {disablePaintMode, bgImageInserted, setPaintBtnSelected, setTextBtnSelected, setTextAlign, setTextColor, setTextFontFamily} = useBtnStatus()
+  const {disablePaintMode, bgImageInserted, setEmojiBtnSelected, setStickerBtnSelected, setTextBtnSelected, setTextAlign, setTextColor, setTextFontFamily} = useBtnStatus()
 
   // O setActiveObject já desativa objetos selecionados
   const addText = () => {
     if (bgImageInserted) {
-
+      setEmojiBtnSelected(false)
+      setStickerBtnSelected(false)
       setTextBtnSelected(true)
 
       disablePaintMode()
@@ -34,6 +35,8 @@ const Text = () => {
         setTextFontFamily(()=>canvas.current?.getActiveObject().get('fontFamily'))
         setTextColor(()=>canvas.current?.getActiveObject().get('fill'))
         setTextAlign(()=>canvas.current?.getActiveObject().get('textAlign'))
+        canvas.current?.renderAll()
+        
       })
 
       canvas.current?.add(textbox)

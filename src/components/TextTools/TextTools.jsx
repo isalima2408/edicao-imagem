@@ -11,20 +11,17 @@ const TextTools = () => {
 
     // Mudar alinhamento
     const changeTextAlign = (e) => {
+        // o set serve para ajustar apenas o value do select, mas não fazer a alteração na propriedade do texto
         setTextAlign(e.target.value) 
-        if (canvas.current?.getActiveObject()) {
-            canvas.current?.getActiveObject().set('textAlign', textAlign)
-            canvas.current?.renderAll()
-        }  
+        canvas.current?.getActiveObject().set('textAlign', e.target.value)
+        canvas.current?.renderAll()
     }
 
     // Mudar cor
     const changeTextColor = (e) => {
         setTextColor(e.target.value)
-        if (canvas.current?.getActiveObject()) {
-            canvas.current?.getActiveObject().set('fill', textColor)
-            canvas.current?.renderAll()
-        }  
+        canvas.current?.getActiveObject().set('fill', e.target.value)
+        canvas.current?.renderAll() 
     }
 
     // Carregar família da fonte antes de usar (evitar erros)
@@ -41,27 +38,15 @@ const TextTools = () => {
           });
       }
     
-
-    /*const initialState = canvas.current?.getActiveObject().get('fontFamily')
-    const [selectedFont, setSelectedFont] = useState(initialState)
-    //setSelectedFont(() => canvas.current?.getActiveObject().get('fontFamily'))
-    console.log(selectedFont)
-
-    useEffect(() => {
-        setSelectedFont(()=>canvas.current?.getActiveObject().get('fontFamily'))
-    }, [canvas.current?.getActiveObject()])*/
-
     // Mudar fonte
     const changeFontFamily = (e) => {
         setTextFontFamily(e.target.value)
 
-        if (canvas.current?.getActiveObject()) {
-            if (textFontFamily !== 'Arial') {
-                loadAndUse(textFontFamily)
-            } else {
-                canvas.current?.getActiveObject().set('fontFamily', textFontFamily)
-                canvas.current?.renderAll();
-            }
+        if (textFontFamily !== 'Arial') {
+            loadAndUse(e.target.value)
+        } else {
+            canvas.current?.getActiveObject().set('fontFamily', e.target.value)
+            canvas.current?.renderAll();
         }
     }
     

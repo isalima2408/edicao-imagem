@@ -17,7 +17,6 @@ export function BtnStatusProvider({ children }) {
     const [textFontFamily, setTextFontFamily] = useState('')
 
     const disablePaintMode = () => {
-        console.log("funcao disable PM")
         setPaintBtnSelected(false)
         canvas.current?.set('isDrawingMode', false)
     }
