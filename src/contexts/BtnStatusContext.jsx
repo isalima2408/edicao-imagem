@@ -12,6 +12,10 @@ export function BtnStatusProvider({ children }) {
     const [emojiBtnSelected, setEmojiBtnSelected] = useState(false)
     const [stickerBtnSelected, setStickerBtnSelected] = useState(false)
 
+    const [textAlign, setTextAlign] = useState('')
+    const [textColor, setTextColor] = useState('')
+    const [textFontFamily, setTextFontFamily] = useState('')
+
     const disablePaintMode = () => {
         setPaintBtnSelected(false)
         canvas.current?.set('isDrawingMode', false)
@@ -29,7 +33,13 @@ export function BtnStatusProvider({ children }) {
         setEmojiBtnSelected,
         stickerBtnSelected,
         setStickerBtnSelected,
-        disablePaintMode
+        disablePaintMode,
+        textAlign,
+        setTextAlign,
+        textColor,
+        setTextColor,
+        textFontFamily,
+        setTextFontFamily
     }}>
         {children}
     </BtnStatusContext.Provider>

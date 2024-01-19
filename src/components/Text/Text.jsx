@@ -7,7 +7,7 @@ import styles from './Text.module.css'
 
 const Text = () => {
   const canvas = useContext(FabricContext);
-  const {bgImageInserted, setPaintBtnSelected, setTextBtnSelected} = useBtnStatus()
+  const {bgImageInserted, setPaintBtnSelected, setTextBtnSelected, setTextAlign, setTextColor, setTextFontFamily} = useBtnStatus()
 
   // O setActiveObject já desativa objetos selecionados
   const addText = () => {
@@ -27,6 +27,12 @@ const Text = () => {
         hoverCursor: 'pointer',
         centeredScaling: true,
         centeredRotation: true,
+      })
+
+      textbox.on('selected', function () {
+        setTextFontFamily(()=>canvas.current?.getActiveObject().get('fontFamily'))
+        setTextColor(()=>canvas.current?.getActiveObject().get('fill'))
+        setTextAlign(()=>canvas.current?.getActiveObject().get('textAlign'))
       })
 
       canvas.current?.add(textbox)

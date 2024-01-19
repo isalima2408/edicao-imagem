@@ -1,26 +1,28 @@
 import { useContext, useState, useEffect } from "react";
 import { FabricContext } from "../../App";
+import { useBtnStatus } from "../../contexts/BtnStatusContext";
 
 var FontFaceObserver = require('fontfaceobserver')
 
 
 const TextTools = () => {
     const canvas = useContext(FabricContext);
+    const { textAlign, setTextAlign, textColor, setTextColor, textFontFamily, setTextFontFamily } = useBtnStatus()
 
     // Mudar alinhamento
     const changeTextAlign = (e) => {
-        const align = e.target.value
+        setTextAlign(e.target.value) 
         if (canvas.current?.getActiveObject()) {
-            canvas.current?.getActiveObject().set('textAlign', align)
+            canvas.current?.getActiveObject().set('textAlign', textAlign)
             canvas.current?.renderAll()
         }  
     }
 
     // Mudar cor
     const changeTextColor = (e) => {
-        const color = e.target.value
+        setTextColor(e.target.value)
         if (canvas.current?.getActiveObject()) {
-            canvas.current?.getActiveObject().set('fill', color)
+            canvas.current?.getActiveObject().set('fill', textColor)
             canvas.current?.renderAll()
         }  
     }
@@ -51,13 +53,13 @@ const TextTools = () => {
 
     // Mudar fonte
     const changeFontFamily = (e) => {
-        const fontFamily = e.target.value   
+        setTextFontFamily(e.target.value)
 
         if (canvas.current?.getActiveObject()) {
-            if (fontFamily !== 'Arial') {
-                loadAndUse(fontFamily)
+            if (textFontFamily !== 'Arial') {
+                loadAndUse(textFontFamily)
             } else {
-                canvas.current?.getActiveObject().set('fontFamily', fontFamily)
+                canvas.current?.getActiveObject().set('fontFamily', textFontFamily)
                 canvas.current?.renderAll();
             }
         }
@@ -66,18 +68,18 @@ const TextTools = () => {
     
     return(
         <div>
-            <select name="font_family" id="font_family" onChange={changeFontFamily}>  
+            <select name="font_family" id="font_family" value={textFontFamily} onChange={changeFontFamily}>  
                 <option value="Roboto">Roboto</option>
                 <option value="Arial">Arial</option>
                 <option value="Montserrat">Montserrat</option>
                 <option value="Lemon">Lemon</option>
             </select>
-            <select name="text_color" id="text_color" onChange={changeTextColor}>
+            <select name="text_color" id="text_color" value={textColor} onChange={changeTextColor}>
                 <option value="black">Preto</option>
                 <option value="red">Vermelho</option>
                 <option value="blue">Azul</option>
             </select>
-            <select name="text_align" id="text_align" onChange={changeTextAlign} >
+            <select name="text_align" id="text_align" value={textAlign} onChange={changeTextAlign} >
                 <option value="left">Esquerda</option>
                 <option value="center">Centro</option>
                 <option value="right">Direita</option>
