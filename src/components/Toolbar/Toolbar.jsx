@@ -11,7 +11,6 @@ import PaintTools from "../PaintTools/PaintTools"
 import ExternImage from '../Image/ExternImage'
 import Download from "../Download/Download"
 import { FabricContext } from "../../App"
-import { BtnStatusProvider } from "../../contexts/BtnStatusContext"
 import { useBtnStatus } from "../../contexts/BtnStatusContext"
 import styles from "./Toolbar.module.css"
 

@@ -14,9 +14,8 @@ const Text = () => {
     if (bgImageInserted) {
 
       setTextBtnSelected(true)
-      setPaintBtnSelected(false)
 
-      canvas.current?.set('isDrawingMode', false)
+      disablePaintMode()
 
       const textbox = new fabric.Textbox("Texto", {
         left: 30,
