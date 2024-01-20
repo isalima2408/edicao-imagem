@@ -7,7 +7,7 @@ var FontFaceObserver = require('fontfaceobserver')
 
 const TextTools = () => {
     const canvas = useContext(FabricContext);
-    const { textAlign, setTextAlign, textColor, setTextColor, textFontFamily, setTextFontFamily } = useBtnStatus()
+    const { textAlign, setTextAlign, textColor, setTextColor, textFontFamily, setTextFontFamily, textStyle, setTextStyle } = useBtnStatus()
 
     // Mudar alinhamento
     const changeTextAlign = (e) => {
@@ -49,6 +49,22 @@ const TextTools = () => {
             canvas.current?.renderAll();
         }
     }
+
+    // Itálico / Negrito
+    const changeTextStyle = (e) => {
+        setTextStyle(e.target.value)
+        if (e.target.value === 'italic') {
+            canvas.current?.getActiveObject().set("fontStyle", e.target.value);
+            canvas.current?.renderAll();
+        } else if (e.target.value === 'bold') {
+            canvas.current?.getActiveObject().set("fontWeight", e.target.value);
+            canvas.current?.renderAll();
+        } else {
+            canvas.current?.getActiveObject().set("fontStyle", 'normal');
+            canvas.current?.getActiveObject().set("fontWeight", 'normal');
+            canvas.current?.renderAll();
+        }
+    }
     
     
     return(
@@ -68,6 +84,11 @@ const TextTools = () => {
                 <option value="left">Esquerda</option>
                 <option value="center">Centro</option>
                 <option value="right">Direita</option>
+            </select>
+            <select name="text_style" id="text_style" value={textStyle} onChange={changeTextStyle}>
+                <option value="normal">Normal</option>
+                <option value="italic">Itálico</option>
+                <option value="bold">Negrito</option>
             </select>
         </div>
     )

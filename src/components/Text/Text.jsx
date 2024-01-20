@@ -7,13 +7,12 @@ import styles from './Text.module.css'
 
 const Text = () => {
   const canvas = useContext(FabricContext);
-  const {disablePaintMode, bgImageInserted, setEmojiBtnSelected, setStickerBtnSelected, setTextBtnSelected, setTextAlign, setTextColor, setTextFontFamily} = useBtnStatus()
+  const {disablePaintMode, bgImageInserted, setEmojiBtnSelected, setTextBtnSelected, setTextAlign, setTextColor, setTextFontFamily, setTextStyle } = useBtnStatus()
 
   // O setActiveObject já desativa objetos selecionados
   const addText = () => {
     if (bgImageInserted) {
       setEmojiBtnSelected(false)
-      setStickerBtnSelected(false)
       setTextBtnSelected(true)
 
       disablePaintMode()
@@ -23,6 +22,8 @@ const Text = () => {
         fill: 'back',
         textAlign: 'left',
         fontFamily: 'Arial',
+        fontStyle: 'normal',
+        fontWeight: 'normal',
         selectable: true,
         hoverCursor: 'pointer',
         centeredScaling: true,
@@ -36,9 +37,22 @@ const Text = () => {
         setTextFontFamily(()=>canvas.current?.getActiveObject().get('fontFamily'))
         setTextColor(()=>canvas.current?.getActiveObject().get('fill'))
         setTextAlign(()=>canvas.current?.getActiveObject().get('textAlign'))
+        setTextStyle(()=>canvas.current?.getActiveObject().get('fontStyle', 'fontWeight'))
         canvas.current?.renderAll()
         
       })
+
+      textbox.setControlsVisibility({
+        tl:false, 
+        tr:false,
+        ml:false, 
+        mr:false, 
+        bl:false, 
+        mb:false, 
+        mt: false,
+        mtr: true,
+        br: true,
+    })
 
       canvas.current?.add(textbox)
       canvas.current?.centerObject(textbox)

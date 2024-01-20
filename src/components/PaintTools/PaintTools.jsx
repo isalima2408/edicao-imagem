@@ -38,6 +38,7 @@ const PaintTools = () => {
         <div>
             <select name="brush_type" id="brush_type" onChange={changeBrushType}>
                 <option value="pencil">Pincél</option>
+                <option value="eraser">Borracha</option>
             </select>
             <select name="brush_color" id="brush_color" onChange={changeBrushColor}>
                 <option value="purple">Roxo</option>

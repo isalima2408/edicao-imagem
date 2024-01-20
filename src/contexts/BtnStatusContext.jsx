@@ -10,11 +10,11 @@ export function BtnStatusProvider({ children }) {
     const [textBtnSelected, setTextBtnSelected] = useState(false)
     const [paintBtnSelected, setPaintBtnSelected] = useState(false)
     const [emojiBtnSelected, setEmojiBtnSelected] = useState(false)
-    const [stickerBtnSelected, setStickerBtnSelected] = useState(false)
 
     const [textAlign, setTextAlign] = useState('')
     const [textColor, setTextColor] = useState('')
     const [textFontFamily, setTextFontFamily] = useState('')
+    const [textStyle, setTextStyle] = useState('')
 
     const disablePaintMode = () => {
         setPaintBtnSelected(false)
@@ -31,15 +31,15 @@ export function BtnStatusProvider({ children }) {
         setPaintBtnSelected,
         emojiBtnSelected,
         setEmojiBtnSelected,
-        stickerBtnSelected,
-        setStickerBtnSelected,
         disablePaintMode,
         textAlign,
         setTextAlign,
         textColor,
         setTextColor,
         textFontFamily,
-        setTextFontFamily
+        setTextFontFamily,
+        textStyle,
+        setTextStyle
     }}>
         {children}
     </BtnStatusContext.Provider>

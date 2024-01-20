@@ -7,7 +7,7 @@ import styles from './BgImage.module.css'
 
 const BgImage = ({}) => {
     const canvas = useContext(FabricContext)
-    const { setBgImageInserted, setTextBtnSelected, setPaintBtnSelected, disablePaintMode } = useBtnStatus()
+    const { setBgImageInserted, setTextBtnSelected, disablePaintMode } = useBtnStatus()
 
     const [bgImgURL, setBgImgURL] = useState('')
     const { innerWidth: width, innerHeight: height } = window

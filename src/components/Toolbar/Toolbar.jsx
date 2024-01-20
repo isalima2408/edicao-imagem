@@ -5,7 +5,6 @@ import BgImage from "../BgImage/BgImage"
 import Text from "../Text/Text"
 import TextTools from '../TextTools/TextTools'
 import Emoji from "../Emoji/Emoji"
-import Sticker from "../Sticker/Sticker"
 import Paint from "../Paint/Paint"
 import PaintTools from "../PaintTools/PaintTools"
 import ExternImage from '../Image/ExternImage'
@@ -26,7 +25,6 @@ const Toolbar = () => {
                     <Text />
                     <ExternImage />
                     <Emoji />
-                    <Sticker />
                     <Paint />
                     <Download />   
                 </div>

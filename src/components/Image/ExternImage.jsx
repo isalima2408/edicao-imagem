@@ -41,6 +41,10 @@ const ExternImage = () => {
                 centeredScaling: true,
                 centeredRotation: true,
             }).scale(0.2)
+
+            img.setControlsVisibility({
+                tr: false
+            })
             
             canvas.current?.add(img)
             canvas.current?.centerObject(img)
