@@ -9,7 +9,7 @@ export const useFabric = () => {
 
     // 60 é o tamanho da barra de ferramentas total (main_tools + custom_tools)
     const canvasHeight = height - 60
-    console.log(width)
+    //console.log(width)
     
     // criando canvas
     const fabricRef = useCallback((element) => {
@@ -20,17 +20,17 @@ export const useFabric = () => {
         hoverCursor: 'default',
         height: canvasHeight,
         transparentCorners: false,
-        cornerStyle: 'circle',
-        cornerColor: 'purple',
+        //cornerStyle: 'circle',
+        //cornerColor: 'purple',
         imageSmoothingEnabled: false,
         webkitImageSmoothingEnabled: false,
         mozImageSmoothingEnabled: false,
         msImageSmoothingEnabled: false,
-        oImageSmoothingEnabled: false
+        oImageSmoothingEnabled: false,
+        objectCaching: false
       });
 
       
-
 
       // desabilitando seleção de todos os elementos (para atingir a função desenho)
       fabric.Object.prototype.selectable = false
@@ -77,12 +77,9 @@ export const useFabric = () => {
         ctx.rotate(fabric.util.degreesToRadians(fabricObject.angle));
         ctx.drawImage(img, -size/2, -size/2, size, size);
         ctx.restore();
-
-        ctx.rotate(fabric.util.degreesToRadians(fabricObject.angle));
-        ctx.drawImage(img, -size/2, -size/2, size, size);
-        ctx.restore();
-      }   
-
+      } 
+      
+      //console.log(canvas.current?.getActiveObjects())
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
     return fabricRef;

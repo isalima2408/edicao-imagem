@@ -12,13 +12,13 @@ const Text = () => {
   // O setActiveObject já desativa objetos selecionados
   const addText = () => {
     if (bgImageInserted) {
+      canvas.current?.discardActiveObject()
       setEmojiBtnSelected(false)
       setTextBtnSelected(true)
 
       disablePaintMode()
 
       const textbox = new fabric.Textbox("Texto", {
-        left: 30,
         fill: 'back',
         textAlign: 'left',
         fontFamily: 'Arial',
@@ -28,17 +28,7 @@ const Text = () => {
         hoverCursor: 'pointer',
         centeredScaling: true,
         centeredRotation: true,
-        
-      })
-
-      textbox.on('selected', function () {
-        // passar true para habilitar textTools quando o texto estiver selecionado
-        setTextBtnSelected(true)
-        setTextFontFamily(()=>canvas.current?.getActiveObject().get('fontFamily'))
-        setTextColor(()=>canvas.current?.getActiveObject().get('fill'))
-        setTextAlign(()=>canvas.current?.getActiveObject().get('textAlign'))
-        setTextStyle(()=>canvas.current?.getActiveObject().get('fontStyle', 'fontWeight'))
-        canvas.current?.renderAll()
+        objectCaching: false
         
       })
 
@@ -52,7 +42,18 @@ const Text = () => {
         mt: false,
         mtr: true,
         br: true,
-    })
+      })
+
+      textbox.on('selected', function () {
+        // passar true para habilitar textTools quando o texto estiver selecionado
+        setTextBtnSelected(true)
+        setTextFontFamily(()=>canvas.current?.getActiveObject().get('fontFamily'))
+        setTextColor(()=>canvas.current?.getActiveObject().get('fill'))
+        setTextAlign(()=>canvas.current?.getActiveObject().get('textAlign'))
+        setTextStyle(()=>canvas.current?.getActiveObject().get('fontStyle', 'fontWeight'))
+        canvas.current?.renderAll()
+        
+      })
 
       canvas.current?.add(textbox)
       canvas.current?.centerObject(textbox)

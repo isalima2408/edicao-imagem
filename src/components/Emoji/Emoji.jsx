@@ -73,6 +73,7 @@ const Emoji = () => {
     }
 
     function onEmojiClick (emojiObject, e) {
+        
         // Botão alternante (ativa/desativa)
         setEmojiBtnSelected(false)
   

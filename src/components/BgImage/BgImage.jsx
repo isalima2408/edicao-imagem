@@ -22,7 +22,7 @@ const BgImage = ({}) => {
         canvas.current?.clear()
     }
 
-    const handleImgChange = (e) => {
+    const handleBgImgChange = (e) => {
         setBgImgURL(URL.createObjectURL(e.target.files[0])) 
         setBgImageInserted(true)  
     }
@@ -63,6 +63,7 @@ const BgImage = ({}) => {
             img.set({
                 scaleX: scale,
                 scaleY: scale,
+                selectable: false,
 
                 imageSmoothingEnabled: false,
                 webkitImageSmoothingEnabled: false,
@@ -72,18 +73,31 @@ const BgImage = ({}) => {
             })
             img.objectCaching = false
             img.noScaleCache = true
+
+            img.setControlsVisibility({
+                tl:false, 
+                tr:false,
+                ml:false, 
+                mr:false, 
+                bl:false, 
+                mb:false, 
+                mt: false,
+                mtr: true,
+                br: false,
+            })
             
             canvas.current?.setBackgroundImage(img, canvas.current?.renderAll.bind(canvas.current))
             canvas.current?.setWidth(img.getScaledWidth())
             canvas.current?.setHeight(img.getScaledHeight())
 
-            img.set({
+            /*img.set({
                 left: 0,
                 top: 0
             })
-            img.setCoords()
+            img.setCoords()*/
 
-            canvas.current?.requestRenderAll()          
+            canvas.current?.requestRenderAll() 
+            console.log(canvas.current?.getActiveObjects())         
             })
     }, [canvas?.current, bgImgURL])
 
@@ -91,7 +105,7 @@ const BgImage = ({}) => {
     return(
             <label className={ styles.camera_icon }>
                 <ion-icon name="camera-outline"></ion-icon>
-                <input type="file" accept="image/*" onClick={resetCanvas} onChange={handleImgChange} />
+                <input type="file" accept="image/*" onClick={resetCanvas} onChange={handleBgImgChange} />
             </label>     
     )
 }
