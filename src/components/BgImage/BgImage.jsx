@@ -72,8 +72,7 @@ const BgImage = () => {
             canvas.current?.setWidth(img.getScaledWidth())
             canvas.current?.setHeight(img.getScaledHeight())
             img.setCoords()
-            canvas.current?.requestRenderAll() 
-            console.log(canvas.current?.getActiveObjects())         
+            canvas.current?.requestRenderAll()         
         })
     }, [canvas?.current, bgImgURL])
 

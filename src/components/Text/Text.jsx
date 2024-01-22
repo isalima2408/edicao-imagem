@@ -34,7 +34,7 @@ const Text = () => {
       textbox.setControlsVisibility({
         tl: false, 
         tr: false,
-        ml: false, 
+        ml: true, 
         mr: false, 
         bl: false, 
         mb: false, 
