@@ -11,7 +11,7 @@ const BgImage = () => {
 
     const [bgImgURL, setBgImgURL] = useState('')
     const { innerWidth: width, innerHeight: height } = window
-    const windowHeight = height - 60
+    const windowHeight = height - 80
     //const fileInput = useRef(null)
 
     // Limpar elementos inseridos no canvas antigo ao inserir nova imagem de fundo
@@ -32,8 +32,18 @@ const BgImage = () => {
             var scale
             var scaleW = width / img.width
             var scaleH = windowHeight / img.height
+            var ratioWindow = width / windowHeight
+            var ratioImg = img.width / img.height
 
-            if(width > 540) {
+            var imgOverflow = ratioImg>ratioWindow
+
+            if(!imgOverflow) {
+                scale = scaleH
+            } else {
+                scale = scaleW
+            }
+
+            /*if(width > 540) {
                 if (img.width > img.height && img.height < height) {
                     scale = scaleW
                 } else if (img.width > img.height && img.height > height){
@@ -58,7 +68,7 @@ const BgImage = () => {
                 } else if (img.height == img.width) {
                     scale = scaleW
                 }
-            }
+            }*/
   
             img.set({
                 scaleX: scale,

@@ -54,16 +54,16 @@ const Text = () => {
         canvas.current?.renderAll()
       })
 
-      function removeEmptyTextbox(e) {
+      /*function removeEmptyTextbox(e) {
         console.log("oi")
         if(e.target.text === '') {
           console.log("oi")
           canvas.current?.remove(e.target);
           canvas.current?.renderAll()
         }
-      }
+      }*/
       
-      canvas.current?.on('text:editing:exited', removeEmptyTextbox)
+      //canvas.current?.on('text:editing:exited', removeEmptyTextbox)
 
       
 

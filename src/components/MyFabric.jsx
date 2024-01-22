@@ -78,6 +78,16 @@ export const useFabric = () => {
         ctx.drawImage(img, -size/2, -size/2, size, size);
         ctx.restore();
       } 
+
+      canvas.current?.on('text:editing:exited', removeEmptyTextbox)
+      function removeEmptyTextbox(e) {
+        console.log("oi")
+        if(e.target.text === '') {
+          console.log("oi")
+          canvas.current?.remove(e.target);
+          canvas.current?.renderAll()
+        }
+      }
       
       //console.log(canvas.current?.getActiveObjects())
       // eslint-disable-next-line react-hooks/exhaustive-deps
