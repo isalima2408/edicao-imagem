@@ -5,7 +5,7 @@ import { useBtnStatus } from "../../contexts/BtnStatusContext"
 import styles from './BgImage.module.css'
 
 
-const BgImage = ({}) => {
+const BgImage = () => {
     const canvas = useContext(FabricContext)
     const { setBgImageInserted, setTextBtnSelected, disablePaintMode } = useBtnStatus()
 

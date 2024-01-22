@@ -52,8 +52,20 @@ const Text = () => {
         setTextAlign(()=>canvas.current?.getActiveObject().get('textAlign'))
         setTextStyle(()=>canvas.current?.getActiveObject().get('fontStyle', 'fontWeight'))
         canvas.current?.renderAll()
-        
       })
+
+      function removeEmptyTextbox(e) {
+        console.log("oi")
+        if(e.target.text === '') {
+          console.log("oi")
+          canvas.current?.remove(e.target);
+          canvas.current?.renderAll()
+        }
+      }
+      
+      canvas.current?.on('text:editing:exited', removeEmptyTextbox)
+
+      
 
       canvas.current?.add(textbox)
       canvas.current?.centerObject(textbox)
