@@ -15,7 +15,6 @@ const Text = () => {
       canvas.current?.discardActiveObject()
       setEmojiBtnSelected(false)
       setTextBtnSelected(true)
-
       disablePaintMode()
 
       const textbox = new fabric.Textbox("Texto", {
@@ -33,12 +32,12 @@ const Text = () => {
       })
 
       textbox.setControlsVisibility({
-        tl:false, 
-        tr:false,
-        ml:false, 
-        mr:false, 
-        bl:false, 
-        mb:false, 
+        tl: false, 
+        tr: false,
+        ml: false, 
+        mr: false, 
+        bl: false, 
+        mb: false, 
         mt: false,
         mtr: true,
         br: true,
@@ -54,24 +53,27 @@ const Text = () => {
         canvas.current?.renderAll()
       })
 
-      /*function removeEmptyTextbox(e) {
-        console.log("oi")
+      textbox.on('deselected', function () {
+        setTextBtnSelected(false)
+        canvas.current?.renderAll()
+      })
+
+      // apagar caixa de texto quando vazio
+      canvas.current?.on('object:modified', removeEmptyTextbox)
+      function removeEmptyTextbox(e) {
         if(e.target.text === '') {
-          console.log("oi")
           canvas.current?.remove(e.target);
           canvas.current?.renderAll()
+          setTextBtnSelected(false)
         }
-      }*/
-      
-      //canvas.current?.on('text:editing:exited', removeEmptyTextbox)
+      }
 
-      
-
+      // adicionando / atualizando renderização do elemento no canvas
       canvas.current?.add(textbox)
       canvas.current?.centerObject(textbox)
       textbox.setCoords()
       canvas.current?.setActiveObject(textbox).renderAll()
-      }
+    }
   }
 
   return (

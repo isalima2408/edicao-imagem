@@ -54,7 +54,7 @@ const Emoji = () => {
         canvas.current?.setActiveObject(rect).renderAll()
     }
 
-    // Circulo / Ellipse
+    // Circulo / Elipse
     function createEllipse() {
         var ellipse = new fabric.Ellipse({
             fill: 'transparent',
@@ -73,8 +73,6 @@ const Emoji = () => {
     }
 
     function onEmojiClick (emojiObject, e) {
-        
-        // Botão alternante (ativa/desativa)
         setEmojiBtnSelected(false)
   
         if (emojiObject.emoji == 'retangulo') {
@@ -121,7 +119,8 @@ const Emoji = () => {
             <div className={ styles.emoji_box }>
                 {emojiBtnSelected && <EmojiPicker 
                     onEmojiClick={ onEmojiClick } 
-                    categories={['suggested',
+                    categories={[
+                                'suggested',
                                 {category: 'custom', name: 'Formas'},
                                 'smileys_people',
                                 'animals_nature',
@@ -130,7 +129,8 @@ const Emoji = () => {
                                 'activities',
                                 'objects',
                                 'symbols',
-                                'flags']}       
+                                'flags'
+                                ]}       
                     customEmojis={ geometricForms }
                     emojiStyle="native"
                 />}

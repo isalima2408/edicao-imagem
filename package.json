@@ -1,5 +1,4 @@
 {
-  "postinstall": "node post_install.js",
   "homepage": "http://isalima2408.github.io/edicao-imagem",
   "name": "edicao-imagem",
   "version": "0.1.0",
@@ -12,7 +11,6 @@
     "fabric": "^5.3.0",
     "fabric-history": "^1.7.0",
     "fontfaceobserver": "^2.3.0",
-    "pica": "^9.0.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-scripts": "5.0.1",

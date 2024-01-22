@@ -45,15 +45,10 @@ const ExternImage = () => {
 
             img.setControlsVisibility({
                 tr: false,
-                tl: false
             })
             
             canvas.current?.add(img)
             canvas.current?.centerObject(img)
-            /*img.set({
-                left: 0,
-                top: 0
-            })*/
             img.setCoords()
             canvas.current?.setActiveObject(img).renderAll()
             

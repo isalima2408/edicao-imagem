@@ -12,20 +12,10 @@ const Sticker = () => {
 
     const defaultStickers = [
         {
-            names: ['SUBZERO', 'Subzero perfil'],
-            imgUrl: 'https://avatarfiles.alphacoders.com/342/342681.png',
-            id: 'subzero',
+            names: [''],
+            imgUrl: '',
+            id: '',
         },
-        {
-            names: ['Mileena', 'Mileena perfil'],
-            imgUrl: 'https://i.pinimg.com/736x/39/d3/58/39d358101746ec8699ec7670c0aa3e31.jpg',
-            id: 'mileena',
-        },
-        {
-            names: ['Scorpion', 'Scorpion perfil'],
-            imgUrl: 'https://i.redd.it/cv9przqquufb1.jpg',
-            id: 'scorpion',
-        }
     ]
 
     function disableElements() {
@@ -61,16 +51,17 @@ const Sticker = () => {
     }
 
     return (
-        <span className={ styles.btn_sticker }>
+        <span className={ styles.btn_sticker }>  
             <button className={ styles.sticker_icon } onClick={ disableElements }>
                 <ion-icon name="planet-outline"></ion-icon>
             </button>
+
             <div className={ styles.sticker_box }>
                 {stickerBtnSelected && <EmojiPicker 
                 onEmojiClick={onStickerClick} 
                 categories={[{category: 'custom', name: 'Figurinhas'}]} 
                 customEmojis={ defaultStickers }
-                previewConfig={{defaultEmoji: 'scorpion', defaultCaption: 'Selecione sua figurinha...', showPreview: true }}
+                previewConfig={{defaultEmoji: '', defaultCaption: 'Selecione sua figurinha...', showPreview: true }}
                 emojiStyle="native"
                 />}
             </div>

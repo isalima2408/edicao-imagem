@@ -20,13 +20,13 @@ const Download = () => {
             imageSaver.addEventListener('click', saveImage, false);
 
             function saveImage(e) {
-            this.href = canvas.current.toDataURL({
-                format: 'jpeg',
-            });
-            this.download = 'abare-img.jpeg'
+                this.href = canvas.current.toDataURL({
+                    format: 'jpeg',
+                });
+                this.download = 'abare-img.jpeg'
 
-            return () => {
-                saveImage.removeEventListener('click', handleClick);
+                return () => {
+                    saveImage.removeEventListener('click', handleClick);
             }}
         }
   }, [bgImageInserted])

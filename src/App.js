@@ -1,6 +1,4 @@
 import { createRef, createContext } from "react";
-import { fabric } from 'fabric'
-
 import MyFabric from "./components/MyFabric";
 import Toolbar from "./components/Toolbar/Toolbar";
 import { BtnStatusProvider } from "../src/contexts/BtnStatusContext"
@@ -14,11 +12,10 @@ function App () {
       <FabricContext.Provider value={createRef()}>
         <BtnStatusProvider>
           <Toolbar />
+          <MyFabric />
         </BtnStatusProvider>
-        <MyFabric />
       </FabricContext.Provider>
     </div>
-    
   )
 }
 

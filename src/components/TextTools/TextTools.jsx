@@ -4,14 +4,14 @@ import { useBtnStatus } from "../../contexts/BtnStatusContext";
 
 var FontFaceObserver = require('fontfaceobserver')
 
-
 const TextTools = () => {
     const canvas = useContext(FabricContext);
     const { textAlign, setTextAlign, textColor, setTextColor, textFontFamily, setTextFontFamily, textStyle, setTextStyle } = useBtnStatus()
 
     // Mudar alinhamento
     const changeTextAlign = (e) => {
-        // o set serve para ajustar apenas o value do select, mas não fazer a alteração na propriedade do texto
+        // o setTextAlig serve para ajustar apenas o value do select, mas não fazer a alteração na propriedade do texto.
+        // Alteração do texto feita na linha 16
         setTextAlign(e.target.value) 
         canvas.current?.getActiveObject().set('textAlign', e.target.value)
         canvas.current?.renderAll()
@@ -53,12 +53,15 @@ const TextTools = () => {
     // Itálico / Negrito
     const changeTextStyle = (e) => {
         setTextStyle(e.target.value)
+
         if (e.target.value === 'italic') {
             canvas.current?.getActiveObject().set("fontStyle", e.target.value);
             canvas.current?.renderAll();
+
         } else if (e.target.value === 'bold') {
             canvas.current?.getActiveObject().set("fontWeight", e.target.value);
             canvas.current?.renderAll();
+
         } else {
             canvas.current?.getActiveObject().set("fontStyle", 'normal');
             canvas.current?.getActiveObject().set("fontWeight", 'normal');
@@ -75,16 +78,19 @@ const TextTools = () => {
                 <option value="Montserrat">Montserrat</option>
                 <option value="Lemon">Lemon</option>
             </select>
+
             <select name="text_color" id="text_color" value={textColor} onChange={changeTextColor}>
                 <option value="black">Preto</option>
                 <option value="red">Vermelho</option>
                 <option value="blue">Azul</option>
             </select>
+
             <select name="text_align" id="text_align" value={textAlign} onChange={changeTextAlign} >
                 <option value="left">Esquerda</option>
                 <option value="center">Centro</option>
                 <option value="right">Direita</option>
             </select>
+            
             <select name="text_style" id="text_style" value={textStyle} onChange={changeTextStyle}>
                 <option value="normal">Normal</option>
                 <option value="italic">Itálico</option>

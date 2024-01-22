@@ -6,11 +6,13 @@ export const BtnStatusContext = createContext()
 export function BtnStatusProvider({ children }) {
     const canvas = useContext(FabricContext)
 
+    // botões da toolbar
     const [bgImageInserted, setBgImageInserted] = useState(false)
     const [textBtnSelected, setTextBtnSelected] = useState(false)
     const [paintBtnSelected, setPaintBtnSelected] = useState(false)
     const [emojiBtnSelected, setEmojiBtnSelected] = useState(false)
 
+    // propriedades de texto (texttools)
     const [textAlign, setTextAlign] = useState('')
     const [textColor, setTextColor] = useState('')
     const [textFontFamily, setTextFontFamily] = useState('')

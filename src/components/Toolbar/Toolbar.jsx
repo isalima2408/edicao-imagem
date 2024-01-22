@@ -1,6 +1,3 @@
-import { useContext, useState } from "react"
-import { fabric } from "fabric"
-
 import BgImage from "../BgImage/BgImage"
 import Text from "../Text/Text"
 import TextTools from '../TextTools/TextTools'
@@ -9,12 +6,10 @@ import Paint from "../Paint/Paint"
 import PaintTools from "../PaintTools/PaintTools"
 import ExternImage from '../Image/ExternImage'
 import Download from "../Download/Download"
-import { FabricContext } from "../../App"
 import { useBtnStatus } from "../../contexts/BtnStatusContext"
 import styles from "./Toolbar.module.css"
 
 const Toolbar = () => {
-    const canvas = useContext(FabricContext)
     const { textBtnSelected, paintBtnSelected } = useBtnStatus()
 
     return(
@@ -33,8 +28,7 @@ const Toolbar = () => {
                 {textBtnSelected && <TextTools />}
                 {paintBtnSelected && <PaintTools />}
             </div>
-        </>
-        
+        </>  
     )
 }
 

@@ -3,7 +3,7 @@ import { useContext } from "react"
 import { FabricContext } from "../../App"
 import { useBtnStatus } from "../../contexts/BtnStatusContext"
 
-const Paint = ({}) => {
+const Paint = () => {
     const canvas = useContext(FabricContext)
     const { bgImageInserted, setPaintBtnSelected, setTextBtnSelected } = useBtnStatus()
 
