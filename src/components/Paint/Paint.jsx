@@ -13,9 +13,9 @@ const Paint = () => {
             setTextBtnSelected(false)
             
             canvas.current?.discardActiveObject().renderAll()
-            canvas.current?.set('isDrawingMode', true)
+            /*canvas.current?.set('isDrawingMode', true)
             canvas.current.freeDrawingBrush.width = 5;
-            canvas.current.freeDrawingBrush.color = 'purple'
+            canvas.current.freeDrawingBrush.color = 'purple'*/
         }
     }
 

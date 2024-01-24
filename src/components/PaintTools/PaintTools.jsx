@@ -67,7 +67,9 @@ const PaintTools = () => {
         var lastItemIndex = (canvas.current?.getObjects().length - 1);
         var item = canvas.current?.item(lastItemIndex);
 
-        if(item.get('type') === 'path') {
+        if(lastItemIndex < 0) {
+            return
+        } else if(item.get('type') === 'path'){
             canvas.current?.remove(item);
             canvas.current?.renderAll();
         }
