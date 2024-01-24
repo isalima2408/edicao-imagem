@@ -2,7 +2,7 @@ import { useContext, useCallback } from "react";
 import { fabric } from "fabric";
 import { FabricContext } from "../App.js";
 import styles from "./MyFabric.module.css";
-import { useBtnStatus } from '../contexts/BtnStatusContext'
+import { useBtnStatus } from '../contexts/BtnStatusContext.jsx'
 
 export const useFabric = () => {
     const canvas = useContext(FabricContext);
@@ -19,14 +19,14 @@ export const useFabric = () => {
         selection: false,
         backgroundColor: 'gray',
         hoverCursor: 'default',
-        height: canvasHeight,
+        height: 0,
         transparentCorners: false,
-        imageSmoothingEnabled: false,
+        /*imageSmoothingEnabled: false,
         webkitImageSmoothingEnabled: false,
         mozImageSmoothingEnabled: false,
         msImageSmoothingEnabled: false,
         oImageSmoothingEnabled: false,
-        objectCaching: false
+        objectCaching: false*/
       });
 
       // desabilitando seleção de todos os elementos (para atingir a função desenho)
@@ -53,14 +53,14 @@ export const useFabric = () => {
       });
 
       // controle de exclusão para texto
-      fabric.Textbox.prototype.controls.deleteControl = new fabric.Control({
+      /*fabric.Textbox.prototype.controls.deleteControl = new fabric.Control({
         x: 0.5,
         y: -0.5,
         cursorStyle: 'pointer',
         mouseUpHandler: deleteObject,
         render: renderIcon,
         cornerSize: 20
-      });
+      });*/
      
       function deleteObject(eventData, transform) {
         var target = transform.target;
@@ -76,7 +76,7 @@ export const useFabric = () => {
         ctx.rotate(fabric.util.degreesToRadians(fabricObject.angle));
         ctx.drawImage(img, -size/2, -size/2, size, size);
         ctx.restore();
-      } 
+      }
 
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);

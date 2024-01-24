@@ -46,7 +46,8 @@ const Emoji = () => {
             strokeWidth: 5, 
             stroke: 'rgba(255,0,0,1)',
             strokeUniform: true,
-            selectable: true
+            selectable: true,
+            erasable: false,
         })
         canvas.current?.add(rect)
         canvas.current?.centerObject(rect)
@@ -64,7 +65,8 @@ const Emoji = () => {
             strokeWidth: 5, 
             stroke: 'rgba(255,0,0,1)',
             strokeUniform: true,
-            selectable: true
+            selectable: true,
+            erasable: false,
         })
         canvas.current?.add(ellipse)
         canvas.current?.centerObject(ellipse)
@@ -81,33 +83,36 @@ const Emoji = () => {
             createEllipse()
         } else {
 
-        var emojiURL = emojiObject.imageUrl
+            var emojiURL = emojiObject.imageUrl
+            console.log(emojiURL)
 
-        new fabric.Image.fromURL(emojiURL, function(img) {
-            img.set({
-                selectable: true,
-                hoverCursor: 'pointer',
-                centeredScaling: true,
-                centeredRotation: true,
-            })
+            new fabric.Image.fromURL(emojiURL, function(img) {
+                img.set({
+                    selectable: true,
+                    erasable: false,
+                    hoverCursor: 'pointer',
+                    centeredScaling: true,
+                    centeredRotation: true,
+                })
 
-            img.setControlsVisibility({
-                tl:false, 
-                tr:false,
-                ml:false, 
-                mr:false, 
-                bl:false, 
-                mb:false, 
-                mt: false,
-                mtr: true,
-                br: true,
-            })
+                img.setControlsVisibility({
+                    tl:false, 
+                    tr:false,
+                    ml:false, 
+                    mr:false, 
+                    bl:false, 
+                    mb:false, 
+                    mt: false,
+                    mtr: true,
+                    br: true,
+                })
 
-            canvas.current?.add(img)
-            canvas.current?.centerObject(img)
-            img.setCoords()
-            canvas.current?.setActiveObject(img).renderAll()
-        })}
+                canvas.current?.add(img)
+                canvas.current?.centerObject(img)
+                img.setCoords()
+                canvas.current?.setActiveObject(img).renderAll()
+            }, {crossOrigin: 'Anonymous'})
+        }
     }
 
 

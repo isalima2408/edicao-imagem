@@ -11,6 +11,7 @@ export function BtnStatusProvider({ children }) {
     const [textBtnSelected, setTextBtnSelected] = useState(false)
     const [paintBtnSelected, setPaintBtnSelected] = useState(false)
     const [emojiBtnSelected, setEmojiBtnSelected] = useState(false)
+    
 
     // propriedades de texto (texttools)
     const [textAlign, setTextAlign] = useState('')

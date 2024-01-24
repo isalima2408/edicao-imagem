@@ -1,7 +1,7 @@
 import { createRef, createContext } from "react";
 import MyFabric from "./components/MyFabric";
 import Toolbar from "./components/Toolbar/Toolbar";
-import { BtnStatusProvider } from "../src/contexts/BtnStatusContext"
+import { BtnStatusProvider } from "./contexts/BtnStatusContext"
 
 export const FabricContext = createContext();
 

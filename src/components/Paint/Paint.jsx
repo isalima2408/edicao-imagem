@@ -8,7 +8,7 @@ const Paint = () => {
     const { bgImageInserted, setPaintBtnSelected, setTextBtnSelected } = useBtnStatus()
 
     function activePaintMode () {
-        if (bgImageInserted) {
+        if (bgImageInserted) {          
             setPaintBtnSelected(true)
             setTextBtnSelected(false)
             

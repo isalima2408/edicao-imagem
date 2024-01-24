@@ -46,6 +46,7 @@ const BgImage = () => {
                 scaleX: scale,
                 scaleY: scale,
                 selectable: false,
+                erasable: false,
                 imageSmoothingEnabled: false,
                 webkitImageSmoothingEnabled: false,
                 mozImageSmoothingEnabled: false,
