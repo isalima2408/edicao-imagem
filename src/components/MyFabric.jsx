@@ -9,6 +9,8 @@ export const useFabric = () => {
     const {setTextBtnSelected} = useBtnStatus()
     const { innerWidth: width, innerHeight: height } = window
 
+    console.log("atualizou27")
+    console.log(canvas?.current)
     // 60 é o tamanho da barra de ferramentas total (main_tools + custom_tools)
     const canvasHeight = height - 60
 
@@ -20,14 +22,16 @@ export const useFabric = () => {
         backgroundColor: 'gray',
         hoverCursor: 'default',
         height: 0,
-        transparentCorners: false,
-        /*imageSmoothingEnabled: false,
+        /*transparentCorners: false,
+        imageSmoothingEnabled: false,
         webkitImageSmoothingEnabled: false,
         mozImageSmoothingEnabled: false,
         msImageSmoothingEnabled: false,
-        oImageSmoothingEnabled: false,
-        objectCaching: false*/
+        oImageSmoothingEnabled: false,*/
+        objectCaching: false
       });
+
+      canvas.current.allowTouchScrolling = true
 
       // desabilitando seleção de todos os elementos (para atingir a função desenho)
       fabric.Object.prototype.selectable = false
@@ -37,6 +41,14 @@ export const useFabric = () => {
       fabric.Object.prototype.cornerStyle = 'circle'
       fabric.Object.prototype.cornerColor = 'purple'
       fabric.Object.prototype.cornerSize = 18
+      fabric.Object.prototype.objectCaching = false
+      fabric.Object.prototype.dirty = true
+      fabric.PencilBrush.prototype.objectCaching = false
+      fabric.PencilBrush.prototype.dirty = true
+      fabric.Path.prototype.objectCaching = false
+      fabric.Path.prototype.dirty = true
+      
+
 
       // criando controle de exclusão no elemento (somente imagens e formas)
       var deleteIcon = "data:image/svg+xml,%3C%3Fxml version='1.0' encoding='utf-8'%3F%3E%3C!DOCTYPE svg PUBLIC '-//W3C//DTD SVG 1.1//EN' 'http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd'%3E%3Csvg version='1.1' id='Ebene_1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' width='595.275px' height='595.275px' viewBox='200 215 230 470' xml:space='preserve'%3E%3Ccircle style='fill:%23F44336;' cx='299.76' cy='439.067' r='218.516'/%3E%3Cg%3E%3Crect x='267.162' y='307.978' transform='matrix(0.7071 -0.7071 0.7071 0.7071 -222.6202 340.6915)' style='fill:white;' width='65.545' height='262.18'/%3E%3Crect x='266.988' y='308.153' transform='matrix(0.7071 0.7071 -0.7071 0.7071 398.3889 -83.3116)' style='fill:white;' width='65.544' height='262.179'/%3E%3C/g%3E%3C/svg%3E";

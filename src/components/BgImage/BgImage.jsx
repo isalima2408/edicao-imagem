@@ -51,7 +51,8 @@ const BgImage = () => {
                 webkitImageSmoothingEnabled: false,
                 mozImageSmoothingEnabled: false,
                 msImageSmoothingEnabled: false,
-                oImageSmoothingEnabled: false
+                oImageSmoothingEnabled: false,
+                dirty: true,
             })
 
             img.objectCaching = false

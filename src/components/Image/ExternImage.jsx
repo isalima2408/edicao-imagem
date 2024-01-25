@@ -52,7 +52,6 @@ const ExternImage = () => {
                 canvas.current?.setActiveObject(img)
                 canvas.current?.requestRenderAll()
             })
-            console.log(extImgInserted)
             setExtImgInserted(false)
         }
     }, [extImgInserted])
