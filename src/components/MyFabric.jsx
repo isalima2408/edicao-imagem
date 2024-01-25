@@ -9,7 +9,7 @@ export const useFabric = () => {
     const {setTextBtnSelected} = useBtnStatus()
     const { innerWidth: width, innerHeight: height } = window
 
-    console.log("atualizou27")
+    console.log("atualizou75557")
     console.log(canvas?.current)
     // 60 é o tamanho da barra de ferramentas total (main_tools + custom_tools)
     const canvasHeight = height - 60

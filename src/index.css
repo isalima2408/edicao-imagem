@@ -15,4 +15,8 @@ ion-icon {
     cursor: pointer;
 }
 
+canvas {
+    touch-action: manipulation;
+}
+
 @import url('https://fonts.googleapis.com/css2?family=Lemon&family=Montserrat&family=Nabla&family=Roboto&family=Roboto+Mono&display=swap');
