@@ -6,11 +6,20 @@ import styles from './Text.module.css'
 
 
 const Text = () => {
+
+  
+
+
   const canvas = useContext(FabricContext);
   const {disablePaintMode, bgImageInserted, setEmojiBtnSelected, setTextBtnSelected, setTextAlign, setTextColor, setTextFontFamily, setTextStyle } = useBtnStatus()
 
   // O setActiveObject já desativa objetos selecionados
   const addText = () => {
+
+
+    alert("att1")
+
+
     if (bgImageInserted) {
       canvas.current?.discardActiveObject()
       setEmojiBtnSelected(false)
