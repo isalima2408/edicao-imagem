@@ -56,7 +56,7 @@ export const useFabric = () => {
       canvas.current?.on('object:scaling', disableScroll);
       canvas.current?.on('object:rotating', disableScroll);
       canvas.current?.on('mouse:up', enableScroll);
-      canvas.current?.on('mouse:down', disableScroll);
+      //canvas.current?.on('mouse:down', disableScroll);
 
 
       // criando controle de exclusão no elemento (somente imagens e formas)
