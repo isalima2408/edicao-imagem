@@ -22,6 +22,7 @@ export function BtnStatusProvider({ children }) {
     const disablePaintMode = () => {
         setPaintBtnSelected(false)
         canvas.current?.set('isDrawingMode', false)
+        canvas.current?.set('allowTouchScrolling', true)
     }
 
     return(

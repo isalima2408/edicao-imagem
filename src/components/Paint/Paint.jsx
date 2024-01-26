@@ -8,7 +8,8 @@ const Paint = () => {
     const { bgImageInserted, setPaintBtnSelected, setTextBtnSelected } = useBtnStatus()
 
     function activePaintMode () {
-        if (bgImageInserted) {          
+        if (bgImageInserted) {
+            canvas.current?.set('allowTouchScrolling', false)        
             setPaintBtnSelected(true)
             setTextBtnSelected(false)
             
