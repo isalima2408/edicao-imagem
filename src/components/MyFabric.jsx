@@ -11,7 +11,7 @@ export const useFabric = () => {
 
     
 
-    console.log("atualizou1112")
+    console.log("atualizou11312")
     //alert("att")
     console.log(canvas?.current)
     // 60 é o tamanho da barra de ferramentas total (main_tools + custom_tools)
@@ -77,7 +77,7 @@ export const useFabric = () => {
       canvas.current?.on('object:selected', disableScroll);
       canvas.current?.on('selection:created', disableScroll);
       canvas.current?.on('selection:cleared', enableScroll);
-      canvas.current?.on('path:created', enableScroll);
+      canvas.current?.on('path:created', disableScroll);
       canvas.current?.on('object:added', enableScroll);
 
       /*canvas.current?.on('object:moving', disableScroll);
