@@ -15,6 +15,7 @@ ion-icon {
     cursor: pointer;
 }
 
+/* Se rolagem mobile não funcionar acionar essa opção, juntamente com a do arquivo css do MyFabric*/
 canvas {
     touch-action: manipulation;
 }

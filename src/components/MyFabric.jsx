@@ -9,7 +9,8 @@ export const useFabric = () => {
     const {setTextBtnSelected} = useBtnStatus()
     const { innerWidth: width, innerHeight: height } = window
 
-    console.log("atualizou75557")
+    console.log("atualizou")
+    //alert("att")
     console.log(canvas?.current)
     // 60 é o tamanho da barra de ferramentas total (main_tools + custom_tools)
     const canvasHeight = height - 60
@@ -22,12 +23,13 @@ export const useFabric = () => {
         backgroundColor: 'gray',
         hoverCursor: 'default',
         height: 0,
-        /*transparentCorners: false,
+        allowTouchScrolling: true,
+        transparentCorners: false,
         imageSmoothingEnabled: false,
         webkitImageSmoothingEnabled: false,
         mozImageSmoothingEnabled: false,
         msImageSmoothingEnabled: false,
-        oImageSmoothingEnabled: false,*/
+        oImageSmoothingEnabled: false,
         objectCaching: false
       });
 
@@ -41,13 +43,6 @@ export const useFabric = () => {
       fabric.Object.prototype.cornerStyle = 'circle'
       fabric.Object.prototype.cornerColor = 'purple'
       fabric.Object.prototype.cornerSize = 18
-      fabric.Object.prototype.objectCaching = false
-      fabric.Object.prototype.dirty = true
-      fabric.PencilBrush.prototype.objectCaching = false
-      fabric.PencilBrush.prototype.dirty = true
-      fabric.Path.prototype.objectCaching = false
-      fabric.Path.prototype.dirty = true
-      
 
 
       // criando controle de exclusão no elemento (somente imagens e formas)
