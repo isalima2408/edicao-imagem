@@ -8,12 +8,12 @@ const Paint = () => {
     const { bgImageInserted, setPaintBtnSelected, setTextBtnSelected } = useBtnStatus()
 
     function activePaintMode () {
-        if (bgImageInserted) {
-            canvas.current?.set('allowTouchScrolling', false)        
+        if (bgImageInserted) {  
+            canvas.current?.discardActiveObject().renderAll()  
             setPaintBtnSelected(true)
             setTextBtnSelected(false)
-            
-            canvas.current?.discardActiveObject().renderAll()
+
+            canvas.current?.set('allowTouchScrolling', false) 
             /*canvas.current?.set('isDrawingMode', true)
             canvas.current.freeDrawingBrush.width = 5;
             canvas.current.freeDrawingBrush.color = 'purple'*/
