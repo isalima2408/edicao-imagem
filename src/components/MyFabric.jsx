@@ -11,7 +11,7 @@ export const useFabric = () => {
 
     
 
-    console.log("atualizou10012")
+    console.log("atualizou102")
     //alert("att")
     console.log(canvas?.current)
     // 60 é o tamanho da barra de ferramentas total (main_tools + custom_tools)
@@ -28,6 +28,7 @@ export const useFabric = () => {
         hoverCursor: 'default',
         height: 0,
         allowTouchScrolling: true,
+        maxFingers:1,
         transparentCorners: false,
         imageSmoothingEnabled: false,
         webkitImageSmoothingEnabled: false,

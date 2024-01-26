@@ -17,7 +17,7 @@ const Text = () => {
   const addText = () => {
 
 
-    alert("att6")
+    alert("att7")
 
 
     if (bgImageInserted) {
