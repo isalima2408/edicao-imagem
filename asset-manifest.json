@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/edicao-imagem/static/css/main.c95f040f.css",
-    "main.js": "/edicao-imagem/static/js/main.98688886.js",
+    "main.js": "/edicao-imagem/static/js/main.9cc3f407.js",
     "index.html": "/edicao-imagem/index.html",
     "main.c95f040f.css.map": "/edicao-imagem/static/css/main.c95f040f.css.map",
-    "main.98688886.js.map": "/edicao-imagem/static/js/main.98688886.js.map"
+    "main.9cc3f407.js.map": "/edicao-imagem/static/js/main.9cc3f407.js.map"
   },
   "entrypoints": [
     "static/css/main.c95f040f.css",
-    "static/js/main.98688886.js"
+    "static/js/main.9cc3f407.js"
   ]
 }
