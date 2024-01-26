@@ -13,7 +13,7 @@ export const useFabric = () => {
     // 60 é o tamanho da barra de ferramentas total (main_tools + custom_tools)
     const canvasHeight = height - 60
 
-    console.log("att1")
+    console.log("att3")
 
     // criando canvas
     const fabricRef = useCallback((element) => {
@@ -26,6 +26,9 @@ export const useFabric = () => {
         allowTouchScrolling: true,
         //maxFingers:1,
         isTouchSupported: false,
+        controlsAboveOverlay: true,
+
+
         transparentCorners: false,
         imageSmoothingEnabled: false,
         webkitImageSmoothingEnabled: false,
@@ -35,11 +38,21 @@ export const useFabric = () => {
         objectCaching: false
       });
 
+      canvas.current?.on('touch:gesture', function (e) {
+        console.log("touch:gesture event capturado")
+      })
+
+      fabric.util.addListener(canvas.current?.lowerCanvasEl, 'touch:start', function (e) {
+        console.log("touch:start")
+      })
+
       canvas.current?.on('touch:longpress', preventLongpress)
 
       function preventLongpress (opt) {
         opt.e.preventDefault()
       }
+
+      fabric.Object.prototype.isTouchSupported = false
 
       // desabilitando seleção de todos os elementos (para atingir a função desenho)
       fabric.Object.prototype.selectable = false
@@ -49,6 +62,7 @@ export const useFabric = () => {
       fabric.Object.prototype.cornerStyle = 'circle'
       fabric.Object.prototype.cornerColor = 'purple'
       fabric.Object.prototype.cornerSize = 18
+      
 
 
       // ALTERNATIVA 1 (NOT WORKING)
