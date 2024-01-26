@@ -9,7 +9,7 @@ export const useFabric = () => {
     const {setTextBtnSelected} = useBtnStatus()
     const { innerWidth: width, innerHeight: height } = window
 
-    console.log("atualizou")
+    console.log("atualizou25")
     //alert("att")
     console.log(canvas?.current)
     // 60 é o tamanho da barra de ferramentas total (main_tools + custom_tools)
@@ -43,6 +43,18 @@ export const useFabric = () => {
       fabric.Object.prototype.cornerStyle = 'circle'
       fabric.Object.prototype.cornerColor = 'purple'
       fabric.Object.prototype.cornerSize = 18
+
+      var disableScroll = function(){
+        canvas.current.allowTouchScrolling = false;
+      };
+    
+      var enableScroll = function(){
+        canvas.current.allowTouchScrolling = true;
+      };
+
+      canvas.current?.on('selection:created', disableScroll);
+      canvas.current?.on('selection:cleared', enableScroll);
+      canvas.current?.on('mouse:down', disableScroll);
 
 
       // criando controle de exclusão no elemento (somente imagens e formas)
