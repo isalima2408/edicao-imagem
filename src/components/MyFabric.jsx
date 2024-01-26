@@ -9,11 +9,15 @@ export const useFabric = () => {
     const {setTextBtnSelected} = useBtnStatus()
     const { innerWidth: width, innerHeight: height } = window
 
-    console.log("atualizou7")
+    
+
+    console.log("atualizou112")
     //alert("att")
     console.log(canvas?.current)
     // 60 é o tamanho da barra de ferramentas total (main_tools + custom_tools)
     const canvasHeight = height - 60
+
+    
 
     // criando canvas
     const fabricRef = useCallback((element) => {
@@ -58,9 +62,10 @@ export const useFabric = () => {
         $('*').unbind('touchmove', tmf);
       });*/
 
-      // ALTERNATIVA 2
+      /* ALTERNATIVA 2 */
       var disableScroll = function(){
         canvas.current?.set('allowTouchScrolling', false)
+        
         console.log(canvas.current?.get('allowTouchScrolling'))
       };
     
@@ -69,12 +74,17 @@ export const useFabric = () => {
         console.log(canvas.current?.get('allowTouchScrolling'))
       };
 
-      canvas.current?.on('object:moving', disableScroll);
+      /*canvas.current?.on('object:moving', disableScroll);
       canvas.current?.on('object:scaling', disableScroll);
       canvas.current?.on('object:rotating', disableScroll);
-      canvas.current?.on('object:selected', disableScroll);
-      canvas.current?.on('mouse:up', enableScroll);
-      //canvas.current?.on('mouse:down', disableScroll);
+      canvas.current?.on('object:resizing', disableScroll);
+      canvas.current?.on('object:selected', disableScroll);*/
+      canvas.current?.on('selection:created', disableScroll);
+      canvas.current?.on('selection:cleared', enableScroll);
+      /*canvas.current?.on('path:created', disableScroll);*/
+
+      //canvas.current?.on('mouse:up', enableScroll);
+      //canvas.current?.on('mouse:down', disableScroll);*/
 
 
       // criando controle de exclusão no elemento (somente imagens e formas)
