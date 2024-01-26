@@ -9,15 +9,11 @@ export const useFabric = () => {
     const {setTextBtnSelected} = useBtnStatus()
     const { innerWidth: width, innerHeight: height } = window
 
-    
-
-    console.log("atualizou102")
     //alert("att")
-    console.log(canvas?.current)
     // 60 é o tamanho da barra de ferramentas total (main_tools + custom_tools)
     const canvasHeight = height - 60
 
-    
+    console.log("att1")
 
     // criando canvas
     const fabricRef = useCallback((element) => {
@@ -28,7 +24,8 @@ export const useFabric = () => {
         hoverCursor: 'default',
         height: 0,
         allowTouchScrolling: true,
-        maxFingers:1,
+        //maxFingers:1,
+        isTouchSupported: false,
         transparentCorners: false,
         imageSmoothingEnabled: false,
         webkitImageSmoothingEnabled: false,
@@ -38,7 +35,11 @@ export const useFabric = () => {
         objectCaching: false
       });
 
-      //canvas.current.allowTouchScrolling = true
+      canvas.current?.on('touch:longpress', preventLongpress)
+
+      function preventLongpress (opt) {
+        opt.e.preventDefault()
+      }
 
       // desabilitando seleção de todos os elementos (para atingir a função desenho)
       fabric.Object.prototype.selectable = false
