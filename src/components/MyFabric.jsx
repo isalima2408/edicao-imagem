@@ -52,8 +52,10 @@ export const useFabric = () => {
         canvas.current.allowTouchScrolling = true;
       };
 
-      canvas.current?.on('selection:created', disableScroll);
-      canvas.current?.on('selection:cleared', enableScroll);
+      canvas.current?.on('object:moving', disableScroll);
+      canvas.current?.on('object:scaling', disableScroll);
+      canvas.current?.on('object:rotating', disableScroll);
+      canvas.current?.on('mouse:up', enableScroll);
       canvas.current?.on('mouse:down', disableScroll);
 
 
