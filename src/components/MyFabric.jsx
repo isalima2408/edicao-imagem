@@ -11,7 +11,7 @@ export const useFabric = () => {
 
     
 
-    console.log("atualizou112")
+    console.log("atualizou1455")
     //alert("att")
     console.log(canvas?.current)
     // 60 é o tamanho da barra de ferramentas total (main_tools + custom_tools)
@@ -28,6 +28,7 @@ export const useFabric = () => {
         hoverCursor: 'default',
         height: 0,
         allowTouchScrolling: true,
+        evented: false,
         transparentCorners: false,
         imageSmoothingEnabled: false,
         webkitImageSmoothingEnabled: false,
@@ -77,14 +78,14 @@ export const useFabric = () => {
       /*canvas.current?.on('object:moving', disableScroll);
       canvas.current?.on('object:scaling', disableScroll);
       canvas.current?.on('object:rotating', disableScroll);
-      canvas.current?.on('object:resizing', disableScroll);
-      canvas.current?.on('object:selected', disableScroll);*/
+      canvas.current?.on('object:resizing', disableScroll);*/
+      canvas.current?.on('object:selected', disableScroll);
       canvas.current?.on('selection:created', disableScroll);
       canvas.current?.on('selection:cleared', enableScroll);
       /*canvas.current?.on('path:created', disableScroll);*/
 
       //canvas.current?.on('mouse:up', enableScroll);
-      //canvas.current?.on('mouse:down', disableScroll);*/
+      //canvas.current?.on('mouse:down', disableScroll);
 
 
       // criando controle de exclusão no elemento (somente imagens e formas)
