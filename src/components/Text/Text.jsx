@@ -17,7 +17,8 @@ const Text = () => {
   const addText = () => {
 
 
-    alert("att9")
+    //alert("att9")
+    console.log(canvas.current?.getObjects())
 
 
     if (bgImageInserted) {

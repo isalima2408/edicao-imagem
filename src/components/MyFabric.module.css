@@ -9,6 +9,6 @@ canvas {
     touch-action: manipulation;
 }
 
-/*.upper-canvas {
+.upper-canvas {
     touch-action: manipulation;
-}*/
+}

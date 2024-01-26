@@ -13,7 +13,7 @@ export const useFabric = () => {
     // 60 é o tamanho da barra de ferramentas total (main_tools + custom_tools)
     const canvasHeight = height - 60
 
-    console.log("att3")
+    console.log("att12")
 
     // criando canvas
     const fabricRef = useCallback((element) => {
@@ -24,9 +24,10 @@ export const useFabric = () => {
         hoverCursor: 'default',
         height: 0,
         allowTouchScrolling: true,
-        //maxFingers:1,
-        isTouchSupported: false,
-        controlsAboveOverlay: true,
+        maxFingers:1,
+        //controlsAboveOverlay: true,
+        isTouchSupported: true,
+        
 
 
         transparentCorners: false,
@@ -42,6 +43,8 @@ export const useFabric = () => {
         console.log("touch:gesture event capturado")
       })
 
+
+
       fabric.util.addListener(canvas.current?.lowerCanvasEl, 'touch:start', function (e) {
         console.log("touch:start")
       })
@@ -49,10 +52,11 @@ export const useFabric = () => {
       canvas.current?.on('touch:longpress', preventLongpress)
 
       function preventLongpress (opt) {
+        console.log("longpress")
         opt.e.preventDefault()
       }
 
-      fabric.Object.prototype.isTouchSupported = false
+      //fabric.Object.prototype.isTouchSupported = false
 
       // desabilitando seleção de todos os elementos (para atingir a função desenho)
       fabric.Object.prototype.selectable = false
