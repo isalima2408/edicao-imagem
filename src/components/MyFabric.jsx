@@ -9,7 +9,7 @@ export const useFabric = () => {
     const {setTextBtnSelected} = useBtnStatus()
     const { innerWidth: width, innerHeight: height } = window
 
-    console.log("atualizou25")
+    console.log("atualizou7")
     //alert("att")
     console.log(canvas?.current)
     // 60 é o tamanho da barra de ferramentas total (main_tools + custom_tools)
@@ -33,7 +33,7 @@ export const useFabric = () => {
         objectCaching: false
       });
 
-      canvas.current.allowTouchScrolling = true
+      //canvas.current.allowTouchScrolling = true
 
       // desabilitando seleção de todos os elementos (para atingir a função desenho)
       fabric.Object.prototype.selectable = false
@@ -44,17 +44,35 @@ export const useFabric = () => {
       fabric.Object.prototype.cornerColor = 'purple'
       fabric.Object.prototype.cornerSize = 18
 
+
+      // ALTERNATIVA 1 (NOT WORKING)
+      /*var tmf = function(e) {
+        e.preventDefault();
+      };
+      canvas.current?.on('mouse:down', function(e) {
+        if (canvas.getActiveObject()) {
+            $('*').bind('touchmove', tmf);
+        }
+      });
+      canvas.current?.on('mouse:up', function(e) {
+        $('*').unbind('touchmove', tmf);
+      });*/
+
+      // ALTERNATIVA 2
       var disableScroll = function(){
-        canvas.current.allowTouchScrolling = false;
+        canvas.current?.set('allowTouchScrolling', false)
+        console.log(canvas.current?.get('allowTouchScrolling'))
       };
     
       var enableScroll = function(){
-        canvas.current.allowTouchScrolling = true;
+        canvas.current?.set('allowTouchScrolling', true)
+        console.log(canvas.current?.get('allowTouchScrolling'))
       };
 
       canvas.current?.on('object:moving', disableScroll);
       canvas.current?.on('object:scaling', disableScroll);
       canvas.current?.on('object:rotating', disableScroll);
+      canvas.current?.on('object:selected', disableScroll);
       canvas.current?.on('mouse:up', enableScroll);
       //canvas.current?.on('mouse:down', disableScroll);
 
