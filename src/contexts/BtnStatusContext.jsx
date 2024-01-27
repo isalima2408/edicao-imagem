@@ -19,6 +19,13 @@ export function BtnStatusProvider({ children }) {
     const [textFontFamily, setTextFontFamily] = useState('')
     const [textStyle, setTextStyle] = useState('')
 
+    // propriedades das formas geométricas
+    const [shapeSelected, setShapeSelected] = useState(false)
+    const [fillColor, setFillColor] = useState('')
+    const [strokeColor, setStrokeColor] = useState('')
+    const [strokeWidth, setStrokeWidth] = useState('')
+
+
     const disablePaintMode = () => {
         setPaintBtnSelected(false)
         canvas.current?.set('isDrawingMode', false)
@@ -43,7 +50,15 @@ export function BtnStatusProvider({ children }) {
         textFontFamily,
         setTextFontFamily,
         textStyle,
-        setTextStyle
+        setTextStyle,
+        shapeSelected,
+        setShapeSelected,
+        fillColor,
+        setFillColor,
+        strokeColor,
+        setStrokeColor,
+        strokeWidth, 
+        setStrokeWidth
     }}>
         {children}
     </BtnStatusContext.Provider>

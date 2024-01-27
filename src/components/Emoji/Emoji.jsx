@@ -7,7 +7,7 @@ import EmojiPicker from  'emoji-picker-react' ;
 
 const Emoji = () => {
     const canvas = useContext(FabricContext)
-    const { bgImageInserted, emojiBtnSelected, setEmojiBtnSelected, setPaintBtnSelected, setTextBtnSelected } = useBtnStatus()
+    const { bgImageInserted, setShapeSelected, setFillColor, setStrokeColor, setStrokeWidth, emojiBtnSelected, setEmojiBtnSelected, setPaintBtnSelected, setTextBtnSelected } = useBtnStatus()
 
     const geometricForms = [
         {
@@ -49,6 +49,20 @@ const Emoji = () => {
             selectable: true,
             erasable: false,
         })
+
+        rect.on('selected', function () {
+            setShapeSelected(true)
+            setFillColor(()=>canvas.current?.getActiveObject().get('fill'))
+            setStrokeColor(()=>canvas.current?.getActiveObject().get('stroke'))
+            setStrokeWidth(()=>canvas.current?.getActiveObject().get('strokeWidth'))
+            canvas.current?.requestRenderAll()
+        })
+
+        rect.on('deselected', function () {
+            setShapeSelected(false)
+            canvas.current?.requestRenderAll()
+        })
+
         canvas.current?.add(rect)
         canvas.current?.centerObject(rect)
         rect.setCoords()
@@ -67,6 +81,20 @@ const Emoji = () => {
             selectable: true,
             erasable: false,
         })
+
+        ellipse.on('selected', function () {
+            setShapeSelected(true)
+            setFillColor(()=>canvas.current?.getActiveObject().get('fill'))
+            setStrokeColor(()=>canvas.current?.getActiveObject().get('stroke'))
+            setStrokeWidth(()=>canvas.current?.getActiveObject().get('strokeWidth'))
+            canvas.current?.requestRenderAll()
+        })
+
+        ellipse.on('deselected', function () {
+            setShapeSelected(false)
+            canvas.current?.requestRenderAll()
+        })
+
         canvas.current?.add(ellipse)
         canvas.current?.centerObject(ellipse)
         ellipse.setCoords()

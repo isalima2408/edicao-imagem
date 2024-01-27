@@ -6,21 +6,11 @@ import styles from './Text.module.css'
 
 
 const Text = () => {
-
-  
-
-
   const canvas = useContext(FabricContext);
   const {disablePaintMode, bgImageInserted, setEmojiBtnSelected, setTextBtnSelected, setTextAlign, setTextColor, setTextFontFamily, setTextStyle } = useBtnStatus()
 
-  // O setActiveObject já desativa objetos selecionados
   const addText = () => {
-
-
-    //alert("att9")
-    console.log(canvas.current?.getObjects())
-
-
+    
     if (bgImageInserted) {
       canvas.current?.discardActiveObject()
       setEmojiBtnSelected(false)
@@ -35,18 +25,10 @@ const Text = () => {
         fontWeight: 'normal',
         selectable: true,
         erasable: false,
-        //hoverCursor: 'pointer',
         centeredScaling: true,
         centeredRotation: true,
         objectCaching: true,
-        /*evented: true,
-        gesture: ['rotate'],
-        isTouchSupported: false,
-        //selection: false,
-        selectionBackgroundColor: 'rgba(0,0,0,0)',
-        backgroundColor: 'rgba(0,0,0,0)',
-        selectionColor: 'rgba(0,0,0,0)',
-        //isTouchSupported: false,*/
+
       })
 
       textbox.setControlsVisibility({

@@ -2,6 +2,7 @@ import BgImage from "../BgImage/BgImage"
 import Text from "../Text/Text"
 import TextTools from '../TextTools/TextTools'
 import Emoji from "../Emoji/Emoji"
+import ShapeTools from "../ShapeTools/ShapeTools"
 import Paint from "../Paint/Paint"
 import PaintTools from "../PaintTools/PaintTools"
 import ExternImage from '../Image/ExternImage'
@@ -10,7 +11,7 @@ import { useBtnStatus } from "../../contexts/BtnStatusContext"
 import styles from "./Toolbar.module.css"
 
 const Toolbar = () => {
-    const { textBtnSelected, paintBtnSelected } = useBtnStatus()
+    const { textBtnSelected, paintBtnSelected, shapeSelected } = useBtnStatus()
 
     return(
         <>
@@ -27,6 +28,7 @@ const Toolbar = () => {
             <div className={ styles.custom_tools } >
                 {textBtnSelected && <TextTools />}
                 {paintBtnSelected && <PaintTools />}
+                {shapeSelected && <ShapeTools />}
             </div>
         </>  
     )
