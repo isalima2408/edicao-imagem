@@ -28,17 +28,25 @@ const Text = () => {
       disablePaintMode()
 
       const textbox = new fabric.Textbox("Texto", {
-        fill: 'back',
+        fill: 'black',
         textAlign: 'left',
         fontFamily: 'Arial',
         fontStyle: 'normal',
         fontWeight: 'normal',
         selectable: true,
         erasable: false,
-        hoverCursor: 'pointer',
+        //hoverCursor: 'pointer',
         centeredScaling: true,
         centeredRotation: true,
-        objectCaching: false
+        objectCaching: true,
+        /*evented: true,
+        gesture: ['rotate'],
+        isTouchSupported: false,
+        //selection: false,
+        selectionBackgroundColor: 'rgba(0,0,0,0)',
+        backgroundColor: 'rgba(0,0,0,0)',
+        selectionColor: 'rgba(0,0,0,0)',
+        //isTouchSupported: false,*/
       })
 
       textbox.setControlsVisibility({
@@ -91,12 +99,12 @@ const Text = () => {
         setTextColor(()=>canvas.current?.getActiveObject().get('fill'))
         setTextAlign(()=>canvas.current?.getActiveObject().get('textAlign'))
         setTextStyle(()=>canvas.current?.getActiveObject().get('fontStyle', 'fontWeight'))
-        canvas.current?.renderAll()
+        canvas.current?.requestRenderAll()
       })
 
       textbox.on('deselected', function () {
         setTextBtnSelected(false)
-        canvas.current?.renderAll()
+        canvas.current?.requestRenderAll()
       })
 
       // apagar caixa de texto quando vazio
@@ -104,7 +112,7 @@ const Text = () => {
       function removeEmptyTextbox(e) {
         if(e.target.text === '') {
           canvas.current?.remove(e.target);
-          canvas.current?.renderAll()
+          canvas.current?.requestRenderAll()
           setTextBtnSelected(false)
         }
       }
@@ -113,7 +121,7 @@ const Text = () => {
       canvas.current?.add(textbox)
       canvas.current?.centerObject(textbox)
       textbox.setCoords()
-      canvas.current?.setActiveObject(textbox).renderAll()
+      canvas.current?.setActiveObject(textbox).requestRenderAll()
     }
   }
 

@@ -61,7 +61,6 @@ const Emoji = () => {
             fill: 'transparent',
             rx: 80,
             ry: 40,
-            //radius: 30,
             strokeWidth: 5, 
             stroke: 'rgba(255,0,0,1)',
             strokeUniform: true,
@@ -90,7 +89,7 @@ const Emoji = () => {
                 img.set({
                     selectable: true,
                     erasable: false,
-                    hoverCursor: 'pointer',
+                    //hoverCursor: 'pointer',
                     centeredScaling: true,
                     centeredRotation: true,
                 })

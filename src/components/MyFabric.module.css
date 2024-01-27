@@ -5,10 +5,14 @@
     touch-action: manipulation;
 }
 
-canvas {
+.my_fabric:active {
+    background-color: rgba(0,0,0,0);
+}
+
+/*canvas {
     touch-action: manipulation;
 }
 
 .upper-canvas {
     touch-action: manipulation;
-}
+}*/

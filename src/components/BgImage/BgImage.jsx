@@ -47,13 +47,12 @@ const BgImage = () => {
                 scaleY: scale,
                 selectable: false,
                 erasable: false,
-                evented: false,
+                evented: true,
                 imageSmoothingEnabled: false,
                 webkitImageSmoothingEnabled: false,
                 mozImageSmoothingEnabled: false,
                 msImageSmoothingEnabled: false,
-                oImageSmoothingEnabled: false,
-                dirty: true,
+                oImageSmoothingEnabled: false,               
             })
 
             img.objectCaching = false

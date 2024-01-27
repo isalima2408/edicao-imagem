@@ -36,7 +36,6 @@ const ExternImage = () => {
                 img.set({
                     selectable: true,
                     erasable: false,
-                    hoverCursor: 'pointer',
                     centeredScaling: true,
                     centeredRotation: true,
                     objectCaching: false

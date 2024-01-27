@@ -13,20 +13,21 @@ export const useFabric = () => {
     // 60 é o tamanho da barra de ferramentas total (main_tools + custom_tools)
     const canvasHeight = height - 60
 
-    console.log("att12")
+    
 
     // criando canvas
     const fabricRef = useCallback((element) => {
       if (!element) return canvas.current?.dispose();
       canvas.current = new fabric.Canvas(element, {
         selection: false,
-        backgroundColor: 'gray',
+        
+        //backgroundColor: 'gray',
         hoverCursor: 'default',
         height: 0,
         allowTouchScrolling: true,
         maxFingers:1,
-        //controlsAboveOverlay: true,
-        isTouchSupported: true,
+        controlsAboveOverlay: true,
+        isTouchSupported: false,
         
 
 
@@ -36,18 +37,19 @@ export const useFabric = () => {
         mozImageSmoothingEnabled: false,
         msImageSmoothingEnabled: false,
         oImageSmoothingEnabled: false,
-        objectCaching: false
+        objectCaching: false,
+
+        //cor da caixa de seleção de grupo, tipo quando clico com mouse e arrasto criando seleção
+        //selectionColor: 'rgba(255,0,0,1)',
+
+        //opacity: 0.3,
+        //pointerEvents: false
+        //selectable: false,
+
       });
 
-      canvas.current?.on('touch:gesture', function (e) {
-        console.log("touch:gesture event capturado")
-      })
 
-
-
-      fabric.util.addListener(canvas.current?.lowerCanvasEl, 'touch:start', function (e) {
-        console.log("touch:start")
-      })
+      console.log("att2222256")
 
       canvas.current?.on('touch:longpress', preventLongpress)
 
@@ -56,7 +58,7 @@ export const useFabric = () => {
         opt.e.preventDefault()
       }
 
-      //fabric.Object.prototype.isTouchSupported = false
+      fabric.Object.prototype.isTouchSupported = false
 
       // desabilitando seleção de todos os elementos (para atingir a função desenho)
       fabric.Object.prototype.selectable = false
