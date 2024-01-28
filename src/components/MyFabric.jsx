@@ -13,7 +13,7 @@ export const useFabric = () => {
     // 60 é o tamanho da barra de ferramentas total (main_tools + custom_tools)
     const canvasHeight = height - 60
 
-    
+    console.log("att17")
 
     // criando canvas
     const fabricRef = useCallback((element) => {
@@ -34,9 +34,10 @@ export const useFabric = () => {
         msImageSmoothingEnabled: false,
         oImageSmoothingEnabled: false,
         objectCaching: false,
+        noScaleCache: false
       });
 
-      console.log("att2222256")
+      
 
       // desabilitando seleção de todos os elementos (para atingir a função desenho)
       fabric.Object.prototype.selectable = false
@@ -45,6 +46,7 @@ export const useFabric = () => {
       fabric.Object.prototype.cornerStyle = 'circle'
       fabric.Object.prototype.cornerColor = 'purple'
       fabric.Object.prototype.cornerSize = 18
+      fabric.Object.prototype.objectCaching = false;
       
       /* ALTERNATIVA 2 */
       var disableScroll = function(){

@@ -7,7 +7,7 @@ import styles from './Text.module.css'
 
 const Text = () => {
   const canvas = useContext(FabricContext);
-  const {disablePaintMode, bgImageInserted, setEmojiBtnSelected, setTextBtnSelected, setTextAlign, setTextColor, setTextFontFamily, setTextStyle } = useBtnStatus()
+  const {setBgColor, disablePaintMode, bgImageInserted, setEmojiBtnSelected, setTextBtnSelected, setTextAlign, setTextColor, setTextFontFamily } = useBtnStatus()
 
   const addText = () => {
     
@@ -23,12 +23,12 @@ const Text = () => {
         fontFamily: 'Arial',
         fontStyle: 'normal',
         fontWeight: 'normal',
+        backgroundColor: 'transparent',
         selectable: true,
         erasable: false,
         centeredScaling: true,
         centeredRotation: true,
         objectCaching: true,
-
       })
 
       textbox.setControlsVisibility({
@@ -80,7 +80,7 @@ const Text = () => {
         setTextFontFamily(()=>canvas.current?.getActiveObject().get('fontFamily'))
         setTextColor(()=>canvas.current?.getActiveObject().get('fill'))
         setTextAlign(()=>canvas.current?.getActiveObject().get('textAlign'))
-        setTextStyle(()=>canvas.current?.getActiveObject().get('fontStyle', 'fontWeight'))
+        setBgColor(()=>canvas.current?.getActiveObject().get('backgroundColor'))
         canvas.current?.requestRenderAll()
       })
 

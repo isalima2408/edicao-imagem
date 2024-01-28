@@ -6,7 +6,7 @@ var FontFaceObserver = require('fontfaceobserver')
 
 const TextTools = () => {
     const canvas = useContext(FabricContext);
-    const { textAlign, setTextAlign, textColor, setTextColor, textFontFamily, setTextFontFamily, textStyle, setTextStyle } = useBtnStatus()
+    const { textItalic, setTextItalic, textWeight, setTextWeight, bgColor, setBgColor, textAlign, setTextAlign, textColor, setTextColor, textFontFamily, setTextFontFamily } = useBtnStatus()
 
     // Mudar alinhamento
     const changeTextAlign = (e) => {
@@ -50,25 +50,34 @@ const TextTools = () => {
         }
     }
 
-    // Itálico / Negrito
-    const changeTextStyle = (e) => {
-        setTextStyle(e.target.value)
-
-        if (e.target.value === 'italic') {
-            canvas.current?.getActiveObject().set("fontStyle", e.target.value);
-            canvas.current?.renderAll();
-
-        } else if (e.target.value === 'bold') {
-            canvas.current?.getActiveObject().set("fontWeight", e.target.value);
-            canvas.current?.renderAll();
-
+    // Itálico
+    const changeStyle = (e) => {
+        setTextItalic(val => !val)
+        if(!textItalic) {
+            canvas.current?.getActiveObject().set("fontStyle", 'italic')
         } else {
-            canvas.current?.getActiveObject().set("fontStyle", 'normal');
-            canvas.current?.getActiveObject().set("fontWeight", 'normal');
-            canvas.current?.renderAll();
+            canvas.current?.getActiveObject().set("fontStyle", 'normal')
         }
+        canvas.current?.renderAll();
     }
-    
+
+    // Negrito
+    const changeWeight = () => {
+        setTextWeight(val => !val)
+        if(!textWeight) {
+            canvas.current?.getActiveObject().set("fontWeight", 'bold');
+        } else {
+            canvas.current?.getActiveObject().set("fontWeight", 'normal'); 
+        }
+        canvas.current?.renderAll();
+    }
+
+    // Cor de fundo
+    const changeBgColor = (e) => {
+        setBgColor(e.target.value)
+        canvas.current?.getActiveObject().set('backgroundColor', e.target.value)
+        canvas.current?.renderAll() 
+    }
     
     return(
         <div>
@@ -81,6 +90,7 @@ const TextTools = () => {
 
             <select name="text_color" id="text_color" value={textColor} onChange={changeTextColor}>
                 <option value="black">Preto</option>
+                <option value="white">Branco</option>
                 <option value="red">Vermelho</option>
                 <option value="blue">Azul</option>
             </select>
@@ -90,11 +100,16 @@ const TextTools = () => {
                 <option value="center">Centro</option>
                 <option value="right">Direita</option>
             </select>
-            
-            <select name="text_style" id="text_style" value={textStyle} onChange={changeTextStyle}>
-                <option value="normal">Normal</option>
-                <option value="italic">Itálico</option>
-                <option value="bold">Negrito</option>
+
+            <button onClick={changeStyle} >Itálico</button>
+            <button onClick={changeWeight} >Negrito</button>
+
+            <select name="bg_color" id="bg_color" value={bgColor} onChange={changeBgColor}>
+                <option value="transparent">Sem fundo</option>
+                <option value="black">Preto</option>
+                <option value="white">Branco</option>
+                <option value="#EE82EE">Violeta</option>
+                <option value="#ADD8E6">Azul</option>
             </select>
         </div>
     )

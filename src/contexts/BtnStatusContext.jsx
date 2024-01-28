@@ -17,20 +17,27 @@ export function BtnStatusProvider({ children }) {
     const [textAlign, setTextAlign] = useState('')
     const [textColor, setTextColor] = useState('')
     const [textFontFamily, setTextFontFamily] = useState('')
-    const [textStyle, setTextStyle] = useState('')
+    const [textItalic, setTextItalic] = useState(false)
+    const [textWeight, setTextWeight] = useState(false)
+    const [bgColor, setBgColor] = useState('')
 
     // propriedades das formas geométricas
     const [shapeSelected, setShapeSelected] = useState(false)
     const [fillColor, setFillColor] = useState('')
     const [strokeColor, setStrokeColor] = useState('')
     const [strokeWidth, setStrokeWidth] = useState('')
+    const [rectSelected, setRectSelected] = useState(false)
+    const [ry, setRy] = useState()
 
-
+    // desabilitar paintMode
     const disablePaintMode = () => {
         setPaintBtnSelected(false)
         canvas.current?.set('isDrawingMode', false)
         canvas.current?.set('allowTouchScrolling', true)
     }
+
+    // Limpar canvas (salvar estado inicial e depois dar load)
+    //const 
 
     return(
     <BtnStatusContext.Provider value={{
@@ -49,8 +56,10 @@ export function BtnStatusProvider({ children }) {
         setTextColor,
         textFontFamily,
         setTextFontFamily,
-        textStyle,
-        setTextStyle,
+        textItalic, 
+        setTextItalic,
+        textWeight, 
+        setTextWeight,
         shapeSelected,
         setShapeSelected,
         fillColor,
@@ -58,7 +67,13 @@ export function BtnStatusProvider({ children }) {
         strokeColor,
         setStrokeColor,
         strokeWidth, 
-        setStrokeWidth
+        setStrokeWidth,
+        rectSelected, 
+        setRectSelected, 
+        ry, 
+        setRy,
+        bgColor, 
+        setBgColor
     }}>
         {children}
     </BtnStatusContext.Provider>
