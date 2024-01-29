@@ -1,5 +1,5 @@
 import styles from './Emoji.module.css'
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
 import { fabric } from 'fabric';
 import { FabricContext } from '../../App';
 import { useBtnStatus } from '../../contexts/BtnStatusContext';
@@ -7,7 +7,7 @@ import EmojiPicker from  'emoji-picker-react' ;
 
 const Emoji = () => {
     const canvas = useContext(FabricContext)
-    const { bgImageInserted, setShapeSelected, setRectSelected, setFillColor, setStrokeColor, setStrokeWidth, ry, setRy, emojiBtnSelected, setEmojiBtnSelected, setPaintBtnSelected, setTextBtnSelected } = useBtnStatus()
+    const {isScaling, setIsScaling, setNewWidth, setNewHeight, bgImageInserted, setShapeSelected, setRectSelected, setFillColor, setStrokeColor, setStrokeWidth, ry, setRy, emojiBtnSelected, setEmojiBtnSelected, setPaintBtnSelected, setTextBtnSelected } = useBtnStatus()
 
     const geometricForms = [
         {
@@ -45,62 +45,33 @@ const Emoji = () => {
     // Retângulo
     function createRect() {
         var rect = new fabric.Rect({
-            fill: 'white',
+            fill: 'transparent',
             width: 200,
             height: 100,
-            ry: 20,
+            rx: 5,
             strokeWidth: 5,
-            stroke: 'rgba(255,255,255,1)',
-            strokeUniform: false,
+            stroke: 'rgba(255,0,0,1)',
+            originX: 'center',
+            originY: 'center',
+            strokeUniform: true,
             selectable: true,
             erasable: false,
-            objectCaching: false,
             noScaleCache: false,
-            padding: 10
-        })
+            objectCaching: false,
 
-        /*rect.setControlsVisibility({
-            tl: false, 
-            tr: false,
-            ml: true, 
-            mr: false, 
-            bl: false, 
-            mb: false, 
-            mt: false,
-            mtr: true,
-            br: true,
-          })*/
+        })
 
         rect.on('selected', function () {
             setShapeSelected(true)
-            //setRectSelected(true)
             setFillColor(()=>canvas.current?.getActiveObject().get('fill'))
             setStrokeColor(()=>canvas.current?.getActiveObject().get('stroke'))
-            setStrokeWidth(()=>canvas.current?.getActiveObject().get('strokeWidth'))
-            //setRy(()=>canvas.current?.getActiveObject().get('ry'))
             canvas.current?.requestRenderAll()
         })
 
         rect.on('deselected', function () {
             setShapeSelected(false)
-            //setRectSelected(false)
             canvas.current?.requestRenderAll()
         })
-
-        /*rect.on('scaling', roundCorner)
-
-        function roundCorner() {
-            console.log('oi')
-            var newWidth = rect.getScaledWidth()
-            var newHeight = rect.getScaledHeight()
-            console.log(newWidth, newHeight)
-            rect.set({
-                width: newWidth,
-                height: newHeight,
-                ry: 20,
-            })
-            canvas.current?.renderAll()
-        }*/
 
         canvas.current?.add(rect)
         canvas.current?.centerObject(rect)
@@ -115,25 +86,24 @@ const Emoji = () => {
             height: 100,
             strokeWidth: 5, 
             stroke: 'rgba(255,0,0,1)',
+            originX: 'left',
+            originY: 'top',
             strokeUniform: true,
             selectable: true,
             erasable: false,
-            padding: 10
+            noScaleCache: false,
+            objectCaching: false
         })
 
         rect.on('selected', function () {
             setShapeSelected(true)
-            //setRectSelected(true)
             setFillColor(()=>canvas.current?.getActiveObject().get('fill'))
             setStrokeColor(()=>canvas.current?.getActiveObject().get('stroke'))
-            setStrokeWidth(()=>canvas.current?.getActiveObject().get('strokeWidth'))
-            //setRy(()=>canvas.current?.getActiveObject().get('ry'))
             canvas.current?.requestRenderAll()
         })
 
         rect.on('deselected', function () {
             setShapeSelected(false)
-            //setRectSelected(false)
             canvas.current?.requestRenderAll()
         })
 
@@ -143,26 +113,26 @@ const Emoji = () => {
         canvas.current?.setActiveObject(rect).renderAll()
     }
 
-    // Circulo / Elipse
+
+    // Elipse
     function createEllipse() {
         var ellipse = new fabric.Ellipse({
             fill: 'transparent',
-            rx: 40,
-            ry: 10,
+            rx: 80,
+            ry: 40,           
             strokeWidth: 5, 
             stroke: 'rgba(255,0,0,1)',
             strokeUniform: true,
             selectable: true,
             erasable: false,
-            padding: 10
+            noScaleCache: false,
+            objectCaching: false
         })
 
         ellipse.on('selected', function () {
             setShapeSelected(true)
-            setRectSelected(false)
             setFillColor(()=>canvas.current?.getActiveObject().get('fill'))
             setStrokeColor(()=>canvas.current?.getActiveObject().get('stroke'))
-            setStrokeWidth(()=>canvas.current?.getActiveObject().get('strokeWidth'))
             canvas.current?.requestRenderAll()
         })
 
@@ -189,17 +159,17 @@ const Emoji = () => {
         } else {
 
             var emojiURL = emojiObject.imageUrl
-            console.log(emojiURL)
-
             new fabric.Image.fromURL(emojiURL, function(img) {
                 img.set({
                     selectable: true,
                     erasable: false,
-                    //hoverCursor: 'pointer',
                     centeredScaling: true,
                     centeredRotation: true,
-                    dirty: true
+                    objectCaching: false,
+                    noScaleCache: false
                 })
+                img.objectCaching=false
+                img.noScaleCache=false
 
                 img.setControlsVisibility({
                     tl:false, 
@@ -232,8 +202,8 @@ const Emoji = () => {
                     onEmojiClick={ onEmojiClick } 
                     categories={[
                                 'suggested',
-                                'custom'
-                                /*{category: 'custom', name: 'Formas'}*/,
+                                'custom',
+                                {category: 'custom', name: 'Formas'},
                                 'smileys_people',
                                 'animals_nature',
                                 'food_drink',

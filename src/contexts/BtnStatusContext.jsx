@@ -25,9 +25,6 @@ export function BtnStatusProvider({ children }) {
     const [shapeSelected, setShapeSelected] = useState(false)
     const [fillColor, setFillColor] = useState('')
     const [strokeColor, setStrokeColor] = useState('')
-    const [strokeWidth, setStrokeWidth] = useState('')
-    const [rectSelected, setRectSelected] = useState(false)
-    const [ry, setRy] = useState()
 
     // desabilitar paintMode
     const disablePaintMode = () => {
@@ -36,8 +33,6 @@ export function BtnStatusProvider({ children }) {
         canvas.current?.set('allowTouchScrolling', true)
     }
 
-    // Limpar canvas (salvar estado inicial e depois dar load)
-    //const 
 
     return(
     <BtnStatusContext.Provider value={{
@@ -66,14 +61,8 @@ export function BtnStatusProvider({ children }) {
         setFillColor,
         strokeColor,
         setStrokeColor,
-        strokeWidth, 
-        setStrokeWidth,
-        rectSelected, 
-        setRectSelected, 
-        ry, 
-        setRy,
         bgColor, 
-        setBgColor
+        setBgColor,
     }}>
         {children}
     </BtnStatusContext.Provider>

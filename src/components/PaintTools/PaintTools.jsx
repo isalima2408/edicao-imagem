@@ -11,7 +11,6 @@ const PaintTools = () => {
     const [bColor, setBColor] = useState('purple')
     const [eraserActive, setEraserActive] = useState(false)
     const [pencilActive, setPencilActive] = useState(false)
-    //const [eraserBtnDisabled, setEraserBtnDisabled] = useState(true)
 
 
     if(!pencilActive && !eraserActive) {
@@ -78,7 +77,6 @@ const PaintTools = () => {
         }       
     }
 
-    
 
     return(
         <div>

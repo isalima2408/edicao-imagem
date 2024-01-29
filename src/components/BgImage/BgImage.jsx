@@ -34,7 +34,7 @@ const BgImage = () => {
             var ratioWindow = width / windowHeight
             var ratioImg = img.width / img.height
 
-            var imgOverflow = ratioImg>ratioWindow
+            var imgOverflow = ratioImg > ratioWindow
 
             if(!imgOverflow) {
                 scale = scaleH
@@ -48,15 +48,14 @@ const BgImage = () => {
                 selectable: false,
                 erasable: false,
                 evented: true,
+                objectCaching: false,
+                noScaleCache: false,
                 imageSmoothingEnabled: false,
                 webkitImageSmoothingEnabled: false,
                 mozImageSmoothingEnabled: false,
                 msImageSmoothingEnabled: false,
                 oImageSmoothingEnabled: false,               
             })
-
-            img.objectCaching = false
-            img.noScaleCache = true
 
             img.setControlsVisibility({
                 tl:false, 

@@ -9,11 +9,10 @@ export const useFabric = () => {
     const {setTextBtnSelected} = useBtnStatus()
     const { innerWidth: width, innerHeight: height } = window
 
-    //alert("att")
-    // 60 é o tamanho da barra de ferramentas total (main_tools + custom_tools)
+    // 60 é o tamanho da barra de ferramentas total (main_tools + custom_tools) (mudar depois)
     const canvasHeight = height - 60
 
-    console.log("att17")
+    console.log("att8886")
 
     // criando canvas
     const fabricRef = useCallback((element) => {
@@ -24,7 +23,7 @@ export const useFabric = () => {
         hoverCursor: 'default',
         height: 0,
         allowTouchScrolling: true,
-        maxFingers:1,
+        //maxFingers:1,
         controlsAboveOverlay: true,
         isTouchSupported: false,
         transparentCorners: false,
@@ -37,21 +36,19 @@ export const useFabric = () => {
         noScaleCache: false
       });
 
-      
-
       // desabilitando seleção de todos os elementos (para atingir a função desenho)
       fabric.Object.prototype.selectable = false
-      // configurando controles globais
+
+      // configurando estilo dos controles globais
       fabric.Object.prototype.transparentCorners = false
       fabric.Object.prototype.cornerStyle = 'circle'
       fabric.Object.prototype.cornerColor = 'purple'
       fabric.Object.prototype.cornerSize = 18
-      fabric.Object.prototype.objectCaching = false;
+      fabric.Object.prototype.objectCaching = false
+      fabric.Object.prototype.noScaleCache = false
       
-      /* ALTERNATIVA 2 */
       var disableScroll = function(){
         canvas.current?.set('allowTouchScrolling', false)
-        
         console.log(canvas.current?.get('allowTouchScrolling'))
       };
     
