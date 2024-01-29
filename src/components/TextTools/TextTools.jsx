@@ -34,20 +34,16 @@ const TextTools = () => {
             canvas.current?.requestRenderAll();
           }).catch(function(e) {
             console.log(e)
-            alert('font loading failed ' + font);
+            console.log('font loading failed ' + font);
           });
       }
     
     // Mudar fonte
-    const changeFontFamily = (e) => {
+    const changeFontFamily = (e) => {  
         setTextFontFamily(e.target.value)
-
-        if (textFontFamily !== 'Arial') {
-            loadAndUse(e.target.value)
-        } else {
-            canvas.current?.getActiveObject().set('fontFamily', e.target.value)
-            canvas.current?.renderAll();
-        }
+        loadAndUse(e.target.value) 
+        canvas.current?.getActiveObject().set('fontFamily', e.target.value)
+        canvas.current?.renderAll();
     }
 
     // Itálico
@@ -82,9 +78,10 @@ const TextTools = () => {
     return(
         <div>
             <select name="font_family" id="font_family" value={textFontFamily} onChange={changeFontFamily}>  
+                <option value="Times New Roman">Times New Roman</option>
                 <option value="Roboto">Roboto</option>
-                <option value="Arial">Arial</option>
-                <option value="Montserrat">Montserrat</option>
+                <option value="Space Mono">Space Mono</option>
+                <option value="Poppins">Poppins</option>
                 <option value="Lemon">Lemon</option>
             </select>
 

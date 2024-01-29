@@ -12,7 +12,7 @@ export const useFabric = () => {
     // 60 é o tamanho da barra de ferramentas total (main_tools + custom_tools) (mudar depois)
     const canvasHeight = height - 60
 
-    console.log("att8886")
+    console.log("att7891535")
 
     // criando canvas
     const fabricRef = useCallback((element) => {

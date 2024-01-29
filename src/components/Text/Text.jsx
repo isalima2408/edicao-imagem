@@ -19,8 +19,9 @@ const Text = () => {
 
       const textbox = new fabric.Textbox("Texto", {
         fill: 'black',
-        textAlign: 'left',
-        fontFamily: 'Arial',
+        textAlign: 'center',
+        //fontFamily: 'Times New Roman',
+        width:150,
         fontStyle: 'normal',
         fontWeight: 'normal',
         backgroundColor: 'transparent',
