@@ -3,11 +3,11 @@ import { useContext, useState } from 'react'
 import { fabric } from 'fabric';
 import { FabricContext } from '../../App';
 import { useBtnStatus } from '../../contexts/BtnStatusContext';
-import EmojiPicker from  'emoji-picker-react' ;
+import Picker, { SKIN_TONE_MEDIUM_DARK } from "emoji-picker-react";
 
 const Emoji = () => {
     const canvas = useContext(FabricContext)
-    const {isScaling, setIsScaling, setNewWidth, setNewHeight, bgImageInserted, setShapeSelected, setRectSelected, setFillColor, setStrokeColor, setStrokeWidth, ry, setRy, emojiBtnSelected, setEmojiBtnSelected, setPaintBtnSelected, setTextBtnSelected } = useBtnStatus()
+    const {bgImageInserted, setShapeSelected, setFillColor, setStrokeColor, emojiBtnSelected, setEmojiBtnSelected, setPaintBtnSelected, setTextBtnSelected } = useBtnStatus()
 
     const geometricForms = [
         {
@@ -31,6 +31,19 @@ const Emoji = () => {
             id: 'seta',
         }
     ]
+
+    const categories = [
+            {category: 'suggested', name: 'RECENTES'},
+            {category: 'custom', name: 'FORMAS'},
+            {category: 'smileys_people', name: 'PESSOAS'},
+            {category: 'animals_nature', name: 'ANIMAIS'},
+            {category: 'food_drink', name: 'COMIDAS E BEBIDAS'},
+            {category: 'travel_places', name: 'VIAGENS E LUGARES'},
+            {category: 'activities', name: 'ATIVIDADES'},
+            {category: 'objects', name: 'OBJETOS'},
+            {category: 'symbols', name: 'SÍMBOLOS'},
+            {category: 'flags', name: 'BANDEIRAS'}
+        ]
 
     function disableElements() {
         if(bgImageInserted) {
@@ -198,23 +211,13 @@ const Emoji = () => {
                 <ion-icon name="happy-outline"></ion-icon>
             </button>
             <div className={ styles.emoji_box }>
-                {emojiBtnSelected && <EmojiPicker 
+                {emojiBtnSelected && <Picker 
                     onEmojiClick={ onEmojiClick } 
-                    categories={[
-                                'suggested',
-                                'custom',
-                                {category: 'custom', name: 'Formas'},
-                                'smileys_people',
-                                'animals_nature',
-                                'food_drink',
-                                'travel_places',
-                                'activities',
-                                'objects',
-                                'symbols',
-                                'flags'
-                                ]}       
+                    categories={ categories }       
                     customEmojis={ geometricForms }
-                    emojiStyle="native"
+                    skinTonesDisabled
+                    searchDisabled
+                    emojiStyle="apple"
                 />}
             </div>
         </span>   

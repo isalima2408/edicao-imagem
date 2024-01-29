@@ -21,7 +21,7 @@ export function BtnStatusProvider({ children }) {
     const [textWeight, setTextWeight] = useState(false)
     const [bgColor, setBgColor] = useState('')
 
-    // propriedades das formas geométricas
+    // propriedades das formas geométricas (shapetools)
     const [shapeSelected, setShapeSelected] = useState(false)
     const [fillColor, setFillColor] = useState('')
     const [strokeColor, setStrokeColor] = useState('')

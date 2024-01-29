@@ -1,8 +1,8 @@
 import { useContext, useCallback } from "react";
 import { fabric } from "fabric";
 import { FabricContext } from "../App.js";
-import styles from "./MyFabric.module.css";
 import { useBtnStatus } from '../contexts/BtnStatusContext.jsx'
+import styles from "./MyFabric.module.css";
 
 export const useFabric = () => {
     const canvas = useContext(FabricContext);
@@ -12,28 +12,19 @@ export const useFabric = () => {
     // 60 é o tamanho da barra de ferramentas total (main_tools + custom_tools) (mudar depois)
     const canvasHeight = height - 60
 
-    console.log("att7891535")
-
     // criando canvas
     const fabricRef = useCallback((element) => {
       if (!element) return canvas.current?.dispose();
+
       canvas.current = new fabric.Canvas(element, {
         selection: false,
         backgroundColor: 'gray',
         hoverCursor: 'default',
         height: 0,
         allowTouchScrolling: true,
-        //maxFingers:1,
         controlsAboveOverlay: true,
         isTouchSupported: false,
         transparentCorners: false,
-        imageSmoothingEnabled: false,
-        webkitImageSmoothingEnabled: false,
-        mozImageSmoothingEnabled: false,
-        msImageSmoothingEnabled: false,
-        oImageSmoothingEnabled: false,
-        objectCaching: false,
-        noScaleCache: false
       });
 
       // desabilitando seleção de todos os elementos (para atingir a função desenho)
@@ -49,12 +40,10 @@ export const useFabric = () => {
       
       var disableScroll = function(){
         canvas.current?.set('allowTouchScrolling', false)
-        console.log(canvas.current?.get('allowTouchScrolling'))
       };
     
       var enableScroll = function(){
         canvas.current?.set('allowTouchScrolling', true)
-        console.log(canvas.current?.get('allowTouchScrolling'))
       };
 
       canvas.current?.on('object:selected', disableScroll);

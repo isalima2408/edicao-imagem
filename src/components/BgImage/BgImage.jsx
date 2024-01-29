@@ -12,7 +12,6 @@ const BgImage = () => {
     const [bgImgURL, setBgImgURL] = useState('')
     const { innerWidth: width, innerHeight: height } = window
     const windowHeight = height - 80
-    //const fileInput = useRef(null)
 
     // Limpar elementos inseridos no canvas antigo ao inserir nova imagem de fundo
     const resetCanvas = () => {

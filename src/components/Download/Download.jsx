@@ -9,6 +9,7 @@ const Download = () => {
     const ref = useRef(null);
 
     useEffect(() => {
+
         if ( bgImageInserted ) {
             const handleClick = event => {
             console.log('Button clicked');
@@ -29,6 +30,7 @@ const Download = () => {
                     saveImage.removeEventListener('click', handleClick);
             }}
         }
+        
   }, [bgImageInserted])
 
     return (

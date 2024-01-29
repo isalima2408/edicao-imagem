@@ -4,34 +4,60 @@ import { FabricContext } from "../../App"
 const ChangeLayer = () => {
     const canvas = useContext(FabricContext)
 
+    function sendBackwards () {
+        var objBackward = canvas.current?.getActiveObject()
+
+        if (!objBackward) {
+            return
+        } else {
+            objBackward.sendBackwards()
+            canvas.current?.discardActiveObject()
+            canvas.current?.renderAll()
+        }
+    }
+
+    function bringForward () {
+        var objForward = canvas.current?.getActiveObject()
+
+        if (!objForward) {
+            return
+        } else {
+            objForward.bringForward()
+            canvas.current?.discardActiveObject()
+            canvas.current?.renderAll()
+        }
+    }
+
     function sendToBack () {
         var objToBack = canvas.current?.getActiveObject()
 
-        if(objToBack.length !==0) {
-            objToBack.sendBackwards()
+        if (!objToBack) {
+            return
+        } else {
+            objToBack.sendToBack()
             canvas.current?.discardActiveObject()
             canvas.current?.renderAll()
-        } else {
-            return
         }
     }
 
     function bringToFront () {
         var objToFront = canvas.current?.getActiveObject()
 
-        if(objToFront.length !==0) {
-            objToFront.bringForward()
+        if (!objToFront) {
+            return
+        } else {
+            objToFront.bringToFront()
             canvas.current?.discardActiveObject()
             canvas.current?.renderAll()
-        } else {
-            return
         }
     }
 
     return (
         <>
-            <button onClick={sendToBack}>Back</button>
-            <button onClick={bringToFront}>Front</button>
+            <button onClick={sendBackwards}>Back</button>
+            <button onClick={bringForward}>Front</button>
+            <button onClick={sendToBack}>STBack</button>
+            <button onClick={bringToFront}>BTFront</button>
         </>
     )
 }

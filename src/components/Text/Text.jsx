@@ -34,6 +34,9 @@ const Text = () => {
         padding: 10
       })
 
+      // configurando posição do controle de rotação (aplica-se a todos os elementos)
+      textbox.controls.mtr.offsetY = -35
+
       textbox.objectCaching=false
       textbox.noScaleCache=false
 
@@ -78,9 +81,7 @@ const Text = () => {
         ctx.restore();
       } 
 
-
       textbox.on('selected', function () {
-        // passar true para habilitar textTools quando o texto estiver selecionado
         setTextBtnSelected(true)
         setTextFontFamily(()=>canvas.current?.getActiveObject().get('fontFamily'))
         setTextColor(()=>canvas.current?.getActiveObject().get('fill'))

@@ -10,8 +10,6 @@ const TextTools = () => {
 
     // Mudar alinhamento
     const changeTextAlign = (e) => {
-        // o setTextAlig serve para ajustar apenas o value do select, mas não fazer a alteração na propriedade do texto.
-        // Alteração do texto feita na linha 16
         setTextAlign(e.target.value) 
         canvas.current?.getActiveObject().set('textAlign', e.target.value)
         canvas.current?.renderAll()
@@ -29,12 +27,11 @@ const TextTools = () => {
         var myfont = new FontFaceObserver(font)
         myfont.load()
           .then(function() {
-            // when font is loaded, use it.
             canvas.current?.getActiveObject().set("fontFamily", font);
             canvas.current?.requestRenderAll();
           }).catch(function(e) {
-            console.log(e)
-            console.log('font loading failed ' + font);
+            /*console.log(e)
+            console.log('font loading failed ' + font);*/
           });
       }
     

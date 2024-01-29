@@ -22,7 +22,7 @@ const ExternImage = () => {
         canvas.current?.discardActiveObject().renderAll()
         canvas.current?.set('isDrawingMode', false) 
         setTextBtnSelected(false)
-        setPaintBtnSelected(false)      
+        setPaintBtnSelected(false)
     }
 
     const handleImgChange = (e) => {
@@ -30,28 +30,41 @@ const ExternImage = () => {
         setExtImgInserted(true)
     }
 
+    async function fabricImageFromURL(image_url) {                                                                          
+        return new Promise(function(resolve, reject) {                                                                        
+          try {                                                                                                               
+            
+            new fabric.Image.fromURL(image_url, function (img) {                                                                
+              resolve(img);
+              img.set({
+                selectable: true,
+                erasable: false,
+                centeredScaling: true,
+                centeredRotation: true,
+                objectCaching: false,
+                noScaleCache: false
+            }).scale(0.2)
+
+            img.setControlsVisibility({
+                tr: false,
+            })
+
+            canvas.current?.add(img)
+            canvas.current?.centerObject(img)
+            img.setCoords()
+            canvas.current?.setActiveObject(img)
+            canvas.current?.requestRenderAll()
+        })
+
+        } catch (error) {                                                                                                   
+            reject(error);
+            return                                                                                                                                                                                                                                
+        };                                                                                                                   
+      })}
+
     useEffect(() => {
         if(extImgInserted) {
-            new fabric.Image.fromURL(imgURL, function(img) {
-                img.set({
-                    selectable: true,
-                    erasable: false,
-                    centeredScaling: true,
-                    centeredRotation: true,
-                    objectCaching: false,
-                    noScaleCache: false
-                }).scale(0.2)
-
-                img.setControlsVisibility({
-                    tr: false,
-                })
-
-                canvas.current?.add(img)
-                canvas.current?.centerObject(img)
-                img.setCoords()
-                canvas.current?.setActiveObject(img)
-                canvas.current?.requestRenderAll()
-            })
+            fabricImageFromURL(imgURL)
             setExtImgInserted(false)
         }
     }, [extImgInserted])

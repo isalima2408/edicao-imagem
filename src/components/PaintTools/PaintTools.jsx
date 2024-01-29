@@ -17,7 +17,6 @@ const PaintTools = () => {
         canvas.current?.set('isDrawingMode', false)
     }
 
-
     const exitPaintMode = () => {
         disablePaintMode()
     }
