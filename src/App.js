@@ -3,6 +3,7 @@ import MyFabric from "./components/MyFabric";
 import Toolbar from "./components/Toolbar/Toolbar";
 import { BtnStatusProvider } from "./contexts/BtnStatusContext"
 
+// contexto do canvas
 export const FabricContext = createContext();
 
 function App () {

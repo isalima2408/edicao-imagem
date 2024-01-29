@@ -4,13 +4,14 @@ import { FabricContext } from "../App.js";
 import { useBtnStatus } from '../contexts/BtnStatusContext.jsx'
 import styles from "./MyFabric.module.css";
 
+
+/* MUDAR SELECT DE CORES PARA INPUT DE PALETA DE CORES NOS ELEMENTOS APLICÁVEIS (ou outra ideia)*/
+
+
 export const useFabric = () => {
     const canvas = useContext(FabricContext);
     const {setTextBtnSelected} = useBtnStatus()
     const { innerWidth: width, innerHeight: height } = window
-
-    // 60 é o tamanho da barra de ferramentas total (main_tools + custom_tools) (mudar depois)
-    const canvasHeight = height - 60
 
     // criando canvas
     const fabricRef = useCallback((element) => {
@@ -30,14 +31,17 @@ export const useFabric = () => {
       // desabilitando seleção de todos os elementos (para atingir a função desenho)
       fabric.Object.prototype.selectable = false
 
-      // configurando estilo dos controles globais
+      // configurando estilo dos controles de dimensao e rotação globais
       fabric.Object.prototype.transparentCorners = false
       fabric.Object.prototype.cornerStyle = 'circle'
       fabric.Object.prototype.cornerColor = 'purple'
       fabric.Object.prototype.cornerSize = 18
+
+      // desabilitando o cache para prevenir erros
       fabric.Object.prototype.objectCaching = false
       fabric.Object.prototype.noScaleCache = false
       
+      // configurando a ativação do scroll no canvas (desativa quando algum obj está selecionado ou está no modo desenho)
       var disableScroll = function(){
         canvas.current?.set('allowTouchScrolling', false)
       };

@@ -20,11 +20,13 @@ const BgImage = () => {
         canvas.current?.clear()
     }
 
+    // criar url quando a imagem for inserida
     const handleBgImgChange = (e) => {
         setBgImgURL(URL.createObjectURL(e.target.files[0])) 
         setBgImageInserted(true)  
     }
 
+    // adicionando imagem ao canvas
     useEffect(() => {
         new fabric.Image.fromURL(bgImgURL, function(img) {
             var scale

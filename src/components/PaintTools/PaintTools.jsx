@@ -12,15 +12,17 @@ const PaintTools = () => {
     const [eraserActive, setEraserActive] = useState(false)
     const [pencilActive, setPencilActive] = useState(false)
 
-
+    // modo desenho só habilita quando clicar em 'pincel' ou 'borracha'
     if(!pencilActive && !eraserActive) {
         canvas.current?.set('isDrawingMode', false)
     }
 
+    // desabilitar desenho ao clicar em 'sair'
     const exitPaintMode = () => {
         disablePaintMode()
     }
 
+    // tipo do pincél
     const changeBrushType = (e) => {
         setPencilActive(!pencilActive)
         setEraserActive(false)
@@ -31,6 +33,7 @@ const PaintTools = () => {
         canvas.current?.set('isDrawingMode', true)
     }
 
+    // config borracha
     const eraserBrush = (e) => {
         setEraserActive(!eraserActive)
         setPencilActive(false)
@@ -42,11 +45,13 @@ const PaintTools = () => {
         canvas.current?.set('isDrawingMode', true)
     }
 
+    // espessura do traço da borracha
     const changeEraserWidth = (e) => {
         const eraserWidth = e.target.value
         canvas.current.freeDrawingBrush.width =  eraserWidth
     }
 
+    // cor do traço
     const changeBrushColor = (e) => {
         const brushColor = e.target.value
         setBColor(brushColor)
@@ -58,12 +63,14 @@ const PaintTools = () => {
         }
     }
     
+    // espessura do traço pincél
     const changeBrushWidth = (e) => {
         const brushWidth = e.target.value
         setBWidth(brushWidth)
         canvas.current.freeDrawingBrush.width = parseInt(brushWidth, 10);
     }
 
+    // função desfazer
     function undo () {       
         var lastItemIndex = (canvas.current?.getObjects().length - 1);
         var item = canvas.current?.item(lastItemIndex);

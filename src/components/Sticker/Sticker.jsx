@@ -1,4 +1,4 @@
-import styles from './Sticker.module.css'
+/*import styles from './Sticker.module.css'
 import { useContext } from 'react'
 import { fabric } from 'fabric';
 import { FabricContext } from '../../App';
@@ -71,3 +71,4 @@ const Sticker = () => {
 }
 
 export default Sticker
+*/

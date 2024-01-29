@@ -4,6 +4,7 @@ import { FabricContext } from "../../App"
 const ChangeLayer = () => {
     const canvas = useContext(FabricContext)
 
+    // levar para trás
     function sendBackwards () {
         var objBackward = canvas.current?.getActiveObject()
 
@@ -16,6 +17,7 @@ const ChangeLayer = () => {
         }
     }
 
+    // trazer para frente
     function bringForward () {
         var objForward = canvas.current?.getActiveObject()
 
@@ -28,6 +30,7 @@ const ChangeLayer = () => {
         }
     }
 
+    // enviar para trás
     function sendToBack () {
         var objToBack = canvas.current?.getActiveObject()
 
@@ -40,6 +43,7 @@ const ChangeLayer = () => {
         }
     }
 
+    // enviar para frente
     function bringToFront () {
         var objToFront = canvas.current?.getActiveObject()
 

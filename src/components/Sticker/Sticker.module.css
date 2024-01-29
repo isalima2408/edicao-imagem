@@ -1,4 +1,4 @@
-.sticker_icon {
+/*.sticker_icon {
     background-color: rgba(255, 255, 255, 0);
     border: none; 
     display: flex;
@@ -7,7 +7,7 @@
     height: 40px;
     width: 40px;
     border-radius: 6px;
-    /*border: 1px solid red;*/
+    /*border: 1px solid red;
     transition: background-color 0.2s;
 }
 .sticker_icon:hover {
@@ -22,3 +22,4 @@
     position: absolute;
     z-index: 1;
 }
+*/

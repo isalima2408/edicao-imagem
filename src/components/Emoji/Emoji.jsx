@@ -45,6 +45,7 @@ const Emoji = () => {
             {category: 'flags', name: 'BANDEIRAS'}
         ]
 
+
     function disableElements() {
         if(bgImageInserted) {
             setEmojiBtnSelected(val => !val)
@@ -92,6 +93,7 @@ const Emoji = () => {
         canvas.current?.setActiveObject(rect).renderAll()
     }
 
+    // quadrado
     function createSquare() {
         var rect = new fabric.Rect({
             fill: 'transparent',
@@ -211,7 +213,8 @@ const Emoji = () => {
                 <ion-icon name="happy-outline"></ion-icon>
             </button>
             <div className={ styles.emoji_box }>
-                {emojiBtnSelected && <Picker 
+                {emojiBtnSelected && 
+                <Picker 
                     onEmojiClick={ onEmojiClick } 
                     categories={ categories }       
                     customEmojis={ geometricForms }

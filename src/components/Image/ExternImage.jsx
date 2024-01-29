@@ -10,6 +10,7 @@ const ExternImage = () => {
     const [imgURL, setImgURL] = useState('')
     const [extImgInserted, setExtImgInserted] = useState(false)
     
+    // se a imagem de fundo do canvas não for inserida, desabilitar botão
     function disableExternImageBtn () {
         if (bgImageInserted) {
             return false

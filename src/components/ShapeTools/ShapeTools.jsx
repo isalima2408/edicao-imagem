@@ -7,12 +7,14 @@ const ShapeTools = () => {
     const canvas = useContext(FabricContext);
     const { fillColor, setFillColor, strokeColor, setStrokeColor } = useBtnStatus()
 
+    // cor de fundo
     function changeFillColor (e) {
         setFillColor(e.target.value)
         canvas.current?.getActiveObject().set('fill', e.target.value)
         canvas.current?.renderAll()
     }
 
+    // cor de borda
     function changeStrokeColor (e) {
         setStrokeColor(e.target.value)
         canvas.current?.getActiveObject().set('stroke', e.target.value)
