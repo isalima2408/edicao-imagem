@@ -167,7 +167,7 @@ const Emoji = () => {
                     centeredRotation: true,
                     objectCaching: false,
                     noScaleCache: false
-                })
+                }).scale(1)
                 img.objectCaching=false
                 img.noScaleCache=false
 

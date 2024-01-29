@@ -40,10 +40,7 @@ const ExternImage = () => {
                     centeredRotation: true,
                     objectCaching: false,
                     noScaleCache: false
-                }).scale(0.3)
-
-                img.objectCaching=false
-                img.noScaleCache=false
+                }).scale(0.2)
 
                 img.setControlsVisibility({
                     tr: false,
