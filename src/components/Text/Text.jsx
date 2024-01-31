@@ -9,6 +9,59 @@ const Text = () => {
   const canvas = useContext(FabricContext);
   const {setBgColor, disablePaintMode, bgImageInserted, setEmojiBtnSelected, setTextBtnSelected, setTextAlign, setTextColor, setTextFontFamily } = useBtnStatus()
 
+  // modificação de código para possibilitar preenchimento completo (cor) da caixa de texto
+  fabric.Text.prototype.set({
+    _getNonTransformedDimensions() { // Object dimensions
+      return new fabric.Point(this.width, this.height).scalarAdd(this.padding);
+    },
+    _calculateCurrentDimensions() { // Controls dimensions
+      return fabric.util.transformPoint(this._getTransformedDimensions(), this.getViewportTransform(), true);
+    }
+  });
+
+  // modificação de código para que a linha seja pulada com 'enter' e não espaço
+  fabric.Textbox.prototype._wordJoiners = /[]/;
+  function fitTextboxToContent(text) {
+    const textLinesMaxWidth = text.textLines.reduce((max, _, i) => Math.max(max, text.getLineWidth(i)), 0);
+    text.set({width: textLinesMaxWidth});
+  }
+
+  CanvasRenderingContext2D.prototype.roundRect = function (x, y, w, h, r) {
+		if (w < 2 * r) r = w / 2;
+		if (h < 2 * r) r = h / 2;
+		this.beginPath();
+		this.moveTo(x+r, y);
+		this.arcTo(x+w, y,   x+w, y+h, r);
+		this.arcTo(x+w, y+h, x,   y+h, r);
+		this.arcTo(x,   y+h, x,   y,   r);
+		this.arcTo(x,   y,   x+w, y,   r);
+		this.closePath();
+		return this;
+	}
+
+  // modificação de código para que os cantos sejam arredondados, adicionando o atributo 'bgCornerRadius'
+	fabric.Textbox.prototype._renderBackground = function(ctx) {
+		if (!this.backgroundColor) {
+			return;
+		}
+		var dim = this._getNonTransformedDimensions();
+		ctx.fillStyle = this.backgroundColor;
+
+		if(!this.bgCornerRadius) {
+			ctx.fillRect(
+				-dim.x / 2,
+				-dim.y / 2,
+				dim.x,
+				dim.y
+			);
+		} else {
+			ctx.roundRect(-dim.x / 2, -dim.y / 2, dim.x, dim.y, this.bgCornerRadius).fill();
+		}
+		// if there is background color no other shadows
+		// should be casted
+		this._removeShadow(ctx);
+	}
+
   const addText = () => {
     
     if (bgImageInserted) {
@@ -21,7 +74,7 @@ const Text = () => {
         fill: 'black',
         textAlign: 'center',
         //fontFamily: 'Times New Roman',
-        width:150,
+        //width:150,
         fontStyle: 'normal',
         fontWeight: 'normal',
         backgroundColor: 'transparent',
@@ -31,7 +84,8 @@ const Text = () => {
         centeredRotation: true,
         objectCaching: false,
         noScaleCache: false,
-        padding: 10
+        padding: 10,
+        bgCornerRadius: 15
       })
 
       // configurando posição do controle de rotação no textbox (influencia todos os elementos, inclusive imagens e emojis)
