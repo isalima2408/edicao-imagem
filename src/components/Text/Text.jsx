@@ -7,7 +7,63 @@ import styles from './Text.module.css'
 
 const Text = () => {
   const canvas = useContext(FabricContext);
-  const {setBgColor, disablePaintMode, bgImageInserted, setEmojiBtnSelected, setTextBtnSelected, setTextAlign, setTextColor, setTextFontFamily } = useBtnStatus()
+  const { setBgColor, disablePaintMode, bgImageInserted, setEmojiBtnSelected, setTextBtnSelected, setTextAlign, setTextColor, setTextFontFamily } = useBtnStatus()
+
+
+  // alterando a lógica do 'padding' padrão da biblioteca fabric para proporcionar aplicação de cor de fundo em toda a caixa de texto, e não apenas na linha do texto.
+  fabric.Text.prototype.set({
+    _getNonTransformedDimensions() { // Object dimensions
+      return new fabric.Point(this.width, this.height).scalarAdd(this.padding);
+    },
+    _calculateCurrentDimensions() { // Controls dimensions
+      return fabric.util.transformPoint(this._getTransformedDimensions(), this.getViewportTransform(), true);
+    }
+  });
+
+  // modificando limitador de linhas de 'espaço' para 'enter'. Agora, cada 'enter' pula a linha.
+  fabric.Textbox.prototype._wordJoiners = /[]/
+
+  // Para que a ação anterior ocorra durante a edição
+  function fitTextboxToContent(text) {
+    const textLinesMaxWidth = text.textLines.reduce((max, _, i) => Math.max(max, text.getLineWidth(i)), 0);
+    text.set({width: textLinesMaxWidth});
+  }
+
+  // código para adicionar bordas arredondadas a caixa de texto através do atributo 'bgCornerRadius'
+  CanvasRenderingContext2D.prototype.roundRect = function (x, y, w, h, r) {
+    if (w < 2 * r) r = w / 2;
+    if (h < 2 * r) r = h / 2;
+    this.beginPath();
+    this.moveTo(x+r, y);
+    this.arcTo(x+w, y,   x+w, y+h, r);
+    this.arcTo(x+w, y+h, x,   y+h, r);
+    this.arcTo(x,   y+h, x,   y,   r);
+    this.arcTo(x,   y,   x+w, y,   r);
+    this.closePath();
+    return this;
+  }
+  
+  fabric.Textbox.prototype._renderBackground = function(ctx) {
+    if (!this.backgroundColor) {
+      return;
+    }
+    var dim = this._getNonTransformedDimensions();
+    ctx.fillStyle = this.backgroundColor;
+
+    if(!this.bgCornerRadius) {
+      ctx.fillRect(
+        -dim.x / 2,
+        -dim.y / 2,
+        dim.x,
+        dim.y
+      );
+    } else {
+      ctx.roundRect(-dim.x / 2, -dim.y / 2, dim.x, dim.y, this.bgCornerRadius).fill();
+    }
+    // if there is background color no other shadows
+    // should be casted
+    this._removeShadow(ctx);
+  }
 
   const addText = () => {
     
@@ -20,8 +76,7 @@ const Text = () => {
       const textbox = new fabric.Textbox("Texto", {
         fill: 'black',
         textAlign: 'center',
-        //fontFamily: 'Times New Roman',
-        width:150,
+        width: 120,
         fontStyle: 'normal',
         fontWeight: 'normal',
         backgroundColor: 'transparent',
@@ -31,7 +86,8 @@ const Text = () => {
         centeredRotation: true,
         objectCaching: false,
         noScaleCache: false,
-        padding: 10
+        padding: 0,
+        bgCornerRadius: 15
       })
 
       // configurando posição do controle de rotação no textbox (influencia todos os elementos, inclusive imagens e emojis)
@@ -115,6 +171,8 @@ const Text = () => {
       canvas.current?.centerObject(textbox)
       textbox.setCoords()
       canvas.current?.setActiveObject(textbox).requestRenderAll()
+
+      console.log(textbox)
     }
   }
 
