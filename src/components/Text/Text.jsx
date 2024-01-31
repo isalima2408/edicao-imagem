@@ -26,6 +26,7 @@ const Text = () => {
     text.set({width: textLinesMaxWidth});
   }
 
+  // modificação de código para que os cantos sejam arredondados, adicionando o atributo 'bgCornerRadius'
   CanvasRenderingContext2D.prototype.roundRect = function (x, y, w, h, r) {
 		if (w < 2 * r) r = w / 2;
 		if (h < 2 * r) r = h / 2;
@@ -39,8 +40,8 @@ const Text = () => {
 		return this;
 	}
 
-  // modificação de código para que os cantos sejam arredondados, adicionando o atributo 'bgCornerRadius'
 	fabric.Textbox.prototype._renderBackground = function(ctx) {
+
 		if (!this.backgroundColor) {
 			return;
 		}
@@ -77,19 +78,28 @@ const Text = () => {
         //width:150,
         fontStyle: 'normal',
         fontWeight: 'normal',
-        backgroundColor: 'transparent',
+        backgroundColor: 'rgba(255,255,255,0.01)',
+        padding: 0,
+        bgCornerRadius: 15,
+        cornerSize: 18,
+        perPixelTargetFind: false,
+        originX: 'center',
+        originY: 'center',
         selectable: true,
         erasable: false,
         centeredScaling: true,
         centeredRotation: true,
         objectCaching: false,
         noScaleCache: false,
-        padding: 10,
-        bgCornerRadius: 15
+        dirty: true,
       })
 
       // configurando posição do controle de rotação no textbox (influencia todos os elementos, inclusive imagens e emojis)
       textbox.controls.mtr.offsetY = -35
+      textbox.controls.br.offsetY = 0
+      textbox.controls.br.offsetX = 0
+      textbox.controls.ml.offsetY = 0
+      textbox.controls.ml.offsetX = 0
 
       // desabilitando cache
       textbox.objectCaching=false
