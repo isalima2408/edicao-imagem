@@ -72,7 +72,6 @@ const Emoji = () => {
             erasable: false,
             noScaleCache: false,
             objectCaching: false,
-
         })
 
         rect.on('selected', function () {
@@ -107,7 +106,7 @@ const Emoji = () => {
             selectable: true,
             erasable: false,
             noScaleCache: false,
-            objectCaching: false
+            objectCaching: false,
         })
 
         rect.on('selected', function () {
@@ -181,7 +180,7 @@ const Emoji = () => {
                     centeredScaling: true,
                     centeredRotation: true,
                     objectCaching: false,
-                    noScaleCache: false
+                    noScaleCache: false,
                 }).scale(1)
                 img.objectCaching=false
                 img.noScaleCache=false

@@ -68,8 +68,17 @@ const TextTools = () => {
     // Cor de fundo
     const changeBgColor = (e) => {
         setBgColor(e.target.value)
-        canvas.current?.getActiveObject().set('backgroundColor', e.target.value)
-        canvas.current?.renderAll() 
+
+        if (e.target.value === 'transparent') {
+            canvas.current?.getActiveObject().set('perPixelTargetFind', false)
+            canvas.current?.getActiveObject().set('padding', 0)
+            canvas.current?.getActiveObject().set('backgroundColor', e.target.value)
+        } else {
+            canvas.current?.getActiveObject().set('perPixelTargetFind', true)
+            canvas.current?.getActiveObject().set('padding', 20)
+            canvas.current?.getActiveObject().set('backgroundColor', e.target.value)
+        }
+        canvas.current?.renderAll()
     }
     
     return(
@@ -100,6 +109,7 @@ const TextTools = () => {
 
             <select name="bg_color" id="bg_color" value={bgColor} onChange={changeBgColor}>
                 <option value="transparent">Sem fundo</option>
+                <option value="rgba(255,255,255,0.1)">Transparente 1</option>
                 <option value="black">Preto</option>
                 <option value="white">Branco</option>
                 <option value="#EE82EE">Violeta</option>

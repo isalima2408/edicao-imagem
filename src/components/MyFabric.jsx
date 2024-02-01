@@ -18,7 +18,7 @@ export const useFabric = () => {
       if (!element) return canvas.current?.dispose();
 
       canvas.current = new fabric.Canvas(element, {
-        selection: false,
+        selection: true,
         backgroundColor: 'gray',
         hoverCursor: 'default',
         height: 0,
