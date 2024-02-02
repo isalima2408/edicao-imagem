@@ -89,8 +89,9 @@ const Text = () => {
         erasable: false,
         centeredScaling: true,
         centeredRotation: true,
-        objectCaching: false,
+        /*objectCaching: false,
         noScaleCache: false,
+        dirty: true,*/
       })
 
       // configurando posição do controle de rotação no textbox (influencia todos os elementos, inclusive imagens e emojis)

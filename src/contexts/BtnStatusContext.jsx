@@ -25,6 +25,7 @@ export function BtnStatusProvider({ children }) {
     const [shapeSelected, setShapeSelected] = useState(false)
     const [fillColor, setFillColor] = useState('')
     const [strokeColor, setStrokeColor] = useState('')
+    const [arrowActive, setArrowActive ] = useState(false)
 
     // desabilitar paintMode
     const disablePaintMode = () => {
@@ -63,6 +64,8 @@ export function BtnStatusProvider({ children }) {
         setStrokeColor,
         bgColor, 
         setBgColor,
+        arrowActive, 
+        setArrowActive
     }}>
         {children}
     </BtnStatusContext.Provider>

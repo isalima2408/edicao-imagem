@@ -1,6 +1,7 @@
 import { useContext, useState, useEffect } from "react";
 import { FabricContext } from "../../App";
 import { useBtnStatus } from "../../contexts/BtnStatusContext";
+import { fabric } from "fabric";
 
 var FontFaceObserver = require('fontfaceobserver')
 
@@ -22,7 +23,7 @@ const TextTools = () => {
         canvas.current?.renderAll() 
     }
 
-    // Carregar família da fonte antes de usar (evitar erros)
+    // Carregar família da fonte antes de usar
     function loadAndUse(font) {
         var myfont = new FontFaceObserver(font)
         myfont.load()
@@ -30,16 +31,35 @@ const TextTools = () => {
             canvas.current?.getActiveObject().set("fontFamily", font);
             canvas.current?.requestRenderAll();
           }).catch(function(e) {
-            /*console.log(e)
-            console.log('font loading failed ' + font);*/
+            console.log(e)
+            console.log('font loading failed ' + font);
           });
       }
     
     // Mudar fonte
-    const changeFontFamily = (e) => {  
+    const changeFontFamily = async (e) => {  
         setTextFontFamily(e.target.value)
-        loadAndUse(e.target.value) 
+        await loadAndUse(e.target.value)
+
         canvas.current?.getActiveObject().set('fontFamily', e.target.value)
+        canvas.current?.renderAll();
+
+        fabric.util.clearFabricFontCache();
+        canvas.current?.getObjects()?.forEach((object) => {
+            if (object?.Type === 'text') {
+                handleTextOverflow(object);
+            }
+        });
+        canvas.current?.renderAll();
+
+        function handleTextOverflow(textbox) {
+            const textWidth = textbox.calcTextWidth();
+            const textHeight = textbox.calcTextHeight();
+            textbox.set({
+                width: textWidth,
+                height: textHeight,
+            });
+        }
         canvas.current?.renderAll();
     }
 

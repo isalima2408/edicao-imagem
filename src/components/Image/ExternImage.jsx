@@ -9,6 +9,7 @@ const ExternImage = () => {
     const { bgImageInserted, setTextBtnSelected, setPaintBtnSelected } = useBtnStatus()
     const [imgURL, setImgURL] = useState('')
     const [extImgInserted, setExtImgInserted] = useState(false)
+    const inputRef = useRef(null)
     
     // se a imagem de fundo do canvas não for inserida, desabilitar botão
     function disableExternImageBtn () {
@@ -29,6 +30,11 @@ const ExternImage = () => {
     const handleImgChange = (e) => {
         setImgURL(URL.createObjectURL(e.target.files[0]))
         setExtImgInserted(true)
+
+        if (inputRef.current) {
+            inputRef.current.value = ''
+        }        
+        canvas.current?.requestRenderAll()
     }
 
     async function fabricImageFromURL(image_url) {                                                                          
@@ -74,7 +80,7 @@ const ExternImage = () => {
     return(
         <label className={ styles.image_icon }>
             <ion-icon name="images-outline"></ion-icon>
-            <input type="file" accept="image/*" onChange={handleImgChange} onClick={disableElements} disabled={disableExternImageBtn()}/>
+            <input type="file" accept="image/*" onChange={handleImgChange} onClick={disableElements} disabled={disableExternImageBtn()} ref={inputRef}/>
         </label>
     )
 }

@@ -1,4 +1,4 @@
-import { useContext, useState, useEffect } from "react"
+import { useContext, useState, useEffect, useRef } from "react"
 import { fabric } from "fabric"
 import { FabricContext } from "../../App"
 import { useBtnStatus } from "../../contexts/BtnStatusContext"
@@ -8,8 +8,8 @@ import styles from './BgImage.module.css'
 const BgImage = () => {
     const canvas = useContext(FabricContext)
     const { setBgImageInserted, setTextBtnSelected, disablePaintMode } = useBtnStatus()
-
     const [bgImgURL, setBgImgURL] = useState('')
+    const inputRef = useRef(null)
     const { innerWidth: width, innerHeight: height } = window
     const windowHeight = height - 80
 
@@ -24,6 +24,11 @@ const BgImage = () => {
     const handleBgImgChange = (e) => {
         setBgImgURL(URL.createObjectURL(e.target.files[0])) 
         setBgImageInserted(true)  
+
+        if (inputRef.current) {
+            inputRef.current.value = ''
+        }        
+        canvas.current?.requestRenderAll()
     }
 
     // adicionando imagem ao canvas
@@ -83,7 +88,7 @@ const BgImage = () => {
     return(
             <label className={ styles.camera_icon }>
                 <ion-icon name="camera-outline"></ion-icon>
-                <input type="file" accept="image/*" onClick={resetCanvas} onChange={handleBgImgChange} />
+                <input type="file" accept="image/*" onClick={resetCanvas} onChange={handleBgImgChange} ref={inputRef}/>
             </label>     
     )
 }

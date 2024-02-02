@@ -7,7 +7,7 @@ import Picker, { SKIN_TONE_MEDIUM_DARK } from "emoji-picker-react";
 
 const Emoji = () => {
     const canvas = useContext(FabricContext)
-    const {bgImageInserted, setShapeSelected, setFillColor, setStrokeColor, emojiBtnSelected, setEmojiBtnSelected, setPaintBtnSelected, setTextBtnSelected } = useBtnStatus()
+    const {bgImageInserted, setArrowActive, setShapeSelected, setFillColor, setStrokeColor, emojiBtnSelected, setEmojiBtnSelected, setPaintBtnSelected, setTextBtnSelected } = useBtnStatus()
 
     const geometricForms = [
         {
@@ -162,21 +162,22 @@ const Emoji = () => {
         canvas.current?.setActiveObject(ellipse).renderAll()
     }
 
+    // Seta
     function createArrow () {
-        var line = new fabric.Line([10, 10, 10, (10 + 50)], {
+        var line = new fabric.Line([10, 10, 10, (10 + 150)], {
             strokeUniform: true,
             lockScalingX: true,
             borderColor: 'transparent',
             left: 10,
             top: 10,
-            strokeWidth: 2,
-            stroke: 'rgba(255,0,0,1)',
+            strokeWidth: 3,
+            stroke: 'red',
         });
 
         var triangleTop = new fabric.Triangle({
             width: 16,
             height: 16, 
-            fill: 'rgba(255,0,0,1)',
+            fill: 'red',
             scaleX: 1, 
             scaleY: 1, 
             strokeUniform: true, 
@@ -210,6 +211,8 @@ const Emoji = () => {
             bl: false,
             br: false,
         });
+
+        
         canvas.current?.add(group);
         canvas.current?.centerObject(group)
         group.setCoords()
@@ -246,13 +249,24 @@ const Emoji = () => {
 
         group.on('selected', function () {
             setShapeSelected(true)
-            setFillColor(()=>canvas.current?.getActiveObject().get('fill'))
-            setStrokeColor(()=>canvas.current?.getActiveObject().get('stroke'))
+            setArrowActive(true)
+
+            let thing
+            let objCurrent = canvas.current?.getActiveObject()
+            let objs = objCurrent._objects
+
+            for (thing in objs) {
+                if(objs[thing].get('type') === 'triangle') {
+                    setFillColor(objs[thing].get('fill'))
+                }
+            }
+
             canvas.current?.requestRenderAll()
         })
 
         group.on('deselected', function () {
             setShapeSelected(false)
+            setArrowActive(false)
             canvas.current?.requestRenderAll()
         })
     }
