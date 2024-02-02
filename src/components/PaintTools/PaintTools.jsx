@@ -25,7 +25,7 @@ const PaintTools = () => {
 
     // tipo do pincél
     const changeBrushType = (e) => {
-        //setPencilActive(!pencilActive)
+        setPencilActive(!pencilActive)
         setEraserActive(false)
 
         switch(e.target.value) {
@@ -114,12 +114,12 @@ const PaintTools = () => {
 
     return(
         <div>
-            <select name="brush_type" id="brush_type" value={bType} onChange={changeBrushType}>
+            {/*<select name="brush_type" id="brush_type" value='pencil' onChange={changeBrushType}>
                 <option value="pencil">Pincél</option>
                 <option value="ink">Tinta</option>
                 <option value="marker">Marcador</option>
-            </select>
-            {/*<button onClick={changeBrushType}>Pincél</button>*/}
+            </select>*/}
+            <button onClick={changeBrushType}>Pincél</button>
             
             {pencilActive && 
                 <>

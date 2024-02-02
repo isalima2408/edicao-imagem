@@ -162,6 +162,101 @@ const Emoji = () => {
         canvas.current?.setActiveObject(ellipse).renderAll()
     }
 
+    function createArrow () {
+        var line = new fabric.Line([10, 10, 10, (10 + 50)], {
+            strokeUniform: true,
+            lockScalingX: true,
+            borderColor: 'transparent',
+            left: 10,
+            top: 10,
+            strokeWidth: 2,
+            stroke: 'rgba(255,0,0,1)',
+        });
+
+        var triangleTop = new fabric.Triangle({
+            width: 16,
+            height: 16, 
+            fill: 'rgba(255,0,0,1)',
+            scaleX: 1, 
+            scaleY: 1, 
+            strokeUniform: true, 
+            lockScalingX: true, 
+            lockScalingY: true, 
+            lockUniScaling: true, 
+            lockSkewingX: true, 
+            lockSkewingY: true, 
+            left: (10 - 8), 
+            top: (10 - 0)
+        });
+
+        let groupItems = [line, triangleTop];
+        var group = new fabric.Group(groupItems, {
+            selectable: true,
+            hasControls: true,
+            width: 40,
+            left: 10,
+            top: 10,
+            angle: 45,
+            strokeUniform: true,
+            lockScalingX: true
+        }).setControlsVisibility({
+            tl: false,
+            tr: false,
+            mt: true,
+            mb: true,
+            mt: false,
+            ml: false,
+            mr: false,
+            bl: false,
+            br: false,
+        });
+        canvas.current?.add(group);
+        canvas.current?.centerObject(group)
+        group.setCoords()
+        canvas.current?.setActiveObject(group).renderAll()
+
+        canvas.current?.on('object:scaling', function (e) {
+            let type = e.target.get('type');
+            if (type == 'group') {
+                adjustArrowsSize(e.target._objects, e.target.get('scaleY'))
+            }
+        });
+        
+        canvas.current?.on('object:scaled', function (e) {
+            let type = e.target.get('type');
+            if (type == 'group') {
+                adjustArrowsSize(e.target._objects, e.target.get('scaleY'))
+            }
+        });
+        
+        function adjustArrowsSize(arrowObjects, objectScaleY) {
+            var triangleCount = 0, triangles = [];
+        
+            arrowObjects.forEach(function (object) {
+                if (object.get('type') == 'triangle') {
+                    triangles[triangleCount] = object;
+                    triangleCount++;
+                    let ratio = 1 / objectScaleY;
+                    object.set('scaleY', ratio);
+                }
+            });            
+            
+            canvas.current?.requestRenderAll();
+        }
+
+        group.on('selected', function () {
+            setShapeSelected(true)
+            setFillColor(()=>canvas.current?.getActiveObject().get('fill'))
+            setStrokeColor(()=>canvas.current?.getActiveObject().get('stroke'))
+            canvas.current?.requestRenderAll()
+        })
+
+        group.on('deselected', function () {
+            setShapeSelected(false)
+            canvas.current?.requestRenderAll()
+        })
+    }
+
     function onEmojiClick (emojiObject, e) {
         setEmojiBtnSelected(false)
   
@@ -171,6 +266,8 @@ const Emoji = () => {
             createSquare()
         } else if (emojiObject.emoji == 'elipse') {
             createEllipse()
+        } else if (emojiObject.emoji == 'seta') {
+            createArrow()
         } else {
 
             var emojiURL = emojiObject.imageUrl
