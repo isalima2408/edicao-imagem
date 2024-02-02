@@ -55,7 +55,8 @@ const BgImage = () => {
                 webkitImageSmoothingEnabled: false,
                 mozImageSmoothingEnabled: false,
                 msImageSmoothingEnabled: false,
-                oImageSmoothingEnabled: false,               
+                oImageSmoothingEnabled: false,
+                excludeFromExport: true,             
             })
 
             img.setControlsVisibility({
