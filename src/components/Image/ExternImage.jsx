@@ -27,13 +27,20 @@ const ExternImage = () => {
     }
 
     const handleImgChange = (e) => {
-        setImgURL(URL.createObjectURL(e.target.files[0]))
-        setExtImgInserted(true)
+        const file = e.target.files[0];
+        const partsImg = file && file.type.split('/')
+        
+        const isImage =  partsImg[0] == 'image';
+        if(isImage){
+            console.log(e.target.files[0])
+            setImgURL(URL.createObjectURL(e.target.files[0]))
+            setExtImgInserted(true)
 
-        if (inputRef.current) {
-            inputRef.current.value = ''
-        }        
-        canvas.current?.requestRenderAll()
+            if (inputRef.current) {
+                inputRef.current.value = ''
+            }        
+            canvas.current?.requestRenderAll()
+        }
     }
 
     async function fabricImageFromURL(image_url) {                                                                          
@@ -64,6 +71,7 @@ const ExternImage = () => {
 
         } catch (error) {                                                                                                   
             reject(error);
+            console.log(error)
             return                                                                                                                                                                                                                                
         };                                                                                                                   
       })}
