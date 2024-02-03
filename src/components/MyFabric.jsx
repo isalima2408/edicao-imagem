@@ -7,7 +7,7 @@ import styles from "./MyFabric.module.css";
 
 /* MUDAR SELECT DE CORES PARA INPUT DE PALETA DE CORES NOS ELEMENTOS APLICÁVEIS (ou outra ideia)*/
 
-console.log('att356')
+console.log('att55567')
 
 export const useFabric = () => {
     const canvas = useContext(FabricContext);

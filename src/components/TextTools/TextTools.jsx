@@ -63,28 +63,6 @@ const TextTools = () => {
         canvas.current?.renderAll();
     }
 
-    // Itálico
-    const changeStyle = (e) => {
-        setTextItalic(val => !val)
-        if(!textItalic) {
-            canvas.current?.getActiveObject().set("fontStyle", 'italic')
-        } else {
-            canvas.current?.getActiveObject().set("fontStyle", 'normal')
-        }
-        canvas.current?.renderAll();
-    }
-
-    // Negrito
-    const changeWeight = () => {
-        setTextWeight(val => !val)
-        if(!textWeight) {
-            canvas.current?.getActiveObject().set("fontWeight", 'bold');
-        } else {
-            canvas.current?.getActiveObject().set("fontWeight", 'normal'); 
-        }
-        canvas.current?.renderAll();
-    }
-
     // Cor de fundo
     const changeBgColor = (e) => {
         setBgColor(e.target.value)
@@ -102,6 +80,86 @@ const TextTools = () => {
         }
         canvas.current?.renderAll() 
     }
+
+    // Itálico
+    const changeStyle = (e) => {
+        //setTextItalic(val => !val)
+        var text = canvas.current?.getActiveObject()
+        var textSelected = text.getSelectedText()
+
+        if (text.get('fontStyle') === 'italic') {
+            
+        }
+
+        console.log('start: ' + selectionStart + ' end: ' + selectionEnd)
+        var selectionStart = text.get("selectionStart")
+        var selectionEnd = text.get("selectionEnd")
+        console.log('start: ' + selectionStart + ' end: ' + selectionEnd)
+        
+        if(!textItalic) {
+            if (!textSelected) {
+                text.set("fontStyle", 'italic')
+            } else {
+                text.setSelectionStyles({ fontStyle: 'italic', }, selectionStart, selectionEnd)
+            }
+            canvas.current?.renderAll();
+        } else {
+            if (!textSelected) {
+                text.set('fontStyle', 'normal')
+            } else {
+                text.setSelectionStyles({ fontStyle: 'normal', }, selectionStart, selectionEnd)
+            }
+            canvas.current?.renderAll();
+        }
+        canvas.current?.renderAll();
+        //console.log(canvas.current?.getActiveObject().getSelectedText())
+    }
+
+    // Negrito
+    const changeWeight = () => {
+        setTextWeight(val => !val)
+        if(!textWeight) {
+            canvas.current?.getActiveObject().set("fontWeight", 'bold');
+        } else {
+            canvas.current?.getActiveObject().set("fontWeight", 'normal'); 
+        }
+        canvas.current?.renderAll();
+    }
+
+    // Sublinhado
+    const changeUnderline = (e) => {
+        setTextItalic(val => !val)
+        var textSel = canvas.current?.getActiveObject()
+        var selStart = canvas.current?.getActiveObject().get("selectionStart")
+        var selEnd = canvas.current?.getActiveObject().get("selectionEnd")
+        
+        if(!textItalic) {
+            textSel.setSelectionStyles({ underline: true, }, selStart, selEnd)
+            //canvas.current?.getActiveObject().set("fontStyle", 'italic')
+        } else {
+            canvas.current?.getActiveObject().set("fontStyle", 'normal')
+        }
+        canvas.current?.renderAll();
+        console.log(canvas.current?.getActiveObject().getSelectedText())
+    }
+
+    // Tachado
+    const changeLinethrough = (e) => {
+        setTextItalic(val => !val)
+        var textSel = canvas.current?.getActiveObject()
+        var selStart = canvas.current?.getActiveObject().get("selectionStart")
+        var selEnd = canvas.current?.getActiveObject().get("selectionEnd")
+        
+        if(!textItalic) {
+            textSel.setSelectionStyles({ linethrough: true, }, selStart, selEnd)
+            //canvas.current?.getActiveObject().set("fontStyle", 'italic')
+        } else {
+            canvas.current?.getActiveObject().set("fontStyle", 'normal')
+        }
+        canvas.current?.renderAll();
+        console.log(canvas.current?.getActiveObject().getSelectedText())
+    }
+    
     
     return(
         <div>
@@ -126,8 +184,10 @@ const TextTools = () => {
                 <option value="right">Direita</option>
             </select>
 
-            <button onClick={changeStyle} >Itálico</button>
+            <button onClick={changeStyle} style={ {color: textItalic? 'red' : 'black'} }>Itálico</button>
             <button onClick={changeWeight} >Negrito</button>
+            <button onClick={changeUnderline} >Sublinhado</button>
+            <button onClick={changeLinethrough} >Tachado</button>
 
             <select name="bg_color" id="bg_color" value={bgColor} onChange={changeBgColor}>
                 <option value="transparent">Sem fundo</option>
