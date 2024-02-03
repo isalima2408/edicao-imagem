@@ -75,9 +75,9 @@ const Text = () => {
       disablePaintMode()
 
       const textbox = new fabric.Textbox("Texto", {
-        //width:150,
         fontStyle: 'normal',
         fontWeight: 'normal',
+        textAlign: 'center',
         backgroundColor: 'transparent',
         padding: 0,
         bgCornerRadius: 15,
@@ -89,9 +89,6 @@ const Text = () => {
         erasable: false,
         centeredScaling: true,
         centeredRotation: true,
-        /*objectCaching: false,
-        noScaleCache: false,
-        dirty: true,*/
       })
 
       // configurando posição do controle de rotação no textbox (influencia todos os elementos, inclusive imagens e emojis)
@@ -175,8 +172,6 @@ const Text = () => {
       canvas.current?.centerObject(textbox)
       textbox.setCoords()
       canvas.current?.setActiveObject(textbox).requestRenderAll()
-
-      /*console.log(textbox)*/
     }
   }
 

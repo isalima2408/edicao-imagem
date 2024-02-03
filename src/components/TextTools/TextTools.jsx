@@ -23,7 +23,7 @@ const TextTools = () => {
         canvas.current?.renderAll() 
     }
 
-    // Carregar família da fonte antes de usar
+    // Carregar família da fonte
     function loadAndUse(font) {
         var myfont = new FontFaceObserver(font)
         myfont.load()
@@ -66,98 +66,80 @@ const TextTools = () => {
     // Cor de fundo
     const changeBgColor = (e) => {
         setBgColor(e.target.value)
-        canvas.current?.getActiveObject().set('backgroundColor', e.target.value)
+        var text = canvas.current?.getActiveObject()
+        var color = e.target.value
+
+        text.set('backgroundColor', e.target.value)
         canvas.current?.renderAll() 
 
         if (e.target.value === 'transparent') {
-            canvas.current?.getActiveObject().set('perPixelTargetFind', false)
-            canvas.current?.getActiveObject().set('padding', 0)
-            canvas.current?.getActiveObject().set('backgroundColor', e.target.value)
+            text.set({
+                perPixelTargetFind: false,
+                padding: 0,
+                backgroundColor: color,
+            })
         } else {
+            text.set({
+                perPixelTargetFind: true,
+                padding: 20,
+                backgroundColor: color,
+            })
             canvas.current?.getActiveObject().set('perPixelTargetFind', true)
-            canvas.current?.getActiveObject().set('padding', 20)
-            canvas.current?.getActiveObject().set('backgroundColor', e.target.value)
         }
+
         canvas.current?.renderAll() 
     }
 
     // Itálico
     const changeStyle = (e) => {
-        //setTextItalic(val => !val)
         var text = canvas.current?.getActiveObject()
-        var textSelected = text.getSelectedText()
 
         if (text.get('fontStyle') === 'italic') {
-            
-        }
-
-        console.log('start: ' + selectionStart + ' end: ' + selectionEnd)
-        var selectionStart = text.get("selectionStart")
-        var selectionEnd = text.get("selectionEnd")
-        console.log('start: ' + selectionStart + ' end: ' + selectionEnd)
-        
-        if(!textItalic) {
-            if (!textSelected) {
-                text.set("fontStyle", 'italic')
-            } else {
-                text.setSelectionStyles({ fontStyle: 'italic', }, selectionStart, selectionEnd)
-            }
-            canvas.current?.renderAll();
+            text.set('fontStyle', 'normal')
         } else {
-            if (!textSelected) {
-                text.set('fontStyle', 'normal')
-            } else {
-                text.setSelectionStyles({ fontStyle: 'normal', }, selectionStart, selectionEnd)
-            }
-            canvas.current?.renderAll();
+            text.set('fontStyle', 'italic')
         }
+    
         canvas.current?.renderAll();
-        //console.log(canvas.current?.getActiveObject().getSelectedText())
     }
 
     // Negrito
     const changeWeight = () => {
-        setTextWeight(val => !val)
-        if(!textWeight) {
-            canvas.current?.getActiveObject().set("fontWeight", 'bold');
+        var text = canvas.current?.getActiveObject()
+
+        if (text.get('fontWeight') === 'bold') {
+            text.set('fontWeight', 'normal')
         } else {
-            canvas.current?.getActiveObject().set("fontWeight", 'normal'); 
+            text.set('fontWeight', 'bold')
         }
+    
         canvas.current?.renderAll();
     }
 
     // Sublinhado
     const changeUnderline = (e) => {
-        setTextItalic(val => !val)
-        var textSel = canvas.current?.getActiveObject()
-        var selStart = canvas.current?.getActiveObject().get("selectionStart")
-        var selEnd = canvas.current?.getActiveObject().get("selectionEnd")
-        
-        if(!textItalic) {
-            textSel.setSelectionStyles({ underline: true, }, selStart, selEnd)
-            //canvas.current?.getActiveObject().set("fontStyle", 'italic')
+        var text = canvas.current?.getActiveObject()
+
+        if (text.get('underline') === true) {
+            text.set('underline', false)
         } else {
-            canvas.current?.getActiveObject().set("fontStyle", 'normal')
+            text.set('underline', true)
         }
+    
         canvas.current?.renderAll();
-        console.log(canvas.current?.getActiveObject().getSelectedText())
     }
 
     // Tachado
     const changeLinethrough = (e) => {
-        setTextItalic(val => !val)
-        var textSel = canvas.current?.getActiveObject()
-        var selStart = canvas.current?.getActiveObject().get("selectionStart")
-        var selEnd = canvas.current?.getActiveObject().get("selectionEnd")
-        
-        if(!textItalic) {
-            textSel.setSelectionStyles({ linethrough: true, }, selStart, selEnd)
-            //canvas.current?.getActiveObject().set("fontStyle", 'italic')
+        var text = canvas.current?.getActiveObject()
+
+        if (text.get('linethrough') === true) {
+            text.set('linethrough', false)
         } else {
-            canvas.current?.getActiveObject().set("fontStyle", 'normal')
+            text.set('linethrough', true)
         }
+    
         canvas.current?.renderAll();
-        console.log(canvas.current?.getActiveObject().getSelectedText())
     }
     
     

@@ -58,10 +58,10 @@ const ChangeLayer = () => {
 
     return (
         <>
-            <button onClick={sendBackwards}>Back</button>
-            <button onClick={bringForward}>Front</button>
-            <button onClick={sendToBack}>STBack</button>
-            <button onClick={bringToFront}>BTFront</button>
+            <button onClick={sendBackwards} >Back</button>
+            <button onClick={bringForward} >Front</button>
+            <button onClick={sendToBack} >STBack</button>
+            <button onClick={bringToFront} >BTFront</button>
         </>
     )
 }

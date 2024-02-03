@@ -6,21 +6,22 @@ import styles from './BgImage.module.css'
 
 
 const BgImage = () => {
-    const canvas = useContext(FabricContext)
     const { setBgImageInserted, setTextBtnSelected, disablePaintMode } = useBtnStatus()
-    const [bgImgURL, setBgImgURL] = useState('')
-    const inputRef = useRef(null)
     const { innerWidth: width, innerHeight: height } = window
+    const [bgImgURL, setBgImgURL] = useState('')
+    const canvas = useContext(FabricContext)
+    const inputRef = useRef(null)
     const windowHeight = height - 80
-
-    // Limpar elementos inseridos no canvas antigo ao inserir nova imagem de fundo
+    
+ 
+    // Limpar canvas ao inserir nova imagem de fundo
     const resetCanvas = () => {
         setTextBtnSelected(false)
         disablePaintMode()
         canvas.current?.clear()
     }
 
-    // criar url quando a imagem for inserida
+    // criar url quando a imagem for inserida e limpar input
     const handleBgImgChange = (e) => {
         setBgImgURL(URL.createObjectURL(e.target.files[0])) 
         setBgImageInserted(true)  
@@ -31,37 +32,30 @@ const BgImage = () => {
         canvas.current?.requestRenderAll()
     }
 
-    // adicionando imagem ao canvas
+    // adicionar imagem ao canvas
     useEffect(() => {
+        
         new fabric.Image.fromURL(bgImgURL, function(img) {
-            var scale
             var scaleW = width / img.width
             var scaleH = windowHeight / img.height
-            var ratioWindow = width / windowHeight
-            var ratioImg = img.width / img.height
-
-            var imgOverflow = ratioImg > ratioWindow
+            // proporção
+            var aspRatioWindow = width / windowHeight
+            var aspRatioImg = img.width / img.height
+            var imgOverflow =  aspRatioImg > aspRatioWindow
+            var finalScale
 
             if(!imgOverflow) {
-                scale = scaleH
+                finalScale = scaleH
             } else {
-                scale = scaleW
+                finalScale = scaleW
             }
   
             img.set({
-                scaleX: scale,
-                scaleY: scale,
+                scaleX: finalScale,
+                scaleY: finalScale,
                 selectable: false,
                 erasable: false,
-                evented: true,
-                objectCaching: false,
-                noScaleCache: false,
-                imageSmoothingEnabled: false,
-                webkitImageSmoothingEnabled: false,
-                mozImageSmoothingEnabled: false,
-                msImageSmoothingEnabled: false,
-                oImageSmoothingEnabled: false,
-                excludeFromExport: true,             
+                evented: true,          
             })
 
             img.setControlsVisibility({

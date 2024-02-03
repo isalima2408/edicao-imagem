@@ -7,13 +7,12 @@ const Paint = () => {
     const canvas = useContext(FabricContext)
     const { bgImageInserted, setPaintBtnSelected, setTextBtnSelected } = useBtnStatus()
 
-    // ativando o paintMode, e desativando o 'scroll', pois em desenho a tela nao pode se movimentar
+    // ativando o Pain tMode, e desativando o 'scroll', pois no modo desenho a tela não pode se movimentar
     function activePaintMode () {
         if (bgImageInserted) {  
             canvas.current?.discardActiveObject().renderAll()  
             setPaintBtnSelected(true)
             setTextBtnSelected(false)
-
             canvas.current?.set('allowTouchScrolling', false) 
         }
     }

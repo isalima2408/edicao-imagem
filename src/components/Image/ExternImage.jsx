@@ -5,13 +5,13 @@ import { useBtnStatus } from '../../contexts/BtnStatusContext'
 import styles from './ExternImage.module.css'
 
 const ExternImage = () => {
-    const canvas = useContext(FabricContext)
-    const { bgImageInserted, setTextBtnSelected, setPaintBtnSelected } = useBtnStatus()
+    const { bgImageInserted, disablePaintMode, setTextBtnSelected, setPaintBtnSelected } = useBtnStatus()
     const [imgURL, setImgURL] = useState('')
     const [extImgInserted, setExtImgInserted] = useState(false)
+    const canvas = useContext(FabricContext)
     const inputRef = useRef(null)
     
-    // se a imagem de fundo do canvas não for inserida, desabilitar botão
+    
     function disableExternImageBtn () {
         if (bgImageInserted) {
             return false
@@ -21,10 +21,9 @@ const ExternImage = () => {
     }
 
     function disableElements () {
-        canvas.current?.discardActiveObject().renderAll()
-        canvas.current?.set('isDrawingMode', false) 
         setTextBtnSelected(false)
-        setPaintBtnSelected(false)
+        disablePaintMode()
+        canvas.current?.discardActiveObject().renderAll()
     }
 
     const handleImgChange = (e) => {

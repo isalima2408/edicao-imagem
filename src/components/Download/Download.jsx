@@ -4,15 +4,15 @@ import { FabricContext } from '../../App';
 import { useBtnStatus } from '../../contexts/BtnStatusContext';
 
 const Download = () => {
-    const canvas = useContext(FabricContext)
     const { bgImageInserted } = useBtnStatus()
+    const canvas = useContext(FabricContext)
     const ref = useRef(null);
 
     useEffect(() => {
 
         if ( bgImageInserted ) {
             const handleClick = event => {
-            console.log('Button clicked');
+                console.log('Button clicked');
             };
 
             var imageSaver = ref.current;
@@ -24,7 +24,7 @@ const Download = () => {
                 this.href = canvas.current.toDataURL({
                     format: 'jpeg',
                 });
-                this.download = 'abare-img.jpeg'
+                this.download = 'image.jpeg'
 
                 return () => {
                     saveImage.removeEventListener('click', handleClick);

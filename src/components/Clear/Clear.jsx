@@ -11,9 +11,7 @@ const Clear = () => {
     }
 
     return(
-        <button onClick={clearCanvas}>
-            Limpar
-        </button>
+        <button onClick={clearCanvas} >Limpar</button>
     )
 }
 

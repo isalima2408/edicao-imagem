@@ -10,7 +10,6 @@ const ShapeTools = () => {
     // cor de fundo
     function changeFillColor (e) {
         setFillColor(e.target.value)
-        
         let thing
         let objCurrent = canvas.current?.getActiveObject()
         let objs = objCurrent._objects
@@ -24,7 +23,7 @@ const ShapeTools = () => {
                 }
             }
         } else {
-            canvas.current?.getActiveObject().set('fill', e.target.value)
+            objCurrent.set('fill', e.target.value)
         }
         canvas.current?.renderAll() 
     }
@@ -38,7 +37,7 @@ const ShapeTools = () => {
 
     return(
         <div>
-            { !arrowActive &&
+            { !arrowActive ? (
                 <>
                     <select name="fill_color" id="fill_color" value={fillColor} onChange={changeFillColor}>  
                         <option value="transparent">Sem fundo</option>
@@ -55,15 +54,14 @@ const ShapeTools = () => {
                         <option value="blue">Azul</option>
                     </select>
                 </>
-            }
-            { arrowActive &&
+            ) : (
                 <select name="arrow_color" id="arrow_color" value={fillColor} onChange={changeFillColor}>  
                     <option value="black">Preto</option>
                     <option value="red">Vermelho</option>
                     <option value="blue">Azul</option>
                     <option value="white">Branco</option>
                 </select>
-            }
+            )}
         </div>
     )
 }

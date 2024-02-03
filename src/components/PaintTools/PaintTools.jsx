@@ -5,16 +5,14 @@ import { useBtnStatus } from "../../contexts/BtnStatusContext"
 import 'fabric-history';
 
 const PaintTools = () => {
-    const canvas = useContext(FabricContext)
-    const { disablePaintMode } = useBtnStatus()
+    const { disablePaintMode } = useBtnStatus()   
     const [bWidth, setBWidth] = useState(5)
     const [bColor, setBColor] = useState('purple')
-    const [bType, setBType] = useState('pencil')
-    const [eraserActive, setEraserActive] = useState(false)
     const [pencilActive, setPencilActive] = useState(false)
+    const canvas = useContext(FabricContext)
 
-    // modo desenho só habilita quando clicar em 'pincel' ou 'borracha'
-    if(!pencilActive && !eraserActive) {
+    // modo desenho só habilita quando clicar em 'pincel'
+    if(!pencilActive) {
         canvas.current?.set('isDrawingMode', false)
     }
 
@@ -23,61 +21,14 @@ const PaintTools = () => {
         disablePaintMode()
     }
 
-    // tipo do pincél
+    // pincél
     const changeBrushType = (e) => {
         setPencilActive(!pencilActive)
-        setEraserActive(false)
-
-        switch(e.target.value) {
-            case 'pencil':
-                canvas.current.freeDrawingBrush = new fabric.PencilBrush(canvas?.current)
-                canvas.current.freeDrawingBrush.color = 'purple'
-                canvas.current.freeDrawingBrush.width = 5
-                canvas.current?.set('isDrawingMode', true)
-            break;
-            case 'ink':
-                canvas.current.freeDrawingBrush = new fabric.InkBrush(canvas?.current,{
-                    width: 5,
-                    color: 'purple',
-                    opacity: 1
-                })
-                canvas.current?.set('isDrawingMode', true)
-            break;
-            case 'marker':
-                canvas.current.freeDrawingBrush = new fabric.MarkerBrush(canvas?.current,{
-                    width: 5,
-                    color: 'purple',
-                    opacity: 1
-                })
-                canvas.current?.set('isDrawingMode', true)
-            break;
-            default: 
-                canvas.current.freeDrawingBrush = new fabric.PencilBrush(canvas?.current)
-                canvas.current.freeDrawingBrush.color = 'purple'
-                canvas.current.freeDrawingBrush.width = 5
-                canvas.current?.set('isDrawingMode', true)
-            break;
-        }  
-    }
-
-    // ## INATIVO ##
-    // config borracha
-    /*const eraserBrush = (e) => {
-        setEraserActive(!eraserActive)
-        setPencilActive(false)
-        setBColor('purple')
-        setBWidth(5)
-
-        canvas.current.freeDrawingBrush = new fabric.EraserBrush(canvas?.current)
+        canvas.current.freeDrawingBrush = new fabric.PencilBrush(canvas?.current)
+        canvas.current.freeDrawingBrush.color = 'purple'
         canvas.current.freeDrawingBrush.width = 5
         canvas.current?.set('isDrawingMode', true)
-    }
-
-    // espessura do traço da borracha
-    const changeEraserWidth = (e) => {
-        const eraserWidth = e.target.value
-        canvas.current.freeDrawingBrush.width =  eraserWidth
-    }*/
+        }  
 
     // cor do traço
     const changeBrushColor = (e) => {
@@ -91,7 +42,7 @@ const PaintTools = () => {
         }
     }
     
-    // espessura do traço pincél
+    // espessura
     const changeBrushWidth = (e) => {
         const brushWidth = e.target.value
         setBWidth(brushWidth)
@@ -99,7 +50,7 @@ const PaintTools = () => {
     }
 
     // função desfazer
-    // desfaz em qualquer momento (saindo e voltando a tela de pintura)
+    // desfaz em qualquer momento (saindo e voltando à tela de pintura)
     function undo () {   
         var obj = canvas.current?.getObjects()
 
@@ -114,12 +65,7 @@ const PaintTools = () => {
 
     return(
         <div>
-            {/*<select name="brush_type" id="brush_type" value='pencil' onChange={changeBrushType}>
-                <option value="pencil">Pincél</option>
-                <option value="ink">Tinta</option>
-                <option value="marker">Marcador</option>
-            </select>*/}
-            <button onClick={changeBrushType}>Pincél</button>
+            <button onClick={changeBrushType} >Pincél</button>
             
             {pencilActive && 
                 <>
@@ -138,17 +84,6 @@ const PaintTools = () => {
                 </>
             }
 
-            {/*<button onClick={eraserBrush} disabled={false} >Borracha</button>
-
-            {eraserActive &&
-                <>
-                    <select name="eraser_width" id="eraser_width" onChange={changeEraserWidth}>
-                        <option value="5">1</option>
-                        <option value="15">2</option>
-                        <option value="30">3</option>
-                    </select> 
-                </>
-            */}
             <button onClick={undo}>Desfazer</button>
             <button onClick={exitPaintMode}>Sair</button>
         </div>
