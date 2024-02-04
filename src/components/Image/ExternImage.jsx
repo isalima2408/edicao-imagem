@@ -32,7 +32,7 @@ const ExternImage = () => {
         
         const isImage =  partsImg[0] == 'image';
         if(isImage){
-            console.log(e.target.files[0])
+            //console.log(e.target.files[0])
             setImgURL(URL.createObjectURL(e.target.files[0]))
             setExtImgInserted(true)
 
@@ -45,36 +45,37 @@ const ExternImage = () => {
 
     async function fabricImageFromURL(image_url) {                                                                          
         return new Promise(function(resolve, reject) {                                                                        
-          try {                                                                                                               
+            try {                                                                                                               
             
-            new fabric.Image.fromURL(image_url, function (img) {                                                                
-              resolve(img);
-              img.set({
-                selectable: true,
-                erasable: false,
-                centeredScaling: true,
-                centeredRotation: true,
-                objectCaching: false,
-                noScaleCache: false
-            }).scale(0.2)
+                new fabric.Image.fromURL(image_url, function (img) {                                                                
+                    resolve(img)
+                    img.set({
+                        selectable: true,
+                        erasable: false,
+                        centeredScaling: true,
+                        centeredRotation: true,
+                        objectCaching: false,
+                        noScaleCache: false
+                    }).scale(0.2)
 
-            img.setControlsVisibility({
-                tr: false,
-            })
+                    img.setControlsVisibility({
+                        tr: false,
+                    })
 
-            canvas.current?.add(img)
-            canvas.current?.centerObject(img)
-            img.setCoords()
-            canvas.current?.setActiveObject(img)
-            canvas.current?.requestRenderAll()
-        })
+                    canvas.current?.add(img)
+                    canvas.current?.centerObject(img)
+                    img.setCoords()
+                    canvas.current?.setActiveObject(img)
+                    canvas.current?.requestRenderAll()
+                })
 
-        } catch (error) {                                                                                                   
-            reject(error);
-            console.log(error)
-            return                                                                                                                                                                                                                                
-        };                                                                                                                   
-      })}
+            } catch (error) {                                                                                                   
+                reject(error)
+                console.log(error)
+                return                                                                                                                                                                                                                                
+            }                                                                                                                   
+        }
+    )}
 
     useEffect(() => {
         if(extImgInserted) {

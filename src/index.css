@@ -15,7 +15,7 @@ ion-icon {
     cursor: pointer;
 }
 
-/* Se rolagem mobile não funcionar acionar essa opção, juntamente com a do arquivo css do MyFabric*/
+/* Se rolagem mobile não funcionar, acionar essa opção, juntamente com a do arquivo css do MyFabric*/
 canvas {
     touch-action: manipulation;
 }
@@ -28,16 +28,50 @@ canvas {
     background-color: rgba(0,0,0,0);
 }
 
+/*Import das fontes*/
+
+/*Roboto*/
 @font-face {
     font-family: Roboto;
     src: url('./assets/fonts/Roboto/roboto-regular.woff2');
 }
 
 @font-face {
+    font-family: 'Roboto Italic';
+    src: url('./assets/fonts/Roboto/roboto-italic-webfont.woff2');
+}
+
+@font-face {
+    font-family: 'Roboto Bold';
+    src: url('./assets/fonts/Roboto/roboto-bold-webfont.woff2');
+}
+
+@font-face {
+    font-family: 'Roboto Bold Italic';
+    src: url('./assets/fonts/Roboto/roboto-bolditalic-webfont.woff2');
+}
+
+/*Poppins*/
+@font-face {
     font-family: Poppins;
     src: url('./assets/fonts/Poppins/poppins-regular-webfont.woff2');
 }
 
-/*@import url('https://fonts.googleapis.com/css2?family=Lemon&family=Montserrat&family=Nabla&family=Roboto&family=Roboto+Mono&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Space+Mono&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');*/
+@font-face {
+    font-family: 'Poppins Italic';
+    src: url('./assets/fonts/Poppins/poppins-italic-webfont.woff2');
+}
+
+@font-face {
+    font-family: 'Poppins Bold';
+    src: url('./assets/fonts/Poppins/poppins-bold-webfont.woff2');
+    font-weight: bold;
+}
+
+@font-face {
+    font-family: 'Poppins Bold Italic';
+    src: url('./assets/fonts/Poppins/poppins-bolditalic-webfont.woff2') format('woff2');
+    font-weight: bold;
+    font-style: italic;
+}
+

@@ -3,6 +3,8 @@ import { FabricContext } from "../App";
 
 export const BtnStatusContext = createContext()
 
+var FontFaceObserver = require('fontfaceobserver')
+
 export function BtnStatusProvider({ children }) {
     const canvas = useContext(FabricContext)
 
@@ -34,6 +36,18 @@ export function BtnStatusProvider({ children }) {
         canvas.current?.set('allowTouchScrolling', true)
     }
 
+    // carregar fonte antes de usar
+    function loadAndUse(font) {
+        var myfont = new FontFaceObserver(font)
+        myfont.load()
+          .then(function() {
+            canvas.current?.getActiveObject().set("fontFamily", font);
+            canvas.current?.requestRenderAll();
+          }).catch(function(e) {
+            console.log(e)
+            //console.log('font loading failed ' + font);
+          });
+    }
 
     return(
     <BtnStatusContext.Provider value={{
@@ -56,6 +70,7 @@ export function BtnStatusProvider({ children }) {
         setTextItalic,
         textWeight, 
         setTextWeight,
+        loadAndUse,
         shapeSelected,
         setShapeSelected,
         fillColor,

@@ -23,7 +23,7 @@ const Emoji = () => {
     const geometricForms = [
         {
             names: ['Quadrado', 'Quadrado'],
-            imgUrl: 'https://w7.pngwing.com/pngs/572/684/png-transparent-square-border-illustration-square-black-and-white-fuchsia-frame-miscellaneous-angle-white-thumbnail.png',
+            imgUrl: '../../assets/images/icon_square',
             id: 'square',
         },
         {
@@ -61,7 +61,8 @@ const Emoji = () => {
         canvas.current?.add(obj)
         canvas.current?.centerObject(obj)
         obj.setCoords()
-        canvas.current?.setActiveObject(obj).renderAll()
+        canvas.current?.setActiveObject(obj)
+        canvas.current?.renderAll()
     }
 
     // Desabilitar botões ativos e consequentemente suas funções
@@ -179,6 +180,7 @@ const Emoji = () => {
     // Seta (linha + triangulo)
     function createArrow () {
         setArrowActive(true)
+        setShapeSelected(true)
         var line = new fabric.Line([10, 10, 10, (10 + 150)], {
             strokeUniform       : true,
             lockScalingX        : true,
@@ -221,6 +223,7 @@ const Emoji = () => {
             lockScalingX        : true,
             noScaleCache        : false,
             objectCaching       : false
+
         }).setControlsVisibility({
             tl: false,
             tr: false,
@@ -235,7 +238,6 @@ const Emoji = () => {
 
         addObject(group)
         
-
         canvas.current?.on('object:scaling', function (e) {
             let type = e.target.get('type')
             if (type == 'group') {
@@ -283,6 +285,7 @@ const Emoji = () => {
         })
 
         group.on('selection:created', function () {
+            setShapeSelected(true)
             setArrowActive(true)
         })
 

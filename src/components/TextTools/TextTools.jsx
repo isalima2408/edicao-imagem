@@ -3,46 +3,32 @@ import { FabricContext } from "../../App";
 import { useBtnStatus } from "../../contexts/BtnStatusContext";
 import { fabric } from "fabric";
 
-var FontFaceObserver = require('fontfaceobserver')
-
 const TextTools = () => {
     const canvas = useContext(FabricContext);
-    const { textItalic, setTextItalic, textWeight, setTextWeight, bgColor, setBgColor, textAlign, setTextAlign, textColor, setTextColor, textFontFamily, setTextFontFamily } = useBtnStatus()
+    const { loadAndUse, textItalic, setTextItalic, textWeight, setTextWeight, bgColor, setBgColor, textAlign, setTextAlign, textColor, setTextColor, textFontFamily, setTextFontFamily } = useBtnStatus()
 
-    // Mudar alinhamento
+
+    // Alinhamento
     const changeTextAlign = (e) => {
         setTextAlign(e.target.value) 
         canvas.current?.getActiveObject().set('textAlign', e.target.value)
         canvas.current?.renderAll()
+        
     }
 
-    // Mudar cor
+    // Cor
     const changeTextColor = (e) => {
         setTextColor(e.target.value)
         canvas.current?.getActiveObject().set('fill', e.target.value)
         canvas.current?.renderAll() 
     }
-
-    // Carregar família da fonte
-    function loadAndUse(font) {
-        var myfont = new FontFaceObserver(font)
-        myfont.load()
-          .then(function() {
-            canvas.current?.getActiveObject().set("fontFamily", font);
-            canvas.current?.requestRenderAll();
-          }).catch(function(e) {
-            console.log(e)
-            console.log('font loading failed ' + font);
-          });
-      }
     
     // Mudar fonte
-    const changeFontFamily = async (e) => {  
+    const changeFontFamily = (e) => {  
         setTextFontFamily(e.target.value)
-        await loadAndUse(e.target.value)
 
-        canvas.current?.getActiveObject().set('fontFamily', e.target.value)
-        canvas.current?.renderAll();
+        canvas.current?.getActiveObject().set("fontFamily", e.target.value);
+        //canvas.current?.requestRenderAll();
 
         fabric.util.clearFabricFontCache();
         canvas.current?.getObjects()?.forEach((object) => {
@@ -93,13 +79,14 @@ const TextTools = () => {
     // Itálico
     const changeStyle = (e) => {
         var text = canvas.current?.getActiveObject()
-
-        if (text.get('fontStyle') === 'italic') {
+        loadAndUse('Roboto Bold Italic')
+        //canvas.current?.getActiveObject().set('fontStyle', 'italic')
+        /*if (text.get('fontStyle') === 'italic') {
             text.set('fontStyle', 'normal')
         } else {
             text.set('fontStyle', 'italic')
-        }
-    
+        }*/
+
         canvas.current?.renderAll();
     }
 
@@ -112,7 +99,7 @@ const TextTools = () => {
         } else {
             text.set('fontWeight', 'bold')
         }
-    
+        
         canvas.current?.renderAll();
     }
 
@@ -125,7 +112,7 @@ const TextTools = () => {
         } else {
             text.set('underline', true)
         }
-    
+
         canvas.current?.renderAll();
     }
 
@@ -138,7 +125,7 @@ const TextTools = () => {
         } else {
             text.set('linethrough', true)
         }
-    
+
         canvas.current?.renderAll();
     }
     
@@ -146,11 +133,10 @@ const TextTools = () => {
     return(
         <div>
             <select name="font_family" id="font_family" value={textFontFamily} onChange={changeFontFamily}>  
-                <option value="Times New Roman">Times New Roman</option>
+                <option value="">Padrão</option>
                 <option value="Roboto">Roboto</option>
-                <option value="Space Mono">Space Mono</option>
                 <option value="Poppins">Poppins</option>
-                <option value="Lemon">Lemon</option>
+                
             </select>
 
             <select name="text_color" id="text_color" value={textColor} onChange={changeTextColor}>

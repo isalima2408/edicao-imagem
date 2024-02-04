@@ -45,6 +45,7 @@ const ShapeTools = () => {
                         <option value="red">Vermelho</option>
                         <option value="blue">Azul</option>
                         <option value="white">Branco</option>
+                        <option value="#A020F0">Violeta</option>
                     </select>
 
                     <select name="stroke_color" id="stroke_color" value={strokeColor} onChange={changeStrokeColor}>
@@ -52,6 +53,7 @@ const ShapeTools = () => {
                         <option value="black">Preto</option>
                         <option value="red">Vermelho</option>
                         <option value="blue">Azul</option>
+                        <option value="#A020F0">Violeta</option>
                     </select>
                 </>
             ) : (
@@ -60,6 +62,7 @@ const ShapeTools = () => {
                     <option value="red">Vermelho</option>
                     <option value="blue">Azul</option>
                     <option value="white">Branco</option>
+                    <option value="#A020F0">Violeta</option>
                 </select>
             )}
         </div>

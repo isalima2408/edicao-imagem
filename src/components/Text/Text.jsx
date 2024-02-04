@@ -7,7 +7,7 @@ import styles from './Text.module.css'
 
 const Text = () => {
   const canvas = useContext(FabricContext);
-  const { setBgColor, disablePaintMode, bgImageInserted, setEmojiBtnSelected, setTextBtnSelected, setTextAlign, setTextColor, setTextFontFamily } = useBtnStatus()
+  const { setBgColor, loadAndUse, disablePaintMode, bgImageInserted, setEmojiBtnSelected, setTextBtnSelected, setTextAlign, setTextColor, setTextFontFamily } = useBtnStatus()
 
 
   // alterando a lógica do 'padding' padrão da biblioteca fabric para proporcionar aplicação de cor de fundo em toda a caixa de texto, e não apenas na linha do texto.
@@ -75,6 +75,7 @@ const Text = () => {
       disablePaintMode()
 
       const textbox = new fabric.Textbox("Texto", {
+        fontFamily: 'Roboto',
         fontStyle: 'normal',
         fontWeight: 'normal',
         textAlign: 'center',
@@ -86,11 +87,11 @@ const Text = () => {
         originX: 'center',
         originY: 'center',
         selectable: true,
-        erasable: false,
         centeredScaling: true,
         centeredRotation: true,
+        objectCaching: false,
       })
-
+      
       // configurando posição do controle de rotação no textbox (influencia todos os elementos, inclusive imagens e emojis)
       textbox.controls.mtr.offsetY = -35
 
@@ -150,12 +151,14 @@ const Text = () => {
         setTextAlign(()=>canvas.current?.getActiveObject().get('textAlign'))
         setBgColor(()=>canvas.current?.getActiveObject().get('backgroundColor'))
         canvas.current?.requestRenderAll()
+        console.log(canvas.current?.getActiveObject().get('width'))
       })
 
       // quando perde a seleção, o botao do texto é desativado
       textbox.on('deselected', function () {
         setTextBtnSelected(false)
         canvas.current?.requestRenderAll()
+
       })
 
       // apagar caixa de texto quando vazia
@@ -172,6 +175,7 @@ const Text = () => {
       canvas.current?.centerObject(textbox)
       textbox.setCoords()
       canvas.current?.setActiveObject(textbox).requestRenderAll()
+      console.log(canvas.current?.getActiveObject().get('fontFamily'))
     }
   }
 
