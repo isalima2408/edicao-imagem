@@ -1,13 +1,21 @@
 {
   "files": {
-    "main.css": "/edicao-imagem/static/css/main.39eb7964.css",
-    "main.js": "/edicao-imagem/static/js/main.83225e4f.js",
+    "main.css": "/edicao-imagem/static/css/main.59676f63.css",
+    "main.js": "/edicao-imagem/static/js/main.206e45ae.js",
+    "static/media/roboto-bolditalic-webfont.woff2": "/edicao-imagem/static/media/roboto-bolditalic-webfont.edf08f3c4bfe7f47b8f1.woff2",
+    "static/media/roboto-italic-webfont.woff2": "/edicao-imagem/static/media/roboto-italic-webfont.7c27f9c1b18ff6cc26c6.woff2",
+    "static/media/roboto-bold-webfont.woff2": "/edicao-imagem/static/media/roboto-bold-webfont.7f2cb756fe5c8d869447.woff2",
+    "static/media/poppins-italic-webfont.woff2": "/edicao-imagem/static/media/poppins-italic-webfont.7df1d448cfdc6f1ca93c.woff2",
+    "static/media/roboto-regular.woff2": "/edicao-imagem/static/media/roboto-regular.60c6d073cfdf57bc03d2.woff2",
+    "static/media/poppins-bolditalic-webfont.woff2": "/edicao-imagem/static/media/poppins-bolditalic-webfont.7e1642b193ceb5c11cb0.woff2",
+    "static/media/poppins-regular-webfont.woff2": "/edicao-imagem/static/media/poppins-regular-webfont.0f67076434b3fb771a5d.woff2",
+    "static/media/poppins-bold-webfont.woff2": "/edicao-imagem/static/media/poppins-bold-webfont.afa55343836049a5f8c6.woff2",
     "index.html": "/edicao-imagem/index.html",
-    "main.39eb7964.css.map": "/edicao-imagem/static/css/main.39eb7964.css.map",
-    "main.83225e4f.js.map": "/edicao-imagem/static/js/main.83225e4f.js.map"
+    "main.59676f63.css.map": "/edicao-imagem/static/css/main.59676f63.css.map",
+    "main.206e45ae.js.map": "/edicao-imagem/static/js/main.206e45ae.js.map"
   },
   "entrypoints": [
-    "static/css/main.39eb7964.css",
-    "static/js/main.83225e4f.js"
+    "static/css/main.59676f63.css",
+    "static/js/main.206e45ae.js"
   ]
 }
