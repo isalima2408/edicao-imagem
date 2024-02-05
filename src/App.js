@@ -1,8 +1,8 @@
 import { createRef, createContext } from "react";
-import MyFabric from "./components/MyFabric";
-import Toolbar from "./components/Toolbar/Toolbar";
 import { BtnStatusProvider } from "./contexts/BtnStatusContext"
-import { loadFonts } from "./loadFonts/loadFonts";
+import { loadFonts } from "./functions";
+import MyFabric from "./components/MyFabric/MyFabric";
+import Toolbar from "./components/Toolbar/Toolbar";
 
 // contexto do canvas
 export const FabricContext = createContext();

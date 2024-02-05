@@ -5,7 +5,7 @@ import Emoji from "../Emoji/Emoji"
 import ShapeTools from "../ShapeTools/ShapeTools"
 import Paint from "../Paint/Paint"
 import PaintTools from "../PaintTools/PaintTools"
-import ExternImage from '../Image/ExternImage'
+import ExternImage from '../Image/Image'
 import Clear from "../Clear/Clear"
 import ChangeLayer from "../ChangeLayer/ChangeLayer"
 import Download from "../Download/Download"

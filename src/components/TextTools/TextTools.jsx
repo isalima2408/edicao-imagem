@@ -1,4 +1,4 @@
-import { useContext, useState, useEffect } from "react";
+import { useContext, useState } from "react";
 import { FabricContext } from "../../App";
 import { useBtnStatus } from "../../contexts/BtnStatusContext";
 import { fabric } from "fabric";
@@ -6,8 +6,10 @@ import { HuePicker } from 'react-color';
 
 const TextTools = () => {
     const canvas = useContext(FabricContext);
-    const { textItalic, bgColor, setBgColor, textAlign, setTextAlign, textColor, setTextColor, textFontFamily, setTextFontFamily } = useBtnStatus()
-    const [color, setColor] = useState({ background: '#A020F0' })
+    const { textAlign, setTextAlign, textFontFamily, setTextFontFamily } = useBtnStatus()
+    const [fontColor, setFontColor] = useState({ background: '#000000' })
+    const [bgColor, setBgColor] = useState({ background: '#FFFFFF' })
+
     const [btnColorActive, setBtnColorActive] = useState(false)
     const [btnBgColorActive, setBtnBgColorActive] = useState(false)
 
@@ -20,7 +22,7 @@ const TextTools = () => {
 
     // Cor
     const handleTextColor = (e) => {
-        setColor({ background: e.hex })
+        setFontColor({ background: e.hex })
         canvas.current?.getActiveObject().set('fill', e.hex)
         canvas.current?.renderAll() 
     }
@@ -30,7 +32,6 @@ const TextTools = () => {
         setTextFontFamily(e.target.value)
 
         canvas.current?.getActiveObject().set("fontFamily", e.target.value);
-        //canvas.current?.requestRenderAll();
 
         fabric.util.clearFabricFontCache();
         canvas.current?.getObjects()?.forEach((object) => {
@@ -53,7 +54,7 @@ const TextTools = () => {
 
     // Cor de fundo
     const handleBgTextColor = (e) => {
-        setColor({ background: e.hex })
+        setBgColor({ background: e.hex })
         var text = canvas.current?.getActiveObject()
         var color = e.hex
 
@@ -92,15 +93,16 @@ const TextTools = () => {
     }
 
     // Negrito
+    // Mesma condição do itálico
     const changeWeight = (e) => {
         var text = canvas.current?.getActiveObject()
-        var fontArr = text.get('fontFamily').split(' ') //pega o texto e transforma em array
-        var indexBold = fontArr.indexOf('Bold') // ve se há a palavra bold e onde esta localizada
-        var isBold = indexBold > -1 // confere se tem a palavra mesmo
+        var fontArr = text.get('fontFamily').split(' ') // transforma texto em array
+        var indexBold = fontArr.indexOf('Bold') // verifica existência da palavra 'bold' e sua localização
+        var isBold = indexBold > -1 // true se 'bold' existir
 
         if (isBold) {
-            fontArr.splice(indexBold, 1) // apaga o bold
-            var newFont = fontArr.join(" ")
+            fontArr.splice(indexBold, 1) // remove 'bold' do array
+            var newFont = fontArr.join(" ") // converte array em string e aplica nova fonte
             text.set('fontFamily', newFont)
         } else {
             fontArr.splice(1, 0, 'Bold')
@@ -137,6 +139,7 @@ const TextTools = () => {
         canvas.current?.renderAll();
     }
 
+    // Tipo de borda (reta ou curva)
     const handleCornerRadius = () => {
         var text = canvas.current?.getActiveObject()
 
@@ -162,7 +165,7 @@ const TextTools = () => {
                 {btnColorActive &&
                     <div style={{position: 'absolute', zIndex: 1}}>
                         <HuePicker 
-                            color={ color.background }
+                            color={ fontColor.background }
                             onChangeComplete={ handleTextColor }
                         />    
                     </div>
@@ -174,7 +177,7 @@ const TextTools = () => {
                 <option value="right">Direita</option>
             </select>
 
-            <button onClick={changeStyle} style={ {color: textItalic? 'red' : 'black'} }>Itálico</button>
+            <button onClick={changeStyle} >Itálico</button>
             <button onClick={changeWeight} >Negrito</button>
             <button onClick={changeUnderline} >Sublinhado</button>
             <button onClick={changeLinethrough} >Tachado</button>
@@ -183,7 +186,7 @@ const TextTools = () => {
                 {btnBgColorActive &&
                     <div style={{position: 'absolute', zIndex: 1}}>
                         <HuePicker 
-                            color={ color.background }
+                            color={ bgColor.background }
                             onChangeComplete={ handleBgTextColor }
                         />    
                     </div>

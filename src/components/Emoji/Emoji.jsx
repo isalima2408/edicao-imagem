@@ -18,7 +18,7 @@ const Emoji = () => {
             setEmojiBtnSelected, 
             setTextBtnSelected,
             disablePaintMode
-        } = useBtnStatus()
+    } = useBtnStatus()
 
     const geometricForms = [
         {

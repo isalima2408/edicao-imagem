@@ -15,21 +15,12 @@ ion-icon {
     cursor: pointer;
 }
 
-/* Se rolagem mobile não funcionar, acionar essa opção, juntamente com a do arquivo css do MyFabric*/
+/* Habilitar Scroll*/
 canvas {
     touch-action: manipulation;
 }
 
-/*.canvas-container .upper-canvas :active {
-    background-color: rgba(255,255,255,0.0) !important;
-}
-
-.my_fabric .upper-canvas:active {
-    background-color: rgba(0,0,0,0);
-}*/
-
 /*Import das fontes*/
-
 /*Roboto*/
 @font-face {
     font-family: Roboto;

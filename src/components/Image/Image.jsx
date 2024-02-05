@@ -2,10 +2,10 @@ import { useContext, useState, useEffect, useRef } from "react"
 import { fabric } from "fabric"
 import { FabricContext } from "../../App"
 import { useBtnStatus } from '../../contexts/BtnStatusContext'
-import styles from './ExternImage.module.css'
+import styles from './Image.module.css'
 
-const ExternImage = () => {
-    const { bgImageInserted, disablePaintMode, setTextBtnSelected, setPaintBtnSelected } = useBtnStatus()
+const Image = () => {
+    const { bgImageInserted, disablePaintMode, setTextBtnSelected } = useBtnStatus()
     const [imgURL, setImgURL] = useState('')
     const [extImgInserted, setExtImgInserted] = useState(false)
     const canvas = useContext(FabricContext)
@@ -32,7 +32,6 @@ const ExternImage = () => {
         
         const isImage =  partsImg[0] == 'image';
         if(isImage){
-            //console.log(e.target.files[0])
             setImgURL(URL.createObjectURL(e.target.files[0]))
             setExtImgInserted(true)
 
@@ -50,12 +49,12 @@ const ExternImage = () => {
                 new fabric.Image.fromURL(image_url, function (img) {                                                                
                     resolve(img)
                     img.set({
-                        selectable: true,
-                        erasable: false,
-                        centeredScaling: true,
-                        centeredRotation: true,
-                        objectCaching: false,
-                        noScaleCache: false
+                        selectable          : true,
+                        erasable            : false,
+                        centeredScaling     : true,
+                        centeredRotation    : true,
+                        objectCaching       : false,
+                        noScaleCache        : false
                     }).scale(0.2)
 
                     img.setControlsVisibility({
@@ -93,4 +92,4 @@ const ExternImage = () => {
     )
 }
 
-export default ExternImage
+export default Image

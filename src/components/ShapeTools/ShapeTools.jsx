@@ -5,13 +5,15 @@ import { HuePicker } from 'react-color';
 
 const ShapeTools = () => {
     const canvas = useContext(FabricContext);
-    const { arrowActive, fillColor, setFillColor, strokeColor, setStrokeColor } = useBtnStatus()
+    const { arrowActive } = useBtnStatus()
     const [fillActive, setFillActive] = useState(false)
     const [strokeActive, setStrokeActive] = useState(false)
-    const [color, setColor] = useState({ background: '#A020F0' })
+    const [fillColor, setFillColor] = useState({ background: '#A020F0' })
+    const [strokeColor, setStrokeColor] = useState({ background: '#A020F0' })
 
     // cor de fundo
     function handleFillColorChangeComplete (e) {
+        setFillColor({ background: e.hex })
         let thing
         let objCurrent = canvas.current?.getActiveObject()
         let objs = objCurrent._objects
@@ -32,7 +34,7 @@ const ShapeTools = () => {
 
     // cor de borda
     function handleStrokeColorChangeComplete (e) {
-        setColor({ background: e.hex })
+        setStrokeColor({ background: e.hex })
         canvas.current?.getActiveObject().set('stroke', e.hex)
         canvas.current?.renderAll()
     }
@@ -44,14 +46,14 @@ const ShapeTools = () => {
                     <button onClick={ () => setFillActive(val => !val) } >Fundo</button>
                     {fillActive && 
                         <HuePicker 
-                            color={ color.background }
+                            color={ strokeColor.background }
                             onChangeComplete={ handleFillColorChangeComplete }
                         />   
                     }
                     <button onClick={ () => setStrokeActive(val => !val) } >Borda</button>
                     {strokeActive && 
                         <HuePicker 
-                            color={ color.background }
+                            color={ fillColor.background }
                             onChangeComplete={ handleStrokeColorChangeComplete }
                         />   
                     }
@@ -61,7 +63,7 @@ const ShapeTools = () => {
                 <button onClick={ () => setFillActive(val => !val) } >Fundo</button>
                     {fillActive && 
                         <HuePicker 
-                            color={ color.background }
+                            color={ fillColor.background }
                             onChangeComplete={ handleFillColorChangeComplete }
                         />   
                     }

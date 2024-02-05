@@ -3,68 +3,25 @@ import { fabric } from 'fabric';
 import { FabricContext } from "../../App.js";
 import { useBtnStatus } from '../../contexts/BtnStatusContext.jsx';
 import styles from './Text.module.css'
+import { textboxConfig } from '../../functions';
 
 
 const Text = () => {
   const canvas = useContext(FabricContext);
-  const { setBgColor, loadAndUse, disablePaintMode, bgImageInserted, setEmojiBtnSelected, setTextBtnSelected, setTextAlign, setTextColor, setTextFontFamily } = useBtnStatus()
+  const { setBgColor,
+          disablePaintMode, 
+          bgImageInserted, 
+          setEmojiBtnSelected, 
+          setTextBtnSelected, 
+          setTextAlign, 
+          setTextColor, 
+          setTextFontFamily 
+  } = useBtnStatus()
 
+  // modifica funções padrão de texto da biblioteca fabric js
+  textboxConfig()
 
-  // alterando a lógica do 'padding' padrão da biblioteca fabric para proporcionar aplicação de cor de fundo em toda a caixa de texto, e não apenas na linha do texto.
-  fabric.Text.prototype.set({
-    _getNonTransformedDimensions() { // Object dimensions
-      return new fabric.Point(this.width, this.height).scalarAdd(this.padding);
-    },
-    _calculateCurrentDimensions() { // Controls dimensions
-      return fabric.util.transformPoint(this._getTransformedDimensions(), this.getViewportTransform(), true);
-    }
-  });
-
-  // modificando limitador de linhas de 'espaço' para 'enter'. Agora, cada 'enter' pula a linha.
-  fabric.Textbox.prototype._wordJoiners = /[]/
-
-  // Para que a ação anterior ocorra durante a edição
-  function fitTextboxToContent(text) {
-    const textLinesMaxWidth = text.textLines.reduce((max, _, i) => Math.max(max, text.getLineWidth(i)), 0);
-    text.set({width: textLinesMaxWidth});
-  }
-
-  // código para adicionar bordas arredondadas a caixa de texto através do atributo 'bgCornerRadius'
-  CanvasRenderingContext2D.prototype.roundRect = function (x, y, w, h, r) {
-    if (w < 2 * r) r = w / 2;
-    if (h < 2 * r) r = h / 2;
-    this.beginPath();
-    this.moveTo(x+r, y);
-    this.arcTo(x+w, y,   x+w, y+h, r);
-    this.arcTo(x+w, y+h, x,   y+h, r);
-    this.arcTo(x,   y+h, x,   y,   r);
-    this.arcTo(x,   y,   x+w, y,   r);
-    this.closePath();
-    return this;
-  }
-  
-  fabric.Textbox.prototype._renderBackground = function(ctx) {
-    if (!this.backgroundColor) {
-      return;
-    }
-    var dim = this._getNonTransformedDimensions();
-    ctx.fillStyle = this.backgroundColor;
-
-    if(!this.bgCornerRadius) {
-      ctx.fillRect(
-        -dim.x / 2,
-        -dim.y / 2,
-        dim.x,
-        dim.y
-      );
-    } else {
-      ctx.roundRect(-dim.x / 2, -dim.y / 2, dim.x, dim.y, this.bgCornerRadius).fill();
-    }
-    // if there is background color no other shadows
-    // should be casted
-    this._removeShadow(ctx);
-  }
-
+  // adiciona elemento de texto ao canvas
   const addText = () => {
     
     if (bgImageInserted) {
@@ -74,27 +31,28 @@ const Text = () => {
       disablePaintMode()
 
       const textbox = new fabric.Textbox("Texto", {
-        fontFamily: 'Roboto',
-        fontStyle: 'normal',
-        fontWeight: 'normal',
-        textAlign: 'center',
-        backgroundColor: 'transparent',
-        padding: 0,
-        bgCornerRadius: 15,
-        cornerSize: 18,
-        perPixelTargetFind: false,
-        originX: 'center',
-        originY: 'center',
-        selectable: true,
-        centeredScaling: true,
-        centeredRotation: true,
-        objectCaching: false,
+        fontFamily          : 'Roboto',
+        fontStyle           : 'normal',
+        fontWeight          : 'normal',
+        textAlign           : 'center',
+        fill                : '#000000',
+        backgroundColor     : 'transparent',
+        padding             : 0,
+        bgCornerRadius      : 15,
+        cornerSize          : 18,
+        perPixelTargetFind  : false,
+        originX             : 'center',
+        originY             : 'center',
+        selectable          : true,
+        centeredScaling     : true,
+        centeredRotation    : true,
+        objectCaching       : false,
       })
       
       // configurando posição do controle de rotação no textbox (influencia todos os elementos, inclusive imagens e emojis)
       textbox.controls.mtr.offsetY = -35
 
-      // desabilitando cache
+      // desabilitando cache para evitar erros de redimensionamento
       textbox.objectCaching=false
       textbox.noScaleCache=false
 
@@ -112,7 +70,7 @@ const Text = () => {
         br: true,
       })
 
-      // criando controle de exclusão somente para o texto (desvinculado do global)
+      // criando controle de exclusão somente para o texto
       var deleteIcon = "data:image/svg+xml,%3C%3Fxml version='1.0' encoding='utf-8'%3F%3E%3C!DOCTYPE svg PUBLIC '-//W3C//DTD SVG 1.1//EN' 'http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd'%3E%3Csvg version='1.1' id='Ebene_1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' width='595.275px' height='595.275px' viewBox='200 215 230 470' xml:space='preserve'%3E%3Ccircle style='fill:%23F44336;' cx='299.76' cy='439.067' r='218.516'/%3E%3Cg%3E%3Crect x='267.162' y='307.978' transform='matrix(0.7071 -0.7071 0.7071 0.7071 -222.6202 340.6915)' style='fill:white;' width='65.545' height='262.18'/%3E%3Crect x='266.988' y='308.153' transform='matrix(0.7071 0.7071 -0.7071 0.7071 398.3889 -83.3116)' style='fill:white;' width='65.544' height='262.179'/%3E%3C/g%3E%3C/svg%3E";
       var img = document.createElement('img');
       img.src = deleteIcon;
@@ -145,29 +103,35 @@ const Text = () => {
       // pegando as caracteristicas do texto selecionado para atualizar value do options do select
       textbox.on('selected', function () {
         setTextBtnSelected(true)
-        setTextFontFamily(()=>canvas.current?.getActiveObject().get('fontFamily'))
-        setTextColor(()=>canvas.current?.getActiveObject().get('fill'))
-        setTextAlign(()=>canvas.current?.getActiveObject().get('textAlign'))
-        setBgColor(()=>canvas.current?.getActiveObject().get('backgroundColor'))
+        let text = canvas.current?.getActiveObject()
+        setTextFontFamily(() => text.get('fontFamily'))
+        setTextColor(() => text.get('fill'))
+        setTextAlign(() => text.get('textAlign'))
+        setBgColor(( )=> text.get('backgroundColor'))
         canvas.current?.requestRenderAll()
       })
 
-      // quando perde a seleção, o botao do texto é desativado
+      // quando perde a seleção, o botao do texto é desativado, e logo suas ferramentas
       textbox.on('deselected', function () {
         setTextBtnSelected(false)
         canvas.current?.requestRenderAll()
+      })
 
+      // ajustar tamanho da caixa de texto após edição
+      textbox.on('editing:exited', function ()  {
+        canvas.current?.setActiveObject(textbox);
+        var largest = Math.max.apply(Math, canvas.current?.getActiveObject().__lineWidths); 
+        canvas.current?.getActiveObject().set("width", (largest + 1));
       })
 
       // apagar caixa de texto quando vazia
-      canvas.current?.on('object:modified', removeEmptyTextbox)
-      function removeEmptyTextbox(e) {
+      canvas.current?.on('object:modified', function (e) {
         if(e.target.text === '') {
           canvas.current?.remove(e.target);
           canvas.current?.requestRenderAll()
           setTextBtnSelected(false)
         }
-      }
+      })
 
       canvas.current?.add(textbox)
       canvas.current?.centerObject(textbox)

@@ -1,12 +1,11 @@
+import styles from "./MyFabric.module.css";
 import { useContext, useCallback } from "react";
 import { fabric } from "fabric";
-import { FabricContext } from "../App.js";
-import { useBtnStatus } from '../contexts/BtnStatusContext.jsx'
-import styles from "./MyFabric.module.css";
+import { FabricContext } from "../../App.js";
+import { useBtnStatus } from '../../contexts/BtnStatusContext.jsx'
 
-/* MUDAR SELECT DE CORES PARA INPUT DE PALETA DE CORES NOS ELEMENTOS APLICÁVEIS (ou outra ideia)*/
 
-console.log('att77785')
+console.log('att8')
 
 export const useFabric = () => {
     const canvas = useContext(FabricContext);
@@ -18,14 +17,14 @@ export const useFabric = () => {
       if (!element) return canvas.current?.dispose();
 
       canvas.current = new fabric.Canvas(element, {
-        selection: false,
-        backgroundColor: 'gray',
-        hoverCursor: 'default',
-        height: 0,
-        allowTouchScrolling: true,
-        controlsAboveOverlay: true,
-        isTouchSupported: false,
-        transparentCorners: false,
+        selection                 : false,
+        backgroundColor           : 'gray',
+        hoverCursor               : 'default',
+        height                    : 0,
+        allowTouchScrolling       : true,
+        controlsAboveOverlay      : true,
+        isTouchSupported          : false,
+        transparentCorners        : false,
       });
 
       // desabilitando seleção de todos os elementos (para atingir a função desenho)
@@ -60,12 +59,12 @@ export const useFabric = () => {
       img.src = deleteIcon;
 
       fabric.Object.prototype.controls.deleteControl = new fabric.Control({
-        x: 0.5,
-        y: -0.5,
-        cursorStyle: 'pointer',
-        mouseUpHandler: deleteObject,
-        render: renderIcon,
-        cornerSize: 20
+        x                 : 0.5,
+        y                 : -0.5,
+        cursorStyle       : 'pointer',
+        mouseUpHandler    : deleteObject,
+        render            : renderIcon,
+        cornerSize        : 20
       });
      
       function deleteObject(eventData, transform) {

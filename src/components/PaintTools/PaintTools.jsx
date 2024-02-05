@@ -8,7 +8,6 @@ import { HuePicker } from 'react-color';
 const PaintTools = () => {
     const { disablePaintMode } = useBtnStatus()   
     const [bWidth, setBWidth] = useState(5)
-    const [bColor, setBColor] = useState('purple')
     const [pencilActive, setPencilActive] = useState(false)
     const [color, setColor] = useState({ background: '#A020F0' })
     const canvas = useContext(FabricContext)

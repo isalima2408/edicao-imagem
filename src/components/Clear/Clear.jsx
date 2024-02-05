@@ -10,9 +10,8 @@ const Clear = () => {
         canvas.current?.renderAll()
     }
 
-    return(
-        <button onClick={clearCanvas} >Limpar</button>
-    )
+    return <button onClick={clearCanvas} >Limpar</button>
+
 }
 
 export default Clear

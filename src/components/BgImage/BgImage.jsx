@@ -59,11 +59,11 @@ const BgImage = () => {
                     }
 
                     img.set({
-                        scaleX: finalScale,
-                        scaleY: finalScale,
-                        selectable: false,
-                        erasable: false,
-                        evented: true,          
+                        scaleX      : finalScale,
+                        scaleY      : finalScale,
+                        selectable  : false,
+                        erasable    : false,
+                        evented     : true,          
                     })
 
                     img.setControlsVisibility({
