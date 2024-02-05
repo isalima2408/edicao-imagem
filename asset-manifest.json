@@ -1,21 +1,27 @@
 {
   "files": {
-    "main.css": "/edicao-imagem/static/css/main.137d910e.css",
-    "main.js": "/edicao-imagem/static/js/main.d5d8ed1f.js",
+    "main.css": "/edicao-imagem/static/css/main.4e36f409.css",
+    "main.js": "/edicao-imagem/static/js/main.25038103.js",
+    "static/media/comicneue-italic-webfont.woff2": "/edicao-imagem/static/media/comicneue-italic-webfont.01b3d7d193dbc126cde0.woff2",
+    "static/media/comicneue-bolditalic-webfont.woff2": "/edicao-imagem/static/media/comicneue-bolditalic-webfont.c948bf1edc29a9d3a9ff.woff2",
     "static/media/roboto-bolditalic-webfont.woff2": "/edicao-imagem/static/media/roboto-bolditalic-webfont.edf08f3c4bfe7f47b8f1.woff2",
     "static/media/roboto-italic-webfont.woff2": "/edicao-imagem/static/media/roboto-italic-webfont.7c27f9c1b18ff6cc26c6.woff2",
+    "static/media/comicneue-bold-webfont.woff2": "/edicao-imagem/static/media/comicneue-bold-webfont.fabfd55335aa51345454.woff2",
+    "static/media/comicneue-regular-webfont.woff2": "/edicao-imagem/static/media/comicneue-regular-webfont.f6051147c772bea805ac.woff2",
     "static/media/roboto-bold-webfont.woff2": "/edicao-imagem/static/media/roboto-bold-webfont.7f2cb756fe5c8d869447.woff2",
     "static/media/poppins-italic-webfont.woff2": "/edicao-imagem/static/media/poppins-italic-webfont.7df1d448cfdc6f1ca93c.woff2",
     "static/media/roboto-regular.woff2": "/edicao-imagem/static/media/roboto-regular.60c6d073cfdf57bc03d2.woff2",
     "static/media/poppins-bolditalic-webfont.woff2": "/edicao-imagem/static/media/poppins-bolditalic-webfont.7e1642b193ceb5c11cb0.woff2",
     "static/media/poppins-regular-webfont.woff2": "/edicao-imagem/static/media/poppins-regular-webfont.0f67076434b3fb771a5d.woff2",
     "static/media/poppins-bold-webfont.woff2": "/edicao-imagem/static/media/poppins-bold-webfont.afa55343836049a5f8c6.woff2",
+    "static/media/arrow.png": "/edicao-imagem/static/media/arrow.4aca251833e1d2d28351.png",
+    "static/media/ellipse.png": "/edicao-imagem/static/media/ellipse.09d18d7e891ae218d31d.png",
     "index.html": "/edicao-imagem/index.html",
-    "main.137d910e.css.map": "/edicao-imagem/static/css/main.137d910e.css.map",
-    "main.d5d8ed1f.js.map": "/edicao-imagem/static/js/main.d5d8ed1f.js.map"
+    "main.4e36f409.css.map": "/edicao-imagem/static/css/main.4e36f409.css.map",
+    "main.25038103.js.map": "/edicao-imagem/static/js/main.25038103.js.map"
   },
   "entrypoints": [
-    "static/css/main.137d910e.css",
-    "static/js/main.d5d8ed1f.js"
+    "static/css/main.4e36f409.css",
+    "static/js/main.25038103.js"
   ]
 }
