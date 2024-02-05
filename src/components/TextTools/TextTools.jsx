@@ -9,7 +9,6 @@ const TextTools = () => {
     const { textAlign, setTextAlign, textFontFamily, setTextFontFamily } = useBtnStatus()
     const [fontColor, setFontColor] = useState({ background: '#000000' })
     const [bgColor, setBgColor] = useState({ background: '#FFFFFF' })
-
     const [btnColorActive, setBtnColorActive] = useState(false)
     const [btnBgColorActive, setBtnBgColorActive] = useState(false)
 
@@ -158,6 +157,7 @@ const TextTools = () => {
             <select name="font_family" id="font_family" value={textFontFamily} onChange={changeFontFamily}>  
                 <option value="Roboto">Roboto</option>
                 <option value="Poppins">Poppins</option>
+                <option value="ComicNeue">Comic Neue</option>
                 
             </select>
 

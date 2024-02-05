@@ -4,6 +4,10 @@ import { fabric } from 'fabric';
 import { FabricContext } from '../../App';
 import { useBtnStatus } from '../../contexts/BtnStatusContext';
 import Picker from "emoji-picker-react";
+import square from '../../assets/images/square.png'
+import ellipse from '../../assets/images/ellipse.png'
+import arrow from '../../assets/images/arrow.png'
+import triangle from '../../assets/images/triangle.png'
 
 const Emoji = () => {
     const canvas = useContext(FabricContext)
@@ -14,7 +18,6 @@ const Emoji = () => {
             setShapeSelected, 
             setFillColor, 
             setStrokeColor, 
-            emojiBtnSelected, 
             setEmojiBtnSelected, 
             setTextBtnSelected,
             disablePaintMode
@@ -23,31 +26,24 @@ const Emoji = () => {
     const geometricForms = [
         {
             names: ['Quadrado', 'Quadrado'],
-            imgUrl: '../../assets/images/icon_square',
+            imgUrl: square,
             id: 'square',
         },
         {
-            names: ['Retângulo', 'Retângulo'],
-            imgUrl: 'https://blog.professorferretto.com.br/wp-content/uploads/2019/07/figura-geometrica-retangulo.png',
-            id: 'rectangle',
-        },
-        {
-            names: ['Circulo', 'Circulo'],
-            imgUrl: 'https://i.pinimg.com/originals/70/7d/55/707d554c6c113f05fa0d783104e3d684.png',
+            names: ['Elipse', 'Elipse'],
+            imgUrl: ellipse,
             id: 'ellipse',
         },
         {
             names: ['Seta', 'Seta'],
-            imgUrl: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAMAAAAJbSJIAAAAWlBMVEX///8AAABJSUl2dnZubm5zc3NtbW2AgICqqqre3t64uLizs7P6+vrGxsYvLy8PDw8cHByhoaHl5eU7Ozvt7e3Ozs4sLCzY2Njz8/NXV1cjIyMYGBhERESHh4cDouVWAAAEKUlEQVR4nO2d21bbMBBFFULIzQQCoVwC//+b9WSJ1sHIlu2RNGc8+7VdavbynJwJDq5zRbhfHx4WSXm8OT6VcSNentPafbOsCglu8vjVHE5FBHfZBGvFElfxlFGwHtQChuushosCbzd5BRfH7IIvmQ1vshvuMxs+ZjfMVxWe7IY5u6KM4Va9oTurNzyqN6z+aDfMncQChu418UfD8obuLeduWsSwdtwv3294EGrIR+84lH6BU1lKnVIuVmJzyMRtvyC2YcQVxDbszyC4YdQVRDaMySC0YdyIAhtGC6Iaxo4orGHkmwyuYfyIghqGr+D6l08apV/tCMIZXDoVhuERXTkVhmHBW6fCMDyiK/pjfMOuDBLwhp0ZJNANuzNIgBv2jahDNwwX/f+vI0Ab9o+owzYMX8FV428BG95FjKhDNuytCQ+sYVQGCVTDiJrwgBrG1IQH0zB6RB2o4RBBSMP4DBKAhgMySOAZDhpRB2gYt6o1QDMclkECzDB2VWuAZTg0gwSU4fARdViGA2vCA2Q4ZkQdkuHgmvDAGI7KIIFiOC6DBIjhyAwSGIZjM0hAGI7OIIFgOGJVawBgOCGDhHzDyB/8BhFvOL4mPNINJ46oE284pSY8sg0n1YRHtOG0mvBINpyeQUKwYc/3ZGKRa8iRQUKsIUsGCamGPBkkhBpyjaiTajh5VWsg0jA8onfDD5NoyLCqNRBoyJhBQp4hW014xBny1YRHmiHziDpxhpw14ZFlyD6iTphh+AqOFxRlyJ9BQpBhggwScgxTZJAQY8i7qjWQYpgmg4QQQ+5VrYEMw1QZJEQYTr350okEw0Q14RFgmHJEnQTDZDXhKW6YriY8pQ0T1oTnvXXyA9PJUSTO4O//xIHr6AiYbr500n7+65rt7F6SZ5B4ax1+z3d4D+kzeOHn49ueOQ/vJEMGL7z9eCbjC+vpHWQZ0QuvV6dvmE8PknZVu2bbeD7qjv30AKw3X3qpjv5Bvuts/29A6lWtzXa32WdLYOKPSxLIVBPlyFUTxchXE4XIWRNFUD+iSW6+SMIyiM6MM6ik6NVncMarWoqPSwVQP6JWE+hYTaAz45pQksEcN1+KYhlEZ8YZVDKitqqho35Vs5sv6KjPoNUEOupH1G6+oGMZREf9qqY+gzNe1ezmCwZWE+hYTaCj/gpaBtFRn8EZr2pKMqj+B7+2qqFjNYGO1QQ66kdUvaBlEB31I2qrGjq2qqFjNYGO+hG1mkDHvieDjmUQHVvV0LFVDR27+YKO+hG1mkDHagId+yVldCyD6KgfUfWr2ldQUMm37tsP+Vb2JlM9Kh9Rt1N+BcMfeZXURM2H7hGtUS/ozrpHtOZTu6A76h7Rmiftgu3PFbpGlKgOV4Jqir7Bqan4VfrVJKH6N6jnfenXkoqn4+d58XG3q0q/kAT8BWF6LmOAr4VmAAAAAElFTkSuQmCC',
+            imgUrl: arrow,
             id: 'arrow',
         },
         {
             names: ['Triângulo', 'Triângulo'],
-            imgUrl: 'https://cdn.icon-icons.com/icons2/2098/PNG/512/triangle_icon_128721.png',
+            imgUrl: triangle,
             id: 'triangle',
-        }
-
-        
+        }    
     ]
 
     const categories = [
@@ -82,47 +78,12 @@ const Emoji = () => {
         }
     }
 
-    // Retângulo
-    function createRect() {
-        var rect = new fabric.Rect({
-            fill                : 'transparent',
-            width               : 200,
-            height              : 100,
-            rx                  : 5,
-            strokeWidth         : 5,
-            stroke              : '#A020F0',
-            originX             : 'center',
-            originY             : 'center',
-            strokeUniform       : true,
-            selectable          : true,
-            erasable            : false,
-            noScaleCache        : false,
-            objectCaching       : false,
-        })
-
-        rect.on('selected', function () {
-            setShapeSelected(true)
-            let obj = canvas.current?.getActiveObject()
-
-            setFillColor(()=>obj.get('fill'))
-            setStrokeColor(()=>obj.get('stroke'))
-            canvas.current?.requestRenderAll()
-        })
-
-        rect.on('deselected', function () {
-            setShapeSelected(false)
-            canvas.current?.requestRenderAll()
-        })
-
-        addObject(rect) 
-    }
-
     // quadrado
     function createSquare() {
         var square = new fabric.Rect({
             fill                : 'transparent',
-            width               : 100,
-            height              : 100,
+            width               : 150,
+            height              : 150,
             strokeWidth         : 5, 
             stroke              : '#A020F0',
             originX             : 'left',
@@ -152,19 +113,21 @@ const Emoji = () => {
     }
 
 
-    // Elipse
+    // Elipse / Círculo
     function createEllipse() {
         var ellipse = new fabric.Ellipse({
             fill                : 'transparent',
             rx                  : 80,
-            ry                  : 40,           
+            ry                  : 80,
+            originX             : 'left',
+            originY             : 'top',        
             strokeWidth         : 5, 
             stroke              : '#A020F0',
             strokeUniform       : true,
             selectable          : true,
             erasable            : false,
             noScaleCache        : false,
-            objectCaching       : false
+            objectCaching       : false,
         })
 
         ellipse.on('selected', function () {
@@ -181,7 +144,12 @@ const Emoji = () => {
             canvas.current?.requestRenderAll()
         })
 
-        addObject(ellipse)
+
+        canvas.current?.add(ellipse).renderAll()
+        canvas.current?.centerObject(ellipse)
+        ellipse.setCoords()
+        canvas.current?.setActiveObject(ellipse)
+        canvas.current?.renderAll()
     }
 
     // Triângulo
@@ -226,15 +194,15 @@ const Emoji = () => {
             borderColor         : 'transparent',
             left                : 10,
             top                 : 10,
-            strokeWidth         : 3,
+            strokeWidth         : 5,
             stroke              : '#A020F0',
             noScaleCache        : false,
             objectCaching       : false
         });
 
         var triangleTop = new fabric.Triangle({
-            width               : 16,
-            height              : 16, 
+            width               : 20,
+            height              : 20, 
             fill                : '#A020F0',
             scaleX              : 1, 
             scaleY              : 1, 
@@ -244,7 +212,7 @@ const Emoji = () => {
             lockUniScaling      : true, 
             lockSkewingX        : true, 
             lockSkewingY        : true, 
-            left                : (10 - 7), 
+            left                : (10 - 8), 
             top                 : (10 - 3),
             noScaleCache        : false,
             objectCaching       : false
@@ -339,23 +307,27 @@ const Emoji = () => {
         setEmojiBtnSelected(false)
 
         switch(emojiObject.emoji) {
-            case 'rectangle':
-                createRect()
-                break;
+
             case 'square':
                 createSquare()
                 break;
+
             case 'ellipse':
                 createEllipse()
+                canvas.current?.renderAll()
                 break;
+
             case 'arrow':
                 setArrowActive(true)
                 createArrow()
                 break;
+
             case 'triangle':
                 createTriangle()
                 break;
+                
             default:
+
                 var emojiURL = emojiObject.imageUrl
                 new fabric.Image.fromURL(emojiURL, function(img) {
                     img.set({
@@ -383,8 +355,9 @@ const Emoji = () => {
                     addObject(img)
 
                 }, {crossOrigin: 'Anonymous'})
-                break;
-        }         
+
+            break;
+        }        
     }
 
     return (

@@ -24,46 +24,62 @@ canvas {
 /*Roboto*/
 @font-face {
     font-family: Roboto;
-    src: url('./assets/fonts/Roboto/roboto-regular.woff2');
+    src: url('./assets/fonts/Roboto/roboto-regular.woff2') format('woff2');
 }
 
 @font-face {
     font-family: 'Roboto Italic';
-    src: url('./assets/fonts/Roboto/roboto-italic-webfont.woff2');
+    src: url('./assets/fonts/Roboto/roboto-italic-webfont.woff2') format('woff2');
 }
 
 @font-face {
     font-family: 'Roboto Bold';
-    src: url('./assets/fonts/Roboto/roboto-bold-webfont.woff2');
-    font-weight: 700;
+    src: url('./assets/fonts/Roboto/roboto-bold-webfont.woff2') format('woff2');
 }
 
 @font-face {
     font-family: 'Roboto Bold Italic';
-    src: url('./assets/fonts/Roboto/roboto-bolditalic-webfont.woff2');
+    src: url('./assets/fonts/Roboto/roboto-bolditalic-webfont.woff2') format('woff2');
 }
 
 /*Poppins*/
 @font-face {
     font-family: Poppins;
-    src: url('./assets/fonts/Poppins/poppins-regular-webfont.woff2');
+    src: url('./assets/fonts/Poppins/poppins-regular-webfont.woff2') format('woff2');
 }
 
 @font-face {
     font-family: 'Poppins Italic';
-    src: url('./assets/fonts/Poppins/poppins-italic-webfont.woff2');
+    src: url('./assets/fonts/Poppins/poppins-italic-webfont.woff2') format('woff2');
 }
 
 @font-face {
     font-family: 'Poppins Bold';
-    src: url('./assets/fonts/Poppins/poppins-bold-webfont.woff2');
-    font-weight: bold;
+    src: url('./assets/fonts/Poppins/poppins-bold-webfont.woff2') format('woff2');
 }
 
 @font-face {
     font-family: 'Poppins Bold Italic';
     src: url('./assets/fonts/Poppins/poppins-bolditalic-webfont.woff2') format('woff2');
-    font-weight: bold;
-    font-style: italic;
 }
 
+/*Comic Neue*/
+@font-face {
+    font-family: ComicNeue;
+    src: url('./assets/fonts/Comic\ Neue/comicneue-regular-webfont.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: 'ComicNeue Italic';
+    src: url('./assets/fonts/Comic\ Neue/comicneue-italic-webfont.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: 'ComicNeue Bold';
+    src: url('./assets/fonts/Comic\ Neue/comicneue-bold-webfont.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: 'ComicNeue Bold Italic';
+    src: url('./assets/fonts/Comic\ Neue/comicneue-bolditalic-webfont.woff2') format('woff2');
+}

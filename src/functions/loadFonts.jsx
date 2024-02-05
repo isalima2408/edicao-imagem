@@ -11,6 +11,10 @@ export function loadFonts () {
         'Poppins Bold': { weight: 700 },
         'Poppins Italic': { weight: 400 },
         'Poppins Bold Italic': { weight: 700 },
+        'ComicNeue': { weight:400 },
+        'ComicNeue Bold': { weight: 700 },
+        'ComicNeue Italic': { weight: 400 },
+        'ComicNeue Bold Italic': { weight: 700 },
     }
     
     var observers = []

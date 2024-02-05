@@ -5,7 +5,7 @@ import { FabricContext } from "../../App.js";
 import { useBtnStatus } from '../../contexts/BtnStatusContext.jsx'
 
 
-console.log('att 98889')
+console.log('att 77848')
 
 export const useFabric = () => {
     const canvas = useContext(FabricContext);

@@ -2,9 +2,8 @@ import { useContext } from 'react';
 import { fabric } from 'fabric';
 import { FabricContext } from "../../App.js";
 import { useBtnStatus } from '../../contexts/BtnStatusContext.jsx';
-import styles from './Text.module.css'
 import { textboxConfig } from '../../functions';
-
+import styles from './Text.module.css'
 
 const Text = () => {
   const canvas = useContext(FabricContext);
