@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/edicao-imagem/static/css/main.40cf2469.css",
-    "main.js": "/edicao-imagem/static/js/main.87f34636.js",
+    "main.css": "/edicao-imagem/static/css/main.a8a2bd29.css",
+    "main.js": "/edicao-imagem/static/js/main.72a90df6.js",
     "static/media/roboto-bolditalic-webfont.woff2": "/edicao-imagem/static/media/roboto-bolditalic-webfont.edf08f3c4bfe7f47b8f1.woff2",
     "static/media/roboto-italic-webfont.woff2": "/edicao-imagem/static/media/roboto-italic-webfont.7c27f9c1b18ff6cc26c6.woff2",
     "static/media/roboto-bold-webfont.woff2": "/edicao-imagem/static/media/roboto-bold-webfont.7f2cb756fe5c8d869447.woff2",
@@ -11,11 +11,11 @@
     "static/media/poppins-regular-webfont.woff2": "/edicao-imagem/static/media/poppins-regular-webfont.0f67076434b3fb771a5d.woff2",
     "static/media/poppins-bold-webfont.woff2": "/edicao-imagem/static/media/poppins-bold-webfont.afa55343836049a5f8c6.woff2",
     "index.html": "/edicao-imagem/index.html",
-    "main.40cf2469.css.map": "/edicao-imagem/static/css/main.40cf2469.css.map",
-    "main.87f34636.js.map": "/edicao-imagem/static/js/main.87f34636.js.map"
+    "main.a8a2bd29.css.map": "/edicao-imagem/static/css/main.a8a2bd29.css.map",
+    "main.72a90df6.js.map": "/edicao-imagem/static/js/main.72a90df6.js.map"
   },
   "entrypoints": [
-    "static/css/main.40cf2469.css",
-    "static/js/main.87f34636.js"
+    "static/css/main.a8a2bd29.css",
+    "static/js/main.72a90df6.js"
   ]
 }
