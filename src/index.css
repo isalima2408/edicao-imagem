@@ -20,13 +20,13 @@ canvas {
     touch-action: manipulation;
 }
 
-.canvas-container .upper-canvas :active {
+/*.canvas-container .upper-canvas :active {
     background-color: rgba(255,255,255,0.0) !important;
 }
 
 .my_fabric .upper-canvas:active {
     background-color: rgba(0,0,0,0);
-}
+}*/
 
 /*Import das fontes*/
 
@@ -44,6 +44,7 @@ canvas {
 @font-face {
     font-family: 'Roboto Bold';
     src: url('./assets/fonts/Roboto/roboto-bold-webfont.woff2');
+    font-weight: 700;
 }
 
 @font-face {

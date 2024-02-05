@@ -66,7 +66,6 @@ const Text = () => {
   }
 
   const addText = () => {
-    console.log(canvas.current?.getObjects().length)
     
     if (bgImageInserted) {
       canvas.current?.discardActiveObject()
@@ -151,7 +150,6 @@ const Text = () => {
         setTextAlign(()=>canvas.current?.getActiveObject().get('textAlign'))
         setBgColor(()=>canvas.current?.getActiveObject().get('backgroundColor'))
         canvas.current?.requestRenderAll()
-        console.log(canvas.current?.getActiveObject().get('width'))
       })
 
       // quando perde a seleção, o botao do texto é desativado
@@ -175,7 +173,6 @@ const Text = () => {
       canvas.current?.centerObject(textbox)
       textbox.setCoords()
       canvas.current?.setActiveObject(textbox).requestRenderAll()
-      console.log(canvas.current?.getActiveObject().get('fontFamily'))
     }
   }
 

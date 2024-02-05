@@ -34,6 +34,6 @@ export function loadFonts () {
             })*/
         })
         .catch(function(err) {
-        console.warn('Some critical font are not available:', err)
+            console.warn(err)
         })
 }

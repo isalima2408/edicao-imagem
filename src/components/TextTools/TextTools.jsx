@@ -2,24 +2,26 @@ import { useContext, useState, useEffect } from "react";
 import { FabricContext } from "../../App";
 import { useBtnStatus } from "../../contexts/BtnStatusContext";
 import { fabric } from "fabric";
+import { HuePicker } from 'react-color';
 
 const TextTools = () => {
     const canvas = useContext(FabricContext);
-    const { loadAndUse, textItalic, setTextItalic, textWeight, setTextWeight, bgColor, setBgColor, textAlign, setTextAlign, textColor, setTextColor, textFontFamily, setTextFontFamily } = useBtnStatus()
-
+    const { textItalic, bgColor, setBgColor, textAlign, setTextAlign, textColor, setTextColor, textFontFamily, setTextFontFamily } = useBtnStatus()
+    const [color, setColor] = useState({ background: '#A020F0' })
+    const [btnColorActive, setBtnColorActive] = useState(false)
+    const [btnBgColorActive, setBtnBgColorActive] = useState(false)
 
     // Alinhamento
     const changeTextAlign = (e) => {
         setTextAlign(e.target.value) 
         canvas.current?.getActiveObject().set('textAlign', e.target.value)
         canvas.current?.renderAll()
-        
     }
 
     // Cor
-    const changeTextColor = (e) => {
-        setTextColor(e.target.value)
-        canvas.current?.getActiveObject().set('fill', e.target.value)
+    const handleTextColor = (e) => {
+        setColor({ background: e.hex })
+        canvas.current?.getActiveObject().set('fill', e.hex)
         canvas.current?.renderAll() 
     }
     
@@ -50,56 +52,62 @@ const TextTools = () => {
     }
 
     // Cor de fundo
-    const changeBgColor = (e) => {
-        setBgColor(e.target.value)
+    const handleBgTextColor = (e) => {
+        setColor({ background: e.hex })
         var text = canvas.current?.getActiveObject()
-        var color = e.target.value
+        var color = e.hex
 
-        text.set('backgroundColor', e.target.value)
+        text.set('backgroundColor', e.hex)
         canvas.current?.renderAll() 
 
-        if (e.target.value === 'transparent') {
-            text.set({
-                perPixelTargetFind: false,
-                padding: 0,
-                backgroundColor: color,
-            })
-        } else {
-            text.set({
-                perPixelTargetFind: true,
-                padding: 20,
-                backgroundColor: color,
-            })
-            canvas.current?.getActiveObject().set('perPixelTargetFind', true)
-        }
+        text.set({
+            perPixelTargetFind: true,
+            padding: 20,
+            backgroundColor: color,
+        })
+        canvas.current?.getActiveObject().set('perPixelTargetFind', true)
 
         canvas.current?.renderAll() 
     }
 
-    // Itálico
+    // Itálico 
+    // só funciona com fontes de nome único. Ex: Arial - ok; Open Sans - not. Mas pode se adaptar pegando os index finais ao inves de fixo)
     const changeStyle = (e) => {
         var text = canvas.current?.getActiveObject()
-        loadAndUse('Roboto Bold Italic')
-        //canvas.current?.getActiveObject().set('fontStyle', 'italic')
-        /*if (text.get('fontStyle') === 'italic') {
-            text.set('fontStyle', 'normal')
+        var fontArr = text.get('fontFamily').split(' ')
+        var indexItalic = fontArr.indexOf('Italic')
+        var isItalic = indexItalic > -1 
+
+        if (isItalic) {
+            fontArr.pop()
+            var newFont = fontArr.join(" ")
+            text.set('fontFamily', newFont)
         } else {
-            text.set('fontStyle', 'italic')
-        }*/
+            fontArr.push('Italic')
+            var newFont = fontArr.join(' ')
+            text.set('fontFamily', newFont)
+        }
 
         canvas.current?.renderAll();
     }
 
     // Negrito
-    const changeWeight = () => {
+    const changeWeight = (e) => {
         var text = canvas.current?.getActiveObject()
+        var fontArr = text.get('fontFamily').split(' ') //pega o texto e transforma em array
+        var indexBold = fontArr.indexOf('Bold') // ve se há a palavra bold e onde esta localizada
+        var isBold = indexBold > -1 // confere se tem a palavra mesmo
 
-        if (text.get('fontWeight') === 'bold') {
-            text.set('fontWeight', 'normal')
+        if (isBold) {
+            fontArr.splice(indexBold, 1) // apaga o bold
+            var newFont = fontArr.join(" ")
+            text.set('fontFamily', newFont)
         } else {
-            text.set('fontWeight', 'bold')
+            fontArr.splice(1, 0, 'Bold')
+            var newFont = fontArr.join(' ')
+            text.set('fontFamily', newFont)
         }
-        
+
         canvas.current?.renderAll();
     }
 
@@ -128,23 +136,37 @@ const TextTools = () => {
 
         canvas.current?.renderAll();
     }
+
+    const handleCornerRadius = () => {
+        var text = canvas.current?.getActiveObject()
+
+        if (text.get('bgCornerRadius') !== 0) {
+            text.set('bgCornerRadius', 0)
+        } else {
+            text.set('bgCornerRadius', 15)
+        }
+
+        canvas.current?.renderAll();
+    }
     
     
     return(
         <div>
             <select name="font_family" id="font_family" value={textFontFamily} onChange={changeFontFamily}>  
-                <option value="">Padrão</option>
                 <option value="Roboto">Roboto</option>
                 <option value="Poppins">Poppins</option>
                 
             </select>
 
-            <select name="text_color" id="text_color" value={textColor} onChange={changeTextColor}>
-                <option value="black">Preto</option>
-                <option value="white">Branco</option>
-                <option value="red">Vermelho</option>
-                <option value="blue">Azul</option>
-            </select>
+            <button onClick={() => setBtnColorActive(val => !val)} style={{position: 'relative'}}>Cor</button>
+                {btnColorActive &&
+                    <div style={{position: 'absolute', zIndex: 1}}>
+                        <HuePicker 
+                            color={ color.background }
+                            onChangeComplete={ handleTextColor }
+                        />    
+                    </div>
+                }
 
             <select name="text_align" id="text_align" value={textAlign} onChange={changeTextAlign} >
                 <option value="left">Esquerda</option>
@@ -157,14 +179,16 @@ const TextTools = () => {
             <button onClick={changeUnderline} >Sublinhado</button>
             <button onClick={changeLinethrough} >Tachado</button>
 
-            <select name="bg_color" id="bg_color" value={bgColor} onChange={changeBgColor}>
-                <option value="transparent">Sem fundo</option>
-                <option value="rgba(255,255,255,0.1)">Transparente 1</option>
-                <option value="black">Preto</option>
-                <option value="white">Branco</option>
-                <option value="#EE82EE">Violeta</option>
-                <option value="#ADD8E6">Azul</option>
-            </select>
+            <button onClick={() => setBtnBgColorActive(val => !val)} style={{position: 'relative'}}>Fundo</button>
+                {btnBgColorActive &&
+                    <div style={{position: 'absolute', zIndex: 1}}>
+                        <HuePicker 
+                            color={ color.background }
+                            onChangeComplete={ handleBgTextColor }
+                        />    
+                    </div>
+                }
+            <button onClick={handleCornerRadius} >Cantos</button>
         </div>
     )
 }

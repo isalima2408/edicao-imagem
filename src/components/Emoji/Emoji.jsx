@@ -40,7 +40,14 @@ const Emoji = () => {
             names: ['Seta', 'Seta'],
             imgUrl: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAMAAAAJbSJIAAAAWlBMVEX///8AAABJSUl2dnZubm5zc3NtbW2AgICqqqre3t64uLizs7P6+vrGxsYvLy8PDw8cHByhoaHl5eU7Ozvt7e3Ozs4sLCzY2Njz8/NXV1cjIyMYGBhERESHh4cDouVWAAAEKUlEQVR4nO2d21bbMBBFFULIzQQCoVwC//+b9WSJ1sHIlu2RNGc8+7VdavbynJwJDq5zRbhfHx4WSXm8OT6VcSNentPafbOsCglu8vjVHE5FBHfZBGvFElfxlFGwHtQChuushosCbzd5BRfH7IIvmQ1vshvuMxs+ZjfMVxWe7IY5u6KM4Va9oTurNzyqN6z+aDfMncQChu418UfD8obuLeduWsSwdtwv3294EGrIR+84lH6BU1lKnVIuVmJzyMRtvyC2YcQVxDbszyC4YdQVRDaMySC0YdyIAhtGC6Iaxo4orGHkmwyuYfyIghqGr+D6l08apV/tCMIZXDoVhuERXTkVhmHBW6fCMDyiK/pjfMOuDBLwhp0ZJNANuzNIgBv2jahDNwwX/f+vI0Ab9o+owzYMX8FV428BG95FjKhDNuytCQ+sYVQGCVTDiJrwgBrG1IQH0zB6RB2o4RBBSMP4DBKAhgMySOAZDhpRB2gYt6o1QDMclkECzDB2VWuAZTg0gwSU4fARdViGA2vCA2Q4ZkQdkuHgmvDAGI7KIIFiOC6DBIjhyAwSGIZjM0hAGI7OIIFgOGJVawBgOCGDhHzDyB/8BhFvOL4mPNINJ46oE284pSY8sg0n1YRHtOG0mvBINpyeQUKwYc/3ZGKRa8iRQUKsIUsGCamGPBkkhBpyjaiTajh5VWsg0jA8onfDD5NoyLCqNRBoyJhBQp4hW014xBny1YRHmiHziDpxhpw14ZFlyD6iTphh+AqOFxRlyJ9BQpBhggwScgxTZJAQY8i7qjWQYpgmg4QQQ+5VrYEMw1QZJEQYTr350okEw0Q14RFgmHJEnQTDZDXhKW6YriY8pQ0T1oTnvXXyA9PJUSTO4O//xIHr6AiYbr500n7+65rt7F6SZ5B4ax1+z3d4D+kzeOHn49ueOQ/vJEMGL7z9eCbjC+vpHWQZ0QuvV6dvmE8PknZVu2bbeD7qjv30AKw3X3qpjv5Bvuts/29A6lWtzXa32WdLYOKPSxLIVBPlyFUTxchXE4XIWRNFUD+iSW6+SMIyiM6MM6ik6NVncMarWoqPSwVQP6JWE+hYTaAz45pQksEcN1+KYhlEZ8YZVDKitqqho35Vs5sv6KjPoNUEOupH1G6+oGMZREf9qqY+gzNe1ezmCwZWE+hYTaCj/gpaBtFRn8EZr2pKMqj+B7+2qqFjNYGO1QQ66kdUvaBlEB31I2qrGjq2qqFjNYGO+hG1mkDHvieDjmUQHVvV0LFVDR27+YKO+hG1mkDHagId+yVldCyD6KgfUfWr2ldQUMm37tsP+Vb2JlM9Kh9Rt1N+BcMfeZXURM2H7hGtUS/ozrpHtOZTu6A76h7Rmiftgu3PFbpGlKgOV4Jqir7Bqan4VfrVJKH6N6jnfenXkoqn4+d58XG3q0q/kAT8BWF6LmOAr4VmAAAAAElFTkSuQmCC',
             id: 'arrow',
+        },
+        {
+            names: ['Triângulo', 'Triângulo'],
+            imgUrl: 'https://cdn.icon-icons.com/icons2/2098/PNG/512/triangle_icon_128721.png',
+            id: 'triangle',
         }
+
+        
     ]
 
     const categories = [
@@ -175,6 +182,38 @@ const Emoji = () => {
         })
 
         addObject(ellipse)
+    }
+
+    // Triângulo
+    function createTriangle () {
+        setShapeSelected(true)
+        var triangle = new fabric.Triangle({
+            selectable          : true,
+            width               : 150,
+            height              : 150,
+            fill                : 'transparent',
+            stroke              : '#A020F0',
+            strokeWidth         : 5,
+            strokeUniform       : true,  
+            noScaleCache        : false,
+            objectCaching       : false
+        });
+
+        triangle.on('selected', function () {
+            setShapeSelected(true)
+            let obj = canvas.current?.getActiveObject()
+
+            setFillColor(()=>obj.get('fill'))
+            setStrokeColor(()=>obj.get('stroke'))
+            canvas.current?.requestRenderAll()
+        })
+
+        triangle.on('deselected', function () {
+            setShapeSelected(false)
+            canvas.current?.requestRenderAll()
+        })
+
+        addObject(triangle)
     }
 
     // Seta (linha + triangulo)
@@ -312,6 +351,9 @@ const Emoji = () => {
             case 'arrow':
                 setArrowActive(true)
                 createArrow()
+                break;
+            case 'triangle':
+                createTriangle()
                 break;
             default:
                 var emojiURL = emojiObject.imageUrl

@@ -3,12 +3,14 @@ import { FabricContext } from "../../App"
 import { fabric } from "fabric"
 import { useBtnStatus } from "../../contexts/BtnStatusContext"
 import 'fabric-history';
+import { HuePicker } from 'react-color';
 
 const PaintTools = () => {
     const { disablePaintMode } = useBtnStatus()   
     const [bWidth, setBWidth] = useState(5)
     const [bColor, setBColor] = useState('purple')
     const [pencilActive, setPencilActive] = useState(false)
+    const [color, setColor] = useState({ background: '#A020F0' })
     const canvas = useContext(FabricContext)
 
     // modo desenho só habilita quando clicar em 'pincel'
@@ -31,11 +33,10 @@ const PaintTools = () => {
         }  
 
     // cor do traço
-    const changeBrushColor = (e) => {
-        const brushColor = e.target.value
-        setBColor(brushColor)
+    const handleColorChangeComplete = (color) => {
+        setColor({ background: color.hex })
         var brush = canvas.current?.freeDrawingBrush;
-        brush.color = brushColor;
+        brush.color = color.hex;
 
         if (brush.getPatternSrc) {
             brush.source = brush.getPatternSrc.call(brush);
@@ -63,18 +64,17 @@ const PaintTools = () => {
         }
     }
 
+
     return(
-        <div>
+        <div style={{ display: 'flex' }}>
             <button onClick={changeBrushType} >Pincél</button>
             
             {pencilActive && 
                 <>
-                    <select name="brush_color" id="brush_color" value={bColor} onChange={changeBrushColor}>
-                        <option value="purple">Roxo</option>
-                        <option value="red">Vermelho</option>
-                        <option value="black">Preto</option>
-                        <option value="blue">Azul</option>
-                    </select>
+                    <HuePicker 
+                        color={ color.background }
+                        onChangeComplete={ handleColorChangeComplete }
+                    />
 
                     <select name="brush_width" id="brush_width" value={bWidth} onChange={changeBrushWidth} >
                         <option value="5">1</option>
