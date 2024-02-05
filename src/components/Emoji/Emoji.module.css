@@ -10,15 +10,20 @@
     /*border: 1px solid red;*/
     transition: background-color 0.2s;
 }
-.emoji_icon:hover {
-    background-color: rgb(243, 243, 243);
+
+.emoji_box {
+    position: absolute;
+    display: none;
+    z-index: 2;
 }
 
 .btn_emoji {
     position: relative;
 }
 
-.emoji_box {
-    position: absolute;
-    z-index: 1;
+.btn_emoji:hover {
+    background-color: rgb(243, 243, 243);
+    .emoji_box {
+        display:block;
+    }
 }

@@ -393,15 +393,16 @@ const Emoji = () => {
                 <ion-icon name="happy-outline"></ion-icon>
             </button>
             <div className={ styles.emoji_box }>
-                {emojiBtnSelected && 
+
                     <Picker 
                         onEmojiClick={ onEmojiClick } 
                         categories={ categories }       
                         customEmojis={ geometricForms }
+                        lazyLoadEmojis={false}
                         skinTonesDisabled
                         searchDisabled
-                        emojiStyle="apple"
-                    />}
+                        emojiStyle="native"
+                    />
             </div>
         </span>   
     )
